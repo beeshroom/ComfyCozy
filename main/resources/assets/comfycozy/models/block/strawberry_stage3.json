@@ -1,0 +1,6 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "comfycozy:blocks/strawberry_stage3"
+    }
+}

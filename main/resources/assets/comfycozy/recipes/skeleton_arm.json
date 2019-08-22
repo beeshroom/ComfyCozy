@@ -1,0 +1,19 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "omm:skeleton_arm"
+    }
+    
+    ],
+
+    "result": 
+    {
+        "item": "minecraft:dye",
+        "data": 15,
+        "count": 7
+    }
+}
