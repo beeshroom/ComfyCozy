@@ -2,14 +2,38 @@
 item.oats.name=Oats
 itemGroup.comfycozy=Comfy Cozy
 item.strawberry.name=Strawberry
-item.strawberry_seeds=Strawberry Seeds
-
+item.strawberry_seeds.name=Strawberry Seeds
+item.cinnamon.name=Cinnamon
 
 
 //blocks
 
 
+
+//plant
+tile.cinnamon_tree.name=Cinnamon Log
+
+
+//awnings
+tile.awning_white.name=White Awning
 tile.awning_red.name=Red Awning
+tile.awning_orange.name=Orange Awning
+tile.awning_yellow.name=Yellow Awning
+tile.awning_lime.name=Lime Awning
+tile.awning_green.name=Green Awning
+tile.awning_cyan.name=Cyan Awning
+tile.awning_light_blue.name=Light Blue Awning
+tile.awning_blue.name=Blue Awning
+tile.awning_purple.name=Purple Awning
+tile.awning_magenta.name=Magenta Awning
+tile.awning_pink.name=Pink Awning
+tile.awning_gray.name=Gray Awning
+tile.awning_dark_gray.name=Dark Gray Awning
+tile.awning_black.name=Black Awning
+tile.awning_brown.name=Brown Awning
+
+
+
 
 
 

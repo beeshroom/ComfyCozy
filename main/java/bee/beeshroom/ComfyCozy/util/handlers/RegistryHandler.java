@@ -78,6 +78,8 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
 
 }
 
+//i should probably put all the awnings in here.. and cinnamon wood..  
+//note to self.... look up what burn times those would have...
 
 	/*
 @SubscribeEvent
@@ -93,6 +95,11 @@ public static void furnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
 		event.setBurnTime(1000);
 	} */
 	
+
+
+
+
+
 
 
 }

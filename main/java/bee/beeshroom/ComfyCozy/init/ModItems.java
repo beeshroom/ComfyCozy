@@ -31,7 +31,7 @@ public class ModItems {
 	public static final Item STRAWBERRY_SEEDS = new ItemBase("strawberry_seeds");
 
 	public static final Item CINNAMON = new ItemBase("cinnamon");
-	//public static final Item CINNAMON_TREE = new ItemBlockSpecial(ModBlocks.CINNAMON_TREE);
+	//public static final Item CINNAMON_TREE = new ItemBlockSpecial("cinnamon_tree");
 	//public static final Item CINNAMON_TREE_ITEM = new ItemBase("cinnamon_tree_item");
 	
 	

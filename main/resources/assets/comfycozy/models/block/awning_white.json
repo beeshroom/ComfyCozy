@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"1": "comfycozy:blocks/stick",
-		"3": "blocks/wool_colored_red",
-		"particle": "minecraft:blocks/wool_colored_red"
+		"3": "blocks/wool_colored_white",
+		"particle": "minecraft:blocks/wool_colored_white"
 	},
 	"elements": [
 		{
