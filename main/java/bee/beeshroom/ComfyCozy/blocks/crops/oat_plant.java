@@ -26,12 +26,12 @@ import net.minecraft.world.World;
 //thank you turty wurty ;w;
 //https://www.youtube.com/watch?v=AUEnR5k9yFQ
 
-public class strawberry_plant extends BlockBush implements IGrowable
+public class oat_plant extends BlockBush implements IGrowable
 {
-    public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
-		private static final AxisAlignedBB[] strawberry_plant = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.4375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625D, 1.0D)};
+    public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 4);
+		private static final AxisAlignedBB[] oat_plant = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.4375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.7625D, 1.0D)};
 
-				  public strawberry_plant(String name)
+				  public oat_plant(String name)
 				    {
 				    	this.setUnlocalizedName(name);
 				    	this.setRegistryName(name);
@@ -46,7 +46,7 @@ public class strawberry_plant extends BlockBush implements IGrowable
 
 				    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 				    {
-				        return strawberry_plant[((Integer)state.getValue(this.getAgeProperty())).intValue()];
+				        return oat_plant[((Integer)state.getValue(this.getAgeProperty())).intValue()];
 				    }
 
 				    /**
@@ -64,7 +64,7 @@ public class strawberry_plant extends BlockBush implements IGrowable
 
 				    public int getMaxAge()
 				    {
-				        return 3;
+				        return 4;
 				    }
 
 				    protected int getAge(IBlockState state)
@@ -185,12 +185,12 @@ public class strawberry_plant extends BlockBush implements IGrowable
 
 				    protected Item getSeed()
 				    {
-				        return ModItems.STRAWBERRY_SEEDS;
+				        return ModItems.OAT_SEEDS;
 				    }
 
 				    protected Item getCrop()
 				    {
-				        return ModItems.STRAWBERRY;
+				        return ModItems.OATS;
 				    }
 
 				    @SuppressWarnings("unused")

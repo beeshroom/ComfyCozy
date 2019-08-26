@@ -7,7 +7,7 @@ import net.minecraft.item.ItemFood;
 
 public class ItemCustomFood extends ItemFood
 {
-	public ItemCustomFood(String name, int amount, boolean iswolffood)
+	public ItemCustomFood(String name, int amount, float saturation, boolean iswolffood)
 	{
 		super(amount, iswolffood);
 		setUnlocalizedName(name);

@@ -67,7 +67,7 @@ public class cinnamon_tree extends BlockBase implements IPlantable
                     ;
                 }
 
-                if (i < 5)
+                if (i < 4)
                 {
                     int j = ((Integer)state.getValue(AGE)).intValue();
 
@@ -76,41 +76,41 @@ public class cinnamon_tree extends BlockBase implements IPlantable
                     if (j == 12)
                     {
                         worldIn.setBlockState(pos.up(), this.getDefaultState());
-                      //  worldIn.setBlockState(pos, state.withProperty(AGE, 2));
+                        
                         worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(0)), 4);
+                        worldIn.setBlockState(pos, state.withProperty(AGE, 2));
                     }
                     else
                     {
                         worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(j + 1)), 4);
-                 
-                        
                     }
                     net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
                     }
                 }
-                
                  
-                if (i > 4 && i < 6)
+                 /*
+                if (i > 3 && i < 5)
                 {
                 	 int j = ((Integer)state.getValue(AGE)).intValue();
 
                      if(net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true))
                      {
-                     if (j == 12)
+                     if (j < 12) 
                      {
                         // worldIn.setBlockState(pos.up(), this.getDefaultState());
-                         worldIn.setBlockState(pos, state.withProperty(AGE, 13));
-                        // worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(0)), 4);
+                         //worldIn.setBlockState(pos, state.withProperty(AGE, 13));
+                       worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(13)));
                      }
-                     else
+                  else
                      {
-                        // worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(j + 1)), 4);
-                  ;
+                    	// worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(13)), 4);
+                         worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(j + 1)), 4);
+                  
                          
-                     }
+                     } 
                      net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
                      }
-                }
+                }*/
             }
         }
     } 
@@ -276,7 +276,7 @@ public class cinnamon_tree extends BlockBase implements IPlantable
     }
  
     
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+ /*   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         ItemStack itemstack = playerIn.getHeldItem(hand);
        // if (!((Boolean)state.getValue(STRIPPED)).booleanValue());
@@ -284,7 +284,8 @@ public class cinnamon_tree extends BlockBase implements IPlantable
         if (!itemstack.isEmpty() && (itemstack.getItem() == Items.SHEARS || itemstack.getItem() == Items.WOODEN_AXE || itemstack.getItem() == Items.STONE_AXE || itemstack.getItem() == Items.IRON_AXE || itemstack.getItem() == Items.DIAMOND_AXE))
         	
     {
-        	worldIn.setBlockState(pos, state.withProperty(AGE, 14));
+        	
+        	worldIn.setBlockState(pos, state.withProperty(AGE, 2));
         	// worldIn.setBlockState(pos, state.withProperty(STRIPPED, Boolean.valueOf(true)), 2);
         	// worldIn.setBlockState(pos, ModBlocks.STRIPPED_CINNAMON.getDefaultState());
         	// itemstack.damageItem(1, playerIn);
@@ -299,6 +300,6 @@ public class cinnamon_tree extends BlockBase implements IPlantable
             return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
         }
         
-    } 
+    } */
     
 }

@@ -1,18 +1,29 @@
-//items
-item.oats.name=Oats
 itemGroup.comfycozy=Comfy Cozy
-item.strawberry.name=Strawberry
-item.strawberry_seeds.name=Strawberry Seeds
-item.cinnamon.name=Cinnamon
 
+//food
+item.oats.name=Oats
+item.strawberry.name=Strawberry
+item.strawberry_oatmeal.name=Strawberry Oatmeal
+item.cinnamon_oatmeal.name=Cinnamon Oatmeal
+item.gold_apple_cinnamon_oatmeal.name=Gold Apple Cinnamon Oatmeal
+item.oatmeal.name=Oatmeal
+
+//materials
+item.cinnamon.name=Cinnamon
+tile.stripped_cinnamon.name=Cinnamon Stick
 
 //blocks
 
 
-
 //plant
 tile.cinnamon_tree.name=Cinnamon Log
+item.strawberry_seeds.name=Strawberry Seeds
+item.oat_seeds.name=Oat Seeds
 
+//decorations
+tile.bunting.name=Bunting
+tile.checker_bunting.name=Checker Bunting
+tile.heart_bunting.name=Heart Bunting
 
 //awnings
 tile.awning_white.name=White Awning

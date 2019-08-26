@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "comfycozy:awning_yellow" },
+        "facing=south": { "model": "comfycozy:awning_yellow", "y": 180 },
+        "facing=west":  { "model": "comfycozy:awning_yellow", "y": 270 },
+        "facing=east":  { "model": "comfycozy:awning_yellow", "y": 90 }
+    }
+}

@@ -2,7 +2,7 @@
     "credit": "Made with Blockbench",
     "textures": {
         "1": "comfycozy:blocks/stick",
-        "particle": "blocks/wool_colored_white"
+        "particle": "blocks/wool_colored_yellow"
     },
     "elements": [
         {
