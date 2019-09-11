@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "SSS"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:carpet",
+      "data": 13
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "comfycozy:awning_green",
+	"count": 3
+  }
+}

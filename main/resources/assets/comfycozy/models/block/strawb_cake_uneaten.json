@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "comfycozy:blocks/strawb_cake_side",
+		"1": "comfycozy:blocks/strawb_cake_bottom",
+		"2": "comfycozy:blocks/strawb_cake_top",
+		"particle": "comfycozy:blocks/strawb_cake_side"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 8, 13],
+			"faces": {
+				"north": {"uv": [3, 8, 13, 16], "texture": "#0"},
+				"east": {"uv": [3, 8, 13, 16], "texture": "#0"},
+				"south": {"uv": [3, 8, 13, 16], "texture": "#0"},
+				"west": {"uv": [3, 8, 13, 16], "texture": "#0"},
+				"up": {"uv": [3, 3, 13, 13], "texture": "#2"},
+				"down": {"uv": [3, 3, 13, 13], "texture": "#1"}
+			}
+		}
+	]
+}

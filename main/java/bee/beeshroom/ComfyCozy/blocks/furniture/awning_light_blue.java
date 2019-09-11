@@ -341,5 +341,10 @@ public class awning_light_blue extends BlockBase implements net.minecraftforge.c
 	                return AWNING;
 	        }
 		}
+		
+		public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        return BlockFaceShape.UNDEFINED;
+    }
 }
 

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "comfycozy:oats"
+    },
+    {
+      "item": "comfycozy:oats"
+    },
+ {
+      "item": "comfycozy:cinnamon"
+    },
+      {
+      "item": "minecraft:golden_apple",
+      "data": 0
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "comfycozy:gold_apple_cinnamon_oatmeal"
+  }
+}

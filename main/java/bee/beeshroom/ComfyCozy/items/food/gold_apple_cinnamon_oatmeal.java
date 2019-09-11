@@ -26,12 +26,6 @@ public class gold_apple_cinnamon_oatmeal  extends ItemFood
 	}
 	
 	@Override
-	public boolean hasEffect(ItemStack stack) 
-	{
-		return true;
-	}
-	
-	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) 
 	{
 		entityLiving.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 120, 1, false, false));

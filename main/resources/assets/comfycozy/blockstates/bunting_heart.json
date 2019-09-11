@@ -1,8 +1,8 @@
 {
     "variants": {
-        "facing=north": { "model": "comfycozy:bunting_heart" },
-        "facing=south": { "model": "comfycozy:bunting_heart", "y": 180 },
-        "facing=west":  { "model": "comfycozy:bunting_heart", "y": 270 },
-        "facing=east":  { "model": "comfycozy:bunting_heart", "y": 90 }
+        "facing=north": { "model": "comfycozy:bunting_heart", "y": 270},
+        "facing=south": { "model": "comfycozy:bunting_heart", "y": 90 },
+        "facing=west":  { "model": "comfycozy:bunting_heart", "y": 180 },
+        "facing=east":  { "model": "comfycozy:bunting_heart" }
     }
 }

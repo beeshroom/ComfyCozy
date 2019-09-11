@@ -360,5 +360,10 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 	                return AWNING;
 	        }
 		}
+		
+		public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        return BlockFaceShape.UNDEFINED;
+    }
 }
 

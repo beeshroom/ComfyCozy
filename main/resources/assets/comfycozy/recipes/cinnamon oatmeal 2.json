@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "comfycozy:oatmeal"
+    },
+ {
+      "item": "comfycozy:cinnamon"
+    }
+  ],
+  "result": {
+    "item": "comfycozy:cinnamon_oatmeal"
+  }
+}

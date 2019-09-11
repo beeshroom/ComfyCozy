@@ -17,6 +17,7 @@ public class strawberry_oatmeal  extends ItemFood
 		setRegistryName(name);
 		setCreativeTab(Main.comfycozytab);
 		//setAlwaysEdible();
+		 this.setMaxStackSize(1);
 		
 		ModItems.ITEMS.add(this);
 	}

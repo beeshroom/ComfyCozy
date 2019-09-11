@@ -1,3 +1,4 @@
+
 package bee.beeshroom.ComfyCozy.items.food;
 
 import bee.beeshroom.ComfyCozy.Main;
@@ -28,21 +29,12 @@ public class cinnamon  extends ItemFood
 		ModItems.ITEMS.add(this);
 	}
 	
-	 @Override
-		public boolean hasEffect(ItemStack stack) 
-		{
-			return true;
-		}
-	 
-		
 		@Override
 		public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) 
 		{
 			
-			entityLiving.addPotionEffect(new PotionEffect(MobEffects.INSTANT_DAMAGE, 1, 1, false, true));
+			entityLiving.addPotionEffect(new PotionEffect(MobEffects.POISON, 5, 1, false, false));
+			entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 25, 1, false, false));
 			return super.onItemUseFinish(stack, worldIn, entityLiving);
-			
 		}
-
-		
 }

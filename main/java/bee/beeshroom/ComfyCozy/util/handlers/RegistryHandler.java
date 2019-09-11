@@ -1,5 +1,6 @@
 package bee.beeshroom.ComfyCozy.util.handlers;
 
+//CREDIT Cadiboo
 
 import javax.annotation.Nonnull;
 
@@ -10,15 +11,21 @@ import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheep;
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import bee.beeshroom.ComfyCozy.util.Reference;
+import bee.beeshroom.ComfyCozy.world.generation.generators.WorldGenTrees;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public final class RegistryHandler {
@@ -50,9 +57,9 @@ public static void onBlockRegister(RegistryEvent.Register<Block> event)
 public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register<EntityEntry> event) {
 
     final ResourceLocation EntityOatmealSheep = new ResourceLocation(Reference.MOD_ID, "entityoatmealsheep");
+ //   final ResourceLocation Seat = new ResourceLocation(Reference.MOD_ID, "seat");
     
-   
-
+    
 
     event.getRegistry().registerAll(
         EntityEntryBuilder.create()
@@ -60,9 +67,16 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
             .id(EntityOatmealSheep, entityId++)
             .name(EntityOatmealSheep.getResourcePath())
             .tracker(32, 10, false)
-            .build()/*,
+            .build()
+            
+      /*  EntityEntryBuilder.create()
+            .entity(Seat.class)
+            .id(Seat, entityId++)
+            .name(Seat.getResourcePath())
+            .tracker(32, 10, false)
+            .build() */
          
-                    EntityEntryBuilder.create()
+                /*    EntityEntryBuilder.create()
                         .entity(EntityCarpet.class)
                         .id(EntityCarpet, entityId++)
                         .name(EntityCarpet.getResourcePath())
@@ -74,8 +88,21 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
     ); 
 
     LOGGER.debug("Registered entities");
+}
 
 
+public static void preInitRegistries(FMLPreInitializationEvent event)
+{
+	GameRegistry.registerWorldGenerator(new WorldGenTrees(), 0);
+	
+	//ModBiomes.registerBiomes();
+}
+
+@EventHandler
+public void preInit(FMLPreInitializationEvent event)
+{
+	MinecraftForge.addGrassSeed(new ItemStack(ModItems.STRAWBERRY_SEEDS), 10);
+	MinecraftForge.addGrassSeed(new ItemStack(ModItems.OAT_SEEDS), 10);
 }
 
 //i should probably put all the awnings in here.. and cinnamon wood..  

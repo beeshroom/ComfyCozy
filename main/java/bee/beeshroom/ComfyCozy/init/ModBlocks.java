@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bee.beeshroom.ComfyCozy.blocks.cinnamon_tree;
+import bee.beeshroom.ComfyCozy.blocks.strawberry_cake;
 import bee.beeshroom.ComfyCozy.blocks.stripped_cinnamon;
 import bee.beeshroom.ComfyCozy.blocks.crops.oat_plant;
 import bee.beeshroom.ComfyCozy.blocks.crops.strawberry_plant;
@@ -14,6 +15,9 @@ import bee.beeshroom.ComfyCozy.blocks.furniture.awning_red;
 import bee.beeshroom.ComfyCozy.blocks.furniture.awning_white;
 import bee.beeshroom.ComfyCozy.blocks.furniture.awning_yellow;
 import bee.beeshroom.ComfyCozy.blocks.furniture.bunting;
+import bee.beeshroom.ComfyCozy.blocks.furniture.pole;
+import bee.beeshroom.ComfyCozy.blocks.furniture.carp_banner;
+import bee.beeshroom.ComfyCozy.blocks.oatmeal.bowl_oatmeal;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -36,6 +40,12 @@ public class ModBlocks
 	public static final Block AWNING_PINK = new awning_pink("awning_pink", Material.WOOD);
 	public static final Block AWNING_GREEN = new awning_green("awning_green", Material.WOOD);
 	public static final Block AWNING_LIGHT_BLUE = new awning_light_blue("awning_light_blue", Material.WOOD);
+	
+	public static final Block POLE = new pole("pole", Material.WOOD);
+	public static final Block CARP_BANNER = new carp_banner("carp_banner", Material.CLOTH);
+	public static final Block BOWL_OATMEAL = new bowl_oatmeal("bowl_oatmeal", Material.WOOD);
+	
+	public static final Block STRAWBERRY_CAKE = new strawberry_cake("strawberry_cake", Material.CAKE);
 
 
 	

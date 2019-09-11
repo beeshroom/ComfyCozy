@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SR",
+    "SB",
+	"SO"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:wool",
+      "data": 14
+    },
+ "B": {
+      "item": "minecraft:wool",
+      "data": 12
+    },
+ "O": {
+      "item": "minecraft:wool",
+      "data": 1
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "comfycozy:carp_banner"
+  }
+}

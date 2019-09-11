@@ -24,8 +24,8 @@ public class ModItems {
 	
 	//items
 	//public static final Item OATS = new ItemBase("oats");
-	public static final Item STRAWBERRY = new strawberry("strawberry", 1, 1.0f, false);
-	public static final Item OATS = new ItemCustomFood("oats", 2, 0.8f, false);
+	public static final Item STRAWBERRY = new strawberry("strawberry", 1, .1f, false);
+	public static final Item OATS = new ItemCustomFood("oats", 2, 0.5f, false);
 	
 	public static final Item STRAWBERRY_SEEDS = new strawberry_seeds("strawberry_seeds");
 	public static final Item OAT_SEEDS = new oat_seeds("oat_seeds");
@@ -35,10 +35,10 @@ public class ModItems {
 	//public static final Item CINNAMON_TREE_ITEM = new ItemBase("cinnamon_tree_item");
 	
 	
-	public static final Item OATMEAL = new oatmeal("oatmeal", 6, 6f, false);
-	public static final Item CINNAMON_OATMEAL = new cinnamon_oatmeal("cinnamon_oatmeal", 7, 9f, false);
-	public static final Item STRAWBERRY_OATMEAL = new strawberry_oatmeal("strawberry_oatmeal", 7, 9f, false);
-	public static final Item GOLD_APPLE_CINNAMON_OATMEAL = new gold_apple_cinnamon_oatmeal("gold_apple_cinnamon_oatmeal", 8, 12f, false);
+	public static final Item OATMEAL = new oatmeal("oatmeal", 6, .6f, false);
+	public static final Item CINNAMON_OATMEAL = new cinnamon_oatmeal("cinnamon_oatmeal", 7, .9f, false);
+	public static final Item STRAWBERRY_OATMEAL = new strawberry_oatmeal("strawberry_oatmeal", 7, .9f, false);
+	public static final Item GOLD_APPLE_CINNAMON_OATMEAL = new gold_apple_cinnamon_oatmeal("gold_apple_cinnamon_oatmeal", 8, 1.2f, false);
 	
 	
 	

@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "bites=0": { "model": "comfycozy:strawb_cake_uneaten" },
+        "bites=1": { "model": "comfycozy:strawb_cake_slice1" },
+        "bites=2": { "model": "comfycozy:strawb_cake_slice2" },
+        "bites=3": { "model": "comfycozy:strawb_cake_slice3" },
+        "bites=4": { "model": "comfycozy:strawb_cake_slice4" }
+    }
+}

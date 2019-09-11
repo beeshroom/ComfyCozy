@@ -24,6 +24,8 @@ item.oat_seeds.name=Oat Seeds
 tile.bunting.name=Bunting
 tile.checker_bunting.name=Checker Bunting
 tile.heart_bunting.name=Heart Bunting
+tile.carp_banner.name=Carp Banner
+tile.pole.name=Pole
 
 //awnings
 tile.awning_white.name=White Awning
@@ -43,8 +45,11 @@ tile.awning_dark_gray.name=Dark Gray Awning
 tile.awning_black.name=Black Awning
 tile.awning_brown.name=Brown Awning
 
-
-
+//block oatmeal bowls
+tile.bowl_oatmeal.name=Bowl of Oatmeal
+tile.bowl_cinnamon.name=Bowl of Cinnamon Oatmeal
+tile.bowl_gold_apple.name=Bowl of Gold Apple Cinnamon Oatmeal
+tile.bowl_strawberry.name=Bowl of Strawberry Oatmeal
 
 
 

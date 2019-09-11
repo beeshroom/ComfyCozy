@@ -1,76 +1,74 @@
-package bee.beeshroom.ComfyCozy.blocks;
-
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyDirection;
-
-import java.util.List;
-import java.util.Random;
+package bee.beeshroom.ComfyCozy.blocks.furniture;
 
 import javax.annotation.Nullable;
 
+import bee.beeshroom.ComfyCozy.Main;
+import bee.beeshroom.ComfyCozy.blocks.BlockBase;
+import bee.beeshroom.ComfyCozy.init.ModBlocks;
+import bee.beeshroom.ComfyCozy.init.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
-//thankyou turtywurty for your custom block model tutorial
-public class awning_red extends BlockBase implements net.minecraftforge.common.IShearable {
+//thank-you turtywurty for your custom block model tutorial on youtube, 
 
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+public class carp_banner extends BlockBase implements net.minecraftforge.common.IShearable {
+
+  public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	 //   protected static final AxisAlignedBB[] AABB_BY_INDEX = new AxisAlignedBB[], new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.4375D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.4375D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 	
 //this code is copied directly from another mod i made where this code worked fine.
-	public static final AxisAlignedBB VERTICAL_WEB = new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.5625D, 1.0D, 1.0D);
-	public static final AxisAlignedBB VERTICAL_WEB_WE = new AxisAlignedBB(0.0625D, 0.0D, 0.4375D, 1.0D, 1.0D, 0.5625D);
-    
-    
-    
-	    public awning_red(String name, Material material) {
+	public static final AxisAlignedBB POLE = new AxisAlignedBB(0.4375D, 0D, 0.4375D, 0.5625D, 1D, 0.5625D);
+	public static final AxisAlignedBB POLE_WE = new AxisAlignedBB(0.4375D, 0D, 0.4375D, 0.5625D, 1D, 0.5625D);
+  
+  
+  
+	    public carp_banner(String name, Material material) {
 		super(name, material);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		//setSoundType(SoundType.CLOTH);
 		setHardness(0.3F);
 		setResistance(0.1F);
-		setHarvestLevel("sword", 0);
+		setHarvestLevel("axe", 0);
 	}  
-	
-	  public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+	    
+	    //reduce fall damage
+	    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
 	    {
-	        entityIn.setInWeb();
+	        entityIn.fall(fallDistance, 0.1F);
 	    }
 	    
-	 
+
 	  
 	  public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
 	    {
@@ -96,10 +94,10 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 	        return true;
 	    }
 	
-	  @Nullable
+	  @Override
 	    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	    {
-	        return NULL_AABB;
+	        return POLE;
 	    }
 	  
 
@@ -136,25 +134,14 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 	        }
 	    }
 
-	    
-	   
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	 
 	
 	/*
 	
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
-        return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos);
-    }
+  {
+      return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos);
+  }
 	
 	  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	    {
@@ -208,27 +195,7 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 		return false;
 	}
 
-	   public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	    {
-	        return Items.STRING;
-	    }
-
-	    /**
-	     * Returns the quantity of items to drop on block destruction.
-	     */
-	    public int quantityDropped(Random random)
-	    {
-	        return 2;
-	    }
-	    
-	    /*
-		@Override
-		public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)  
-		{
-			   return VERTICAL_WEB;
-	           
-	        }*/
-
+	
 		
 		@Override
 		public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
@@ -289,15 +256,6 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 	    {
 	        worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 
-	        if (stack.hasDisplayName())
-	        {
-	            TileEntity tileentity = worldIn.getTileEntity(pos);
-
-	            if (tileentity instanceof TileEntityFurnace)
-	            {
-	                ((TileEntityFurnace)tileentity).setCustomInventoryName(stack.getDisplayName());
-	            }
-	        }
 	    }
 	    
 	    
@@ -368,14 +326,19 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 	        {
 	            case SOUTH:
 	            default:
-	                return VERTICAL_WEB_WE;
+	                return POLE_WE;
 	            case NORTH:
-	                return VERTICAL_WEB_WE;
+	                return POLE_WE;
 	            case EAST:
-	                return VERTICAL_WEB;
+	                return POLE;
 	            case WEST:
-	                return VERTICAL_WEB;
+	                return POLE;
 	        }
 		}
+		
+		public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+  {
+      return BlockFaceShape.UNDEFINED;
+  }
 }
 

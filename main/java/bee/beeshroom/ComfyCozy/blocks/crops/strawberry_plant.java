@@ -1,3 +1,4 @@
+
 package bee.beeshroom.ComfyCozy.blocks.crops;
 
 import java.util.Random;
@@ -11,12 +12,15 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -298,4 +302,18 @@ public class strawberry_plant extends BlockBush implements IGrowable
 				    {
 				        return new BlockStateContainer(this, new IProperty[] {AGE});
 				    }
+				    
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        return BlockFaceShape.UNDEFINED;
+    }
+/*// considering letting you "pluck" the berries without having to break the plant, but i dont think i will bc that'd conflict 
+ * with all those great mods that let you harvest + replant by right clicking 				    
+	 public void onBlockActivated(World worldIn, BlockPos pos, EntityPlayer playerIn) 
+	 {
+		 super.onBlockActivated(worldIn, pos, playerIn);
+	 
+	 }*/
+	
+	 
 }
