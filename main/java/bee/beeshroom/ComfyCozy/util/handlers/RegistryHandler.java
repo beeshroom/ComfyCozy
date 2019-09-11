@@ -1,7 +1,5 @@
 package bee.beeshroom.ComfyCozy.util.handlers;
 
-//CREDIT Cadiboo
-
 import javax.annotation.Nonnull;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +24,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+
+//CREDIT to Cadiboo for a lot of this registry code. 
+
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public final class RegistryHandler {
