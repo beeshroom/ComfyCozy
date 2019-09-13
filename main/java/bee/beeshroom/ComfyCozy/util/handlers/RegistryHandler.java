@@ -25,7 +25,13 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+<<<<<<< HEAD
 //CREDIT to Cadiboo for a lot of this registry code.
+=======
+
+//CREDIT to Cadiboo for a lot of this registry code. 
+
+>>>>>>> f831746022b4198748381e4609607f9e48602dd9
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public final class RegistryHandler {
