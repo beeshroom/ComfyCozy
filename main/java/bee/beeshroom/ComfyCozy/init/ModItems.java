@@ -3,6 +3,7 @@ package bee.beeshroom.ComfyCozy.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import bee.beeshroom.ComfyCozy.items.ItemBase;
 import bee.beeshroom.ComfyCozy.items.oat_seeds;
 import bee.beeshroom.ComfyCozy.items.strawberry_seeds;
 import bee.beeshroom.ComfyCozy.items.food.ItemCustomFood;
@@ -40,7 +41,7 @@ public class ModItems {
 	public static final Item STRAWBERRY_OATMEAL = new strawberry_oatmeal("strawberry_oatmeal", 7, .9f, false);
 	public static final Item GOLD_APPLE_CINNAMON_OATMEAL = new gold_apple_cinnamon_oatmeal("gold_apple_cinnamon_oatmeal", 8, 1.2f, false);
 	
-	
+	public static final Item COZY_HAMMER = new ItemBase("cozy_hammer");
 	
 	//Tools
 	//public static final ItemSword SKELETON_ARM = new ToolSword("skeleton_arm", MATERIAL_BONE);

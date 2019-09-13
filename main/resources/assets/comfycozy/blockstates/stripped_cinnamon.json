@@ -1,5 +1,10 @@
 {
     "variants": {
-        "normal": { "model": "comfycozy:stripped_cinnamon" }
+        "facing=up": { "model": "comfycozy:stripped_cinnamon" },
+        "facing=down": { "model": "comfycozy:stripped_cinnamon", "x": 180 },
+        "facing=east": { "model": "comfycozy:stripped_cinnamon", "y": 90, "x": 90 },
+        "facing=south": { "model": "comfycozy:stripped_cinnamon", "y": 180, "x": 90 },
+        "facing=west": { "model": "comfycozy:stripped_cinnamon", "y": 270, "x": 90 },
+        "facing=north": { "model": "comfycozy:stripped_cinnamon", "y": 0, "x": 90 }
     }
 }

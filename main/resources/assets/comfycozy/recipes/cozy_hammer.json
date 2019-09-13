@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "W",
+        "S"
+    ],
+    
+    "key":
+    {
+        "W":
+        {
+             "item": "minecraft:wool",
+             "data": 14
+        },
+        "S":
+        {
+            "item": "minecraft:stick"
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "comfycozy:cozy_hammer"
+    }
+}

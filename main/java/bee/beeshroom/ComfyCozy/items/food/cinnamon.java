@@ -4,6 +4,7 @@ package bee.beeshroom.ComfyCozy.items.food;
 import bee.beeshroom.ComfyCozy.Main;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
@@ -29,12 +30,21 @@ public class cinnamon  extends ItemFood
 		ModItems.ITEMS.add(this);
 	}
 	
-		@Override
+	/*	@Override
 		public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) 
 		{
-			
-			entityLiving.addPotionEffect(new PotionEffect(MobEffects.POISON, 5, 1, false, false));
-			entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 25, 1, false, false));
+			entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 35, 1, false, false));
+			entityLiving.addPotionEffect(new PotionEffect(MobEffects.POISON, 15, 1, false, false));
 			return super.onItemUseFinish(stack, worldIn, entityLiving);
-		}
+		}*/
+	
+	@Override
+	  protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
+	    {
+	        if (!worldIn.isRemote)
+	        {
+	                player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 300, 1));
+	                player.addPotionEffect(new PotionEffect(MobEffects.POISON, 80, 0));
+	        }
+	    }
 }

@@ -1,7 +1,7 @@
 {
     "variants": {
-        "facing=up": { "model": "comfycozy:bunting"},
-        "facing=down": { "model": "comfycozy:bunting"},
+        "facing=up": { "model": "comfycozy:bunting_vert" },
+        "facing=down": { "model": "comfycozy:bunting_vert"},
         "facing=north": { "model": "comfycozy:bunting", "y": 270},
         "facing=south": { "model": "comfycozy:bunting", "y": 90 },
         "facing=west":  { "model": "comfycozy:bunting", "y": 180 },

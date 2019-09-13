@@ -1,7 +1,5 @@
 package bee.beeshroom.ComfyCozy.util.handlers;
 
-//CREDIT Cadiboo
-
 import javax.annotation.Nonnull;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +24,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+//CREDIT to Cadiboo for a lot of this registry code.
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public final class RegistryHandler {
@@ -90,19 +90,14 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
     LOGGER.debug("Registered entities");
 }
 
-
+@EventHandler
 public static void preInitRegistries(FMLPreInitializationEvent event)
 {
 	GameRegistry.registerWorldGenerator(new WorldGenTrees(), 0);
+	MinecraftForge.addGrassSeed(new ItemStack(ModItems.STRAWBERRY_SEEDS), 10);
+	MinecraftForge.addGrassSeed(new ItemStack(ModItems.OAT_SEEDS), 15);
 	
 	//ModBiomes.registerBiomes();
-}
-
-@EventHandler
-public void preInit(FMLPreInitializationEvent event)
-{
-	MinecraftForge.addGrassSeed(new ItemStack(ModItems.STRAWBERRY_SEEDS), 10);
-	MinecraftForge.addGrassSeed(new ItemStack(ModItems.OAT_SEEDS), 10);
 }
 
 //i should probably put all the awnings in here.. and cinnamon wood..  

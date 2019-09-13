@@ -1,0 +1,18 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "comfycozy:cinnamon_tree"
+    }
+    
+    ],
+
+    "result": 
+    {
+        "item": "comfycozy:stripped_cinnamon",
+        "count": 1
+    }
+}

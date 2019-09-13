@@ -13,12 +13,14 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -87,12 +89,14 @@ public class strawberry_cake extends BlockBase
 	        else
 	        {
 	            player.addStat(StatList.CAKE_SLICES_EATEN);
+	            worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.BLOCKS, 0.8F, 1.0F); 
 	            player.getFoodStats().addStats(3, 0.1F);
 	            int i = ((Integer)state.getValue(BITES)).intValue();
 
 	            if (i < 4)
 	            {
-	                worldIn.setBlockState(pos, state.withProperty(BITES, Integer.valueOf(i + 1)), 3);
+	                worldIn.setBlockState(pos, state.withProperty(BITES, Integer.valueOf(i + 1))); // , 3);
+	                
 	            }
 	            else
 	            {

@@ -8,7 +8,9 @@ import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
+import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -22,6 +24,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -30,8 +33,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -42,6 +47,8 @@ import net.minecraft.world.World;
 
 public class pole extends BlockBase
 {
+	
+    public static final PropertyBool TALL = PropertyBool.create("tall");
 //this code is copied directly from another mod i made where this code worked fine.
  //   public static final AxisAlignedBB BUNTING_VERT = new AxisAlignedBB(0.9375D, 0.0D, 0.46875D, 0.625D, 0.0D, 1.0D);
   //  public static final AxisAlignedBB POLE = new AxisAlignedBB(0.46875D, 0.9375D, 0.0D, 0.54125D, 0.625D, 1.0D);
@@ -49,11 +56,11 @@ public class pole extends BlockBase
 	
 	    public pole(String name, Material material) {
 		super(name, material);
-		//this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		setSoundType(SoundType.CLOTH);
-		setHardness(0.0F);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(TALL, Boolean.valueOf(false)));
+		setSoundType(SoundType.WOOD);
+		setHardness(0.3F);
 		setResistance(0.1F);
-		setHarvestLevel("wood", 0);
+		setHarvestLevel("axe", 0);
 
 	/*	setRegistryName(name);
 		setUnlocalizedName(name);
@@ -134,84 +141,51 @@ public class pole extends BlockBase
 	    {
 	                return POLE;
 	        }
-	 /*   
+	    
+	    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	    {
+	    	  ItemStack itemstack = playerIn.getHeldItem(hand);
+
+	    	    //if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE)
+
+	    	    if (!itemstack.isEmpty() && (itemstack.getItem() == ModItems.COZY_HAMMER))
+
+	         {
+	            state = state.cycleProperty(TALL);
+	            worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ENTITY_BAT_AMBIENT, SoundCategory.BLOCKS, 0.5F, 0.5F);
+	            worldIn.setBlockState(pos, state, 2);
+	           // this.playSound(playerIn, worldIn, pos, ((Boolean)state.getValue(OPEN)).booleanValue());
+	            return true;
+	         }
+	         else
+	         {
+	         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+			} }
+	    	
+	    public IBlockState getStateFromMeta(int meta)
+	    {
+	        return this.getDefaultState().withProperty(TALL, Boolean.valueOf((meta & 4) != 0));
+	    }
+	    
 	    public int getMetaFromState(IBlockState state)
 	    {
-	        return 0;
-	    }
-	    
-	    
-	    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing)
-	    {
-	        IBlockState iblockstate = worldIn.getBlockState(pos);
-	        BlockFaceShape blockfaceshape = iblockstate.getBlockFaceShape(worldIn, pos, facing);
-	        Block block = iblockstate.getBlock();
-	        boolean flag = blockfaceshape == BlockFaceShape.MIDDLE_POLE && (iblockstate.getMaterial() == this.blockMaterial || block instanceof bunting);
-	        return !isExcepBlockForAttachWithPiston(block) && blockfaceshape == BlockFaceShape.SOLID || flag;
-	    }
+	        int i = 0;
+	       
 
-	    protected static boolean isExcepBlockForAttachWithPiston(Block p_194142_0_)
-	    {
-	        return Block.isExceptBlockForAttachWithPiston(p_194142_0_) || p_194142_0_ == Blocks.BARRIER || p_194142_0_ == Blocks.MELON_BLOCK || p_194142_0_ == Blocks.PUMPKIN || p_194142_0_ == Blocks.LIT_PUMPKIN;
-	    }
-	    
-	    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-	    {
-	        return state.withProperty(NORTH, canPoleConnectTo(worldIn, pos, EnumFacing.NORTH))
-	                    .withProperty(EAST,  canPoleConnectTo(worldIn, pos, EnumFacing.EAST))
-	                    .withProperty(SOUTH, canPoleConnectTo(worldIn, pos, EnumFacing.SOUTH))
-	                    .withProperty(WEST,  canPoleConnectTo(worldIn, pos, EnumFacing.WEST));
-	    }
-	
-	    public IBlockState withRotation(IBlockState state, Rotation rot)
-	    {
-	        switch (rot)
+	        if (((Boolean)state.getValue(TALL)).booleanValue())
 	        {
-	            case CLOCKWISE_180:
-	                return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST));
-	            case COUNTERCLOCKWISE_90:
-	                return state.withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH));
-	            case CLOCKWISE_90:
-	                return state.withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH));
-	            default:
-	                return state;
+	            i |= 4;
 	        }
-	    }
-	    
-	    public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
-	    {
-	        switch (mirrorIn)
-	        {
-	            case LEFT_RIGHT:
-	                return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(NORTH));
-	            case FRONT_BACK:
-	                return state.withProperty(EAST, state.getValue(WEST)).withProperty(WEST, state.getValue(EAST));
-	            default:
-	                return super.withMirror(state, mirrorIn);
-	        }
-	    }
-	    
 
+	        return i;
+	    }
+	    
 	    protected BlockStateContainer createBlockState()
 	    {
-	        return new BlockStateContainer(this, new IProperty[] {NORTH, EAST, WEST, SOUTH});
+	        return new BlockStateContainer(this, new IProperty[] {TALL});
 	    }
 
 	    
-
-	    @Override
-	    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
-	    {
-	        return canConnectTo(world, pos.offset(facing), facing.getOpposite());
-	    }
-
-	    private boolean canPoleConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
-	    {
-	        BlockPos other = pos.offset(facing);
-	        Block block = world.getBlockState(other).getBlock();
-	        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
-	    }
-	    */
 	    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
 	    {
 	        return BlockFaceShape.UNDEFINED;

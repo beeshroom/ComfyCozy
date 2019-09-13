@@ -3,6 +3,7 @@ package bee.beeshroom.ComfyCozy.items.food;
 import bee.beeshroom.ComfyCozy.Main;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
@@ -25,12 +26,22 @@ public class gold_apple_cinnamon_oatmeal  extends ItemFood
 		ModItems.ITEMS.add(this);
 	}
 	
-	@Override
+/*	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) 
 	{
 		entityLiving.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 120, 1, false, false));
 		entityLiving.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 5, 2, false, false));
 		super.onItemUseFinish(stack, worldIn, entityLiving);
 		return new ItemStack(Items.BOWL);
-	}
+	}*/
+	
+	@Override
+	  protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
+	    {
+	        if (!worldIn.isRemote)
+	        {
+	                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 100, 1));
+	                player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 2400, 0));
+	        }
+	    }
 }

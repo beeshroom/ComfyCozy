@@ -21,6 +21,7 @@ public class WorldGenCinnamon extends WorldGenerator
             if (worldIn.isAirBlock(blockpos))
             {
                 BlockPos blockpos1 = blockpos.down();
+              
 
                 if (worldIn.getBlockState(blockpos1.west()).getBlock() == Blocks.GRASS || worldIn.getBlockState(blockpos1.east()).getBlock() == Blocks.GRASS || worldIn.getBlockState(blockpos1.north()).getBlock() == Blocks.GRASS || worldIn.getBlockState(blockpos1.south()).getBlock() == Blocks.GRASS)
                 {
@@ -31,6 +32,7 @@ public class WorldGenCinnamon extends WorldGenerator
                        // if (ModBlocks.CINNAMON_TREE.canBlockStay(worldIn, blockpos))
                       //  {
                             worldIn.setBlockState(blockpos.up(k), ModBlocks.CINNAMON_TREE.getDefaultState(), 1);
+                            System.out.println();
                       //   }
                     }
                 }

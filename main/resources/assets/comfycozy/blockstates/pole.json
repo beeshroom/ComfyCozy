@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "comfycozy:pole" }
+        "tall=false": { "model": "comfycozy:pole" },
+        "tall=true": { "model": "comfycozy:pole_awning" }
     }
 }

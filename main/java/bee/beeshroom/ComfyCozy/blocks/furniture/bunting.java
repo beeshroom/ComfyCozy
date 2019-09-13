@@ -46,6 +46,7 @@ public class bunting extends BlockDirectional
  //   public static final AxisAlignedBB BUNTING_VERT = new AxisAlignedBB(0.9375D, 0.0D, 0.46875D, 0.625D, 0.0D, 1.0D);
     public static final AxisAlignedBB BUNTING_WE = new AxisAlignedBB(0.0D, 0.9375D, 0.46875D, 1.0D, 0.625D, 0.54125D);
     public static final AxisAlignedBB BUNTING = new AxisAlignedBB(0.46875D, 0.9375D, 0.0D, 0.54125D, 0.625D, 1.0D);
+    public static final AxisAlignedBB BUNTING_VERT = new AxisAlignedBB(0.4375D, 0D, 0.4375D, 0.5625D, 1D, 0.5625D);
 
     
 	    public bunting(String name, Material material) 
@@ -201,7 +202,7 @@ public class bunting extends BlockDirectional
 	            case Z:
 	                return BUNTING;
 	          case Y:
-	                return BUNTING;
+	                return BUNTING_VERT;
 	        }
 	    } 
 	    

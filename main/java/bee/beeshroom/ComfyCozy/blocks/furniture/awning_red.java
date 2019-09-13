@@ -12,8 +12,11 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import bee.beeshroom.ComfyCozy.blocks.BlockBase;
+import bee.beeshroom.ComfyCozy.init.ModBlocks;
+import bee.beeshroom.ComfyCozy.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -25,6 +28,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,8 +39,10 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -49,18 +55,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class awning_red extends BlockBase implements net.minecraftforge.common.IShearable {
 
+    public static final PropertyBool FLAT = PropertyBool.create("flat");
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	 //   protected static final AxisAlignedBB[] AABB_BY_INDEX = new AxisAlignedBB[], new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.4375D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.4375D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 	
 //this code is copied directly from another mod i made where this code worked fine.
 	public static final AxisAlignedBB AWNING = new AxisAlignedBB(0.0D, 0.2875D, 0.0D, 1.0D, 0.48D, 1.0D);
 	public static final AxisAlignedBB AWNING_WE = new AxisAlignedBB(0.0D, 0.2875D, 0.0D, 1.0D, 0.48D, 1.0D);
+	public static final AxisAlignedBB AWNING_FLAT = new AxisAlignedBB(0.0D, 0.4875D, 0.0D, 1.0D, 0.69D, 1.0D);
     
     
     
 	    public awning_red(String name, Material material) {
 		super(name, material);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(FLAT, Boolean.valueOf(false)));
 		//setSoundType(SoundType.CLOTH);
 		setHardness(0.3F);
 		setResistance(0.1F);
@@ -99,11 +107,11 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 	        return true;
 	    }
 	
-	  @Override
+/*	  @Override
 	    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	    {
 	        return AWNING;
-	    }
+	    } */
 	  
 
 	  
@@ -297,38 +305,6 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 	    }
 
 	    /**
-	     * Convert the given metadata into a BlockState for this Block
-	     */
-	    public IBlockState getStateFromMeta(int meta)
-	    {
-	        EnumFacing enumfacing = EnumFacing.getFront(meta);
-
-	        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-	        {
-	            enumfacing = EnumFacing.NORTH;
-	        }
-
-	        return this.getDefaultState().withProperty(FACING, enumfacing);
-	    }
-
-	    /**
-	     * Convert the BlockState into the correct metadata value
-	     */
-	    public int getMetaFromState(IBlockState state)
-	    {
-	        return ((EnumFacing)state.getValue(FACING)).getIndex();
-	    }
-
-	    /**
-	     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-	     * blockstate.
-	     */
-	    public IBlockState withRotation(IBlockState state, Rotation rot)
-	    {
-	        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
-	    }
-
-	    /**
 	     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
 	     * blockstate.
 	     */
@@ -339,28 +315,129 @@ public class awning_red extends BlockBase implements net.minecraftforge.common.I
 
 	    protected BlockStateContainer createBlockState()
 	    {
-	        return new BlockStateContainer(this, new IProperty[] {FACING});
+	        return new BlockStateContainer(this, new IProperty[] {FACING, FLAT});
 	    }
 	    
+
+	    protected static EnumFacing getFacing(int meta)
+	    {
+	        switch (meta & 3)
+	        {
+	            case 0:
+	                return EnumFacing.NORTH;
+	            case 1:
+	                return EnumFacing.SOUTH;
+	            case 2:
+	                return EnumFacing.WEST;
+	            case 3:
+	            default:
+	                return EnumFacing.EAST;
+	        }
+	    }
 	    
+	    public IBlockState getStateFromMeta(int meta)
+	    {
+	        return this.getDefaultState().withProperty(FACING, getFacing(meta)).withProperty(FLAT, Boolean.valueOf((meta & 4) != 0));
+	    }
+	    
+	    public int getMetaFromState(IBlockState state)
+	    {
+	        int i = 0;
+	        i = i | getMetaForFacing((EnumFacing)state.getValue(FACING));
+
+	        if (((Boolean)state.getValue(FLAT)).booleanValue())
+	        {
+	            i |= 4;
+	        }
+
+	        return i;
+	    }
+	    
+	    protected static int getMetaForFacing(EnumFacing facing)
+	    {
+	        switch (facing)
+	        {
+	            case NORTH:
+	                return 0;
+	            case SOUTH:
+	                return 1;
+	            case WEST:
+	                return 2;
+	            case EAST:
+	            default:
+	                return 3;
+	        }
+	    }
+	    
+	    public IBlockState withRotation(IBlockState state, Rotation rot)
+	    {
+	        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+	    }
 	    
 	    @Override
 		public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) 
 		{
+	    	  AxisAlignedBB axisalignedbb;
+	    	if (((Boolean)state.getValue(FLAT)).booleanValue())
+	        {
+	    	
 			switch(((EnumFacing)state.getValue(FACING)))
 	        {
 	            case SOUTH:
 	            default:
-	                return AWNING_WE;
+	                return AWNING_FLAT;
 	            case NORTH:
-	                return AWNING_WE;
+	                return AWNING_FLAT;
 	            case EAST:
-	                return AWNING;
+	                return AWNING_FLAT;
 	            case WEST:
-	                return AWNING;
+	                return AWNING_FLAT;
 	        }
-		}
+	        }
+	        else
+	        {
+	            axisalignedbb = AWNING;
+	        }
+
+	        return axisalignedbb;
+	    }
 		
+	    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	    {
+	    	  ItemStack itemstack = playerIn.getHeldItem(hand);
+
+	    	    //if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE)
+
+	    	    if (!itemstack.isEmpty() && (itemstack.getItem() == ModItems.COZY_HAMMER))
+	         {
+	            state = state.cycleProperty(FLAT);
+	            worldIn.setBlockState(pos, state, 2);
+	            worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ENTITY_BAT_AMBIENT, SoundCategory.BLOCKS, 0.5F, 0.5F);
+	           // this.playSound(playerIn, worldIn, pos, ((Boolean)state.getValue(OPEN)).booleanValue());
+	            return true;
+	         }
+	         else
+	         {
+	         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+			} }	    	
+	    
+	/*    public boolean onBlockActivated(EntityPlayer player, World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	    {
+	    //	if(player.isSneaking())
+		//	{
+	    		state = state.cycleProperty(FLAT);
+	    		System.out.println("test");
+	            worldIn.setBlockState(pos, state, 2);
+	            worldIn.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_SNOW_PLACE, SoundCategory.BLOCKS, 0.8F, 1.0F);
+	            //this.playSound(playerIn, worldIn, pos, ((Boolean)state.getValue(OPEN)).booleanValue());
+	            return true;
+	    		} */
+	   /* 	else
+	    	{
+	    		return false;
+	    	}
+	    }*/
+	
 		public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
         return BlockFaceShape.UNDEFINED;
