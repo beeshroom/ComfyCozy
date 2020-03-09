@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "RDR",
+        " R "
+    ],
+    
+    "key":
+    {
+             "R": {
+      "item": "minecraft:stained_hardened_clay",
+      "data": 0
+        },
+        
+        "D": {
+      "item": "minecraft:dirt",
+      "data": 0
+    }   
+    },
+    
+    "result":
+    {
+        "item": "comfycozy:flower_box_white",
+        "count": 2
+    }
+}

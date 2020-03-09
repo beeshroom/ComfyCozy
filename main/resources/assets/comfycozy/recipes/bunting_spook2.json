@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "comfycozy:bunting"
+    },
+ {
+      "item": "comfycozy:bunting"
+    },
+ {
+      "item": "comfycozy:bunting"
+    },
+ {
+      "item": "comfycozy:bunting"
+    },
+ {
+      "item": "comfycozy:bunting"
+    },
+ {
+      "item": "comfycozy:bunting"
+    },
+
+     {
+      "item": "minecraft:bone"
+    },
+    
+    {
+      "item": "minecraft:rotten_flesh"
+    }
+  ],
+  "result": {
+    "item": "comfycozy:bunting_spook",
+    "count": 6
+  }
+}

@@ -2,6 +2,8 @@ package bee.beeshroom.ComfyCozy;
 
 import bee.beeshroom.ComfyCozy.tabs.ComfyCozyTab;
 import bee.beeshroom.ComfyCozy.util.Reference;
+import bee.beeshroom.ComfyCozy.util.handlers.MobDropsHandler;
+import bee.beeshroom.ComfyCozy.util.handlers.RegistryHandlerTwo;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -27,12 +29,15 @@ public class Main {
 	
 	}
 	
-/*@EventHandler
-	public static void PreInit(FMLPreInitializationEvent event)
-	{
+
+	@EventHandler
+	public static void preInit(FMLPreInitializationEvent event) 
+	{	
+		RegistryHandlerTwo.preInitRegistries(event);
 		MinecraftForge.EVENT_BUS.register(new MobDropsHandler());
 	}
-			@EventHandler
+
+	/*		@EventHandler
 			public static void init(FMLInitializationEvent event)
 			{
 				//MinecraftForge.EVENT_BUS.register(new LootHandler());

@@ -1,7 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "comfycozy:blocks/bunting"
+		"0": "comfycozy:blocks/bunting",
+		"particle": "blocks/wool_colored_white"
 	},
 	"elements": [
 		{

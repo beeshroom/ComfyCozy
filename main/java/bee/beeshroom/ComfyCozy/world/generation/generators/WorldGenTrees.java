@@ -9,18 +9,23 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeForest;
 import net.minecraft.world.biome.BiomeJungle;
+import net.minecraft.world.biome.BiomeTaiga;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 //thankyou harry's tech reviews for your tutorial on custom tree generation
 
 public class WorldGenTrees implements IWorldGenerator
 {
-	private final WorldGenerator CINNAMON = new WorldGenCinnamon();
+	private final WorldGenerator CINNAMON = new WorldGenCinnamon(true);
+	//private final WorldGenerator STRAWBERRY = new WorldGenStrawberry(null);
+	//private final WorldGenerator TURKEYTAIL = new WorldGenTurkeytail();
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) 
@@ -32,13 +37,29 @@ public class WorldGenTrees implements IWorldGenerator
 			
 		case 0:
 			
-			runGenerator(CINNAMON, world, random, chunkX, chunkZ, 12, Blocks.GRASS, BiomeJungle.class);
-			//runGenerator(CINNAMON, world, random, chunkX, chunkZ, 9, Blocks.GRASS, BiomeForest.class);
+			runGenerator(CINNAMON, world, random, chunkX, chunkZ, 85, Blocks.GRASS, BiomeJungle.class);
+			runGenerator(CINNAMON, world, random, chunkX, chunkZ, 85, Blocks.DIRT, BiomeJungle.class);
+			//runGenerator(CINNAMON, world, random, chunkX, chunkZ, 85, Blocks.LEAVES, BiomeJungle.class);
+			//runGenerator(CINNAMON, world, random, chunkX, chunkZ, 85, Blocks.LEAVES2, BiomeJungle.class);
+		//	System.out.println("JUNGLE");
+			runGenerator(CINNAMON, world, random, chunkX, chunkZ, 15, Blocks.GRASS, BiomeForest.class);
+			
+		//	runGenerator(STRAWBERRY, world, random, chunkX, chunkZ, 15, Blocks.GRASS, BiomeForest.class);
+		//	runGenerator(STRAWBERRY, world, random, chunkX, chunkZ, 15, Blocks.GRASS, BiomeTaiga.class);
+			
+			//runGenerator(TURKEYTAIL, world, random, chunkX, chunkZ, 10, Blocks.LOG, BiomeForest.class);
+			//runGenerator(TURKEYTAIL, world, random, chunkX, chunkZ, 15, Blocks.LOG2, BiomeForest.class);
+			
+		//	runGenerator(CINNAMON, world, random, chunkX, chunkZ, 85, Blocks.GRASS, getBiomes(BiomeDictionary.Type.JUNGLE));
 			
 			break;
 			
 		case -1:
 		}}
+	
+	/*private static Biome[] getBiomes(final BiomeDictionary.Type type) {
+		return BiomeDictionary.getBiomes(type).toArray(new Biome[0]);
+	}*/
 	
 	private void runGenerator(WorldGenerator generator, World world, Random random, int chunkX, int chunkZ, int chance, Block topBlock, Class<?>... classes)
 	{

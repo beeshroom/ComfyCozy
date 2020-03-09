@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "comfycozy:flower_pot_white_floor" },
+        "facing=down": { "model": "comfycozy:flower_pot_white_floor"},
+        "facing=east": { "model": "comfycozy:flower_pot_white_wall", "y": 90},
+        "facing=south": { "model": "comfycozy:flower_pot_white_wall", "y": 180 },
+        "facing=west":  { "model": "comfycozy:flower_pot_white_wall", "y": 270 },
+        "facing=north":  { "model": "comfycozy:flower_pot_white_wall" }
+    }
+}

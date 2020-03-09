@@ -1,8 +1,12 @@
 {
     "variants": {
-        "facing=north": { "model": "comfycozy:awning_pink" },
-        "facing=south": { "model": "comfycozy:awning_pink", "y": 180 },
-        "facing=west":  { "model": "comfycozy:awning_pink", "y": 270 },
-        "facing=east":  { "model": "comfycozy:awning_pink", "y": 90 }
+        "facing=north,flat=false": { "model": "comfycozy:awning_pink" },
+        "facing=south,flat=false": { "model": "comfycozy:awning_pink", "y": 180 },
+        "facing=west,flat=false":  { "model": "comfycozy:awning_pink", "y": 270 },
+        "facing=east,flat=false":  { "model": "comfycozy:awning_pink", "y": 90 },
+        "facing=north,flat=true": { "model": "comfycozy:awning_pink_flat" },
+        "facing=south,flat=true": { "model": "comfycozy:awning_pink_flat", "y": 180 },
+        "facing=west,flat=true":  { "model": "comfycozy:awning_pink_flat", "y": 270 },
+        "facing=east,flat=true":  { "model": "comfycozy:awning_pink_flat", "y": 90 }
     }
 }

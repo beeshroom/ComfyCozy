@@ -1,8 +1,13 @@
 {
     "variants": {
-        "facing=north": { "model": "comfycozy:bunting_heart", "y": 270},
-        "facing=south": { "model": "comfycozy:bunting_heart", "y": 90 },
-        "facing=west":  { "model": "comfycozy:bunting_heart", "y": 180 },
-        "facing=east":  { "model": "comfycozy:bunting_heart" }
-    }
-}
+        "facing=north,long=false": { "model": "comfycozy:bunting_heart", "y": 270  },
+        "facing=south,long=false": { "model": "comfycozy:bunting_heart", "y": 270  },
+        "facing=east,long=false":  { "model": "comfycozy:bunting_heart", "y": 180 },
+         "facing=west,long=false":  { "model": "comfycozy:bunting_heart", "y": 180 },
+       
+        "facing=north,long=true": { "model": "comfycozy:bunting_heart_long", "y": 270 },
+        "facing=south,long=true": { "model": "comfycozy:bunting_heart_long", "y": 270  },
+        "facing=east,long=true":  { "model": "comfycozy:bunting_heart_long", "y": 180 },
+        "facing=west,long=true":  { "model": "comfycozy:bunting_heart_long", "y": 180  }
+        }
+        }

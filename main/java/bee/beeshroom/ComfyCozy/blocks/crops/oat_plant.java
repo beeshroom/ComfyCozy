@@ -2,9 +2,11 @@ package bee.beeshroom.ComfyCozy.blocks.crops;
 
 import java.util.Random;
 
+import bee.beeshroom.ComfyCozy.entity.EntityFurnaceGolem;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheep;
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
-
+import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -14,11 +16,17 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -31,7 +39,7 @@ import net.minecraft.world.World;
 public class oat_plant extends BlockBush implements IGrowable
 {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 4);
-		private static final AxisAlignedBB[] oat_plant = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.4375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.7625D, 1.0D)};
+		private static final AxisAlignedBB[] oat_plant = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.4375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.6625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9625D, 1.0D)};
 
 				  public oat_plant(String name)
 				    {
@@ -178,6 +186,17 @@ public class oat_plant extends BlockBush implements IGrowable
 
 				        return f;
 				    }
+				    
+				    
+				    //I added this to see if itll break when jumped on now
+				    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, float chance, int fortune)
+				    {
+				        if (!this.canBlockStay(worldIn, pos, state))
+				        {
+				            this.dropBlockAsItemWithChance(worldIn, fromPos, state, chance, fortune);
+				        	worldIn.setBlockToAir(pos);
+				        }
+				    }
 
 				    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 				    {
@@ -203,6 +222,9 @@ public class oat_plant extends BlockBush implements IGrowable
 				        int age = getAge(state);
 				        Random rand = world instanceof World ? ((World)world).rand : new Random();
 
+				     /*   if (this.isMaxAge(state) && RANDOM.nextInt(2) == 0)
+		                    drops.add(new ItemStack(Items.POISONOUS_POTATO)); */
+				        
 				        if (age >= getMaxAge())
 				        {
 				            int k = 3 + fortune;
@@ -238,6 +260,7 @@ public class oat_plant extends BlockBush implements IGrowable
 				                    if (worldIn.rand.nextInt(2 * this.getMaxAge()) <= i)
 				                    {
 				                        spawnAsEntity(worldIn, pos, new ItemStack(this.getSeed()));
+				                        
 				                    }
 				                }
 				            }
@@ -252,10 +275,10 @@ public class oat_plant extends BlockBush implements IGrowable
 				        return this.isMaxAge(state) ? this.getCrop() : this.getSeed();
 				    }
 				    
-				    public int quantityDropped(Random random)
+				/*    public int quantityDropped(Random random)
 				    {
 				        return 3;
-				    }
+				    } */
 
 				    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 				    {
@@ -305,4 +328,74 @@ public class oat_plant extends BlockBush implements IGrowable
 				    {
 				        return BlockFaceShape.UNDEFINED;
 				    }
+				    
+				/*    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn)
+				    {
+				    	  //int i = ((Integer)state.getValue(AGE)).intValue();
+				    	  //	if ((i == 4) && RANDOM.nextInt(2) > 1)
+				    	
+				    	 		EntityOatmealSheep EntityOatmealsSheep = new EntityOatmealSheep(worldIn);	 
+				    	 		//entity.setGrowingAge(-2000);
+				    	 		
+				    	       // EntityOatmealSheep.setPosition(getCoord(pos.getX()), pos.getY(), getCoord(pos.getZ()));
+				    	    	//worldIn.spawnEntity(EntityOatmealSheep);
+				    	    	//EntityOatmealSheep.setGrowingAge(-2000);
+				    	    	// worldIn.setBlockToAir(pos);
+				    	 		
+				    	 		
+				    	 		worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ENTITY_SHEEP_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.6F);
+
+				    	 		worldIn.spawnEntity(EntityOatmealsSheep);
+				         } */
+				    
+			/*	    private static double getCoord(int c) {
+						return c + Math.signum(c)*0.5D;
+					} */
+				    
+			/*	    public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn)
+				    {
+				    	super.onBlockClicked(worldIn, pos, playerIn);
+	                   // if (worldIn.rand.nextInt(10) == 0)
+	                    
+	                    	worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ENTITY_SHEEP_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.6F);
+
+	                    	EntityOatmealSheep EntityOatmealsSheep = new EntityOatmealSheep(worldIn);	
+	                    	
+	                    	worldIn.spawnEntity(EntityOatmealsSheep);
+	                    
+				    } */
+				    
+				 
+				/*    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+				    {
+				        ItemStack itemstack = playerIn.getHeldItem(hand);
+
+				        if (worldIn.rand.nextInt(10) == 0)
+
+				    {
+				        	if (!worldIn.isRemote) {
+				        		worldIn.setBlockToAir(pos);
+				        		worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ENTITY_SHEEP_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.6F);
+				        		EntityOatmealSheep EntityOatmealsSheep = new EntityOatmealSheep(worldIn);	
+				        	
+		                    	worldIn.spawnEntity(EntityOatmealsSheep);				        	
+				        	}
+				            return true;
+				        } 
+				        else 
+				        {
+				        	worldIn.setBlockToAir(pos);
+				            return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+				            
+				        }
+				        
+				    }*/
+				    
+				/*    public void spawnSheep(World worldIn)
+				    {
+				    EntityOatmealSheep EntityOatmealSheep = new EntityOatmealSheep(worldIn);	 
+					 EntityOatmealSheep.setGrowingAge(-2000);
+			 		
+					 worldIn.spawnEntity(EntityOatmealSheep);}*/
+				    
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " BR",
+    " I "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:brown_mushroom"
+    },
+     "R": {
+      "item": "minecraft:red_mushroom"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "comfycozy:mushroom_beret"
+  }
+}

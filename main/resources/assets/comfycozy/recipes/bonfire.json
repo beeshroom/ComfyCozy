@@ -3,8 +3,7 @@
     
     "pattern":
     [
-        "RCR",
-        "RRR"
+        "RXR"
     ],
     
     "key":
@@ -12,13 +11,18 @@
         "R":
         {
            "type": "forge:ore_dict",
-        "ore": "blockWood"
+        "ore": "logWood"
         },
-        "C":
-        {
-            "item": "minecraft:coal",
+         "X": [
+      {
+        "item": "minecraft:coal",
         "data": 0
-        }
+      },
+      {
+        "item": "minecraft:coal",
+        "data": 1
+      }
+    ]
         
     },
     

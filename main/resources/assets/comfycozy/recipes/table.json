@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "RRR",
+        "R R"
+    ],
+    
+    "key":
+    {
+        "R":
+        {
+           "type": "forge:ore_dict",
+        "ore": "plankWood"
+        }   
+    },
+    
+    "result":
+    {
+        "item": "comfycozy:table",
+        "count": 4
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "comfycozy:strawberry_jam"
+    },
+    {
+      "item": "comfycozy:strawberry_jam"
+    },
+      {
+      "item": "comfycozy:strawberry_jam"
+    },
+    {
+      "item": "comfycozy:strawberry_jam"
+    }
+  ],
+  "result": {
+    "item": "comfycozy:jam_block"
+  }
+}

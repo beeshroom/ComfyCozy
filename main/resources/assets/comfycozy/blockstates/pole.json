@@ -1,6 +1,19 @@
 {
     "variants": {
-        "tall=false": { "model": "comfycozy:pole" },
-        "tall=true": { "model": "comfycozy:pole_awning" }
+        "facing=north,mode=0": { "model": "comfycozy:pole" },
+        "facing=south,mode=0": { "model": "comfycozy:pole" },
+        "facing=east,mode=0": { "model": "comfycozy:pole" },
+        "facing=west,mode=0": { "model": "comfycozy:pole" },
+         
+         "facing=south,mode=1": { "model": "comfycozy:pole_awning" },
+        "facing=east,mode=1": { "model": "comfycozy:pole_awning" },
+        "facing=west,mode=1": { "model": "comfycozy:pole_awning" },
+        "facing=north,mode=1": { "model": "comfycozy:pole_awning" },
+        
+          "facing=north,mode=2": { "model": "comfycozy:pole_awning_tall" },
+          "facing=east,mode=2": { "model": "comfycozy:pole_awning_tall", "y": 90 },
+          "facing=south,mode=2": { "model": "comfycozy:pole_awning_tall", "y": 180 },
+          "facing=west,mode=2": { "model": "comfycozy:pole_awning_tall", "y": 270 }
+       
     }
 }

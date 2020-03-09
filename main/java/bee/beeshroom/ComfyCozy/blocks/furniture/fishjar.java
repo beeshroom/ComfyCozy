@@ -10,6 +10,8 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -31,8 +33,10 @@ public class fishjar extends BlockBase
 //this code is copied directly from another mod i made where this code worked fine.
  //   public static final AxisAlignedBB BUNTING_VERT = new AxisAlignedBB(0.9375D, 0.0D, 0.46875D, 0.625D, 0.0D, 1.0D);
   //  public static final AxisAlignedBB POLE = new AxisAlignedBB(0.46875D, 0.9375D, 0.0D, 0.54125D, 0.625D, 1.0D);
-	public static final AxisAlignedBB JAR = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.63D, 0.75D);
-	public static final AxisAlignedBB JAR_WE = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.63D, 0.75D);
+	//public static final AxisAlignedBB JAR = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.73D, 0.75D);
+//	public static final AxisAlignedBB JAR_WE = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.73D, 0.75D);
+    protected static final AxisAlignedBB JAR = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.8760D, 0.9375D);
+    protected static final AxisAlignedBB JAR_WE = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.8760D, 0.9375D);
 	
 	    public fishjar(String name, Material material) {
 		super(name, material);
@@ -49,8 +53,9 @@ public class fishjar extends BlockBase
 		ModBlocks.BLOCKS.add(this);
 		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));*/
 	}
-	
-	  @Override
+
+
+	@Override
 	    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	    {
 	        return JAR;
@@ -60,7 +65,7 @@ public class fishjar extends BlockBase
 	@Override
 	public BlockRenderLayer getBlockLayer() 
 	{
-		return BlockRenderLayer.TRANSLUCENT;
+		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override
@@ -112,7 +117,6 @@ public class fishjar extends BlockBase
 		            if (enumfacing == EnumFacing.NORTH)
 		            {
 		                enumfacing = EnumFacing.SOUTH;
-		                
 		            }
 		            else if (enumfacing == EnumFacing.SOUTH)
 		            {

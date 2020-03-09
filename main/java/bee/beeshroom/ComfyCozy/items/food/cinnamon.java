@@ -38,11 +38,13 @@ public class cinnamon  extends ItemFood
 			return super.onItemUseFinish(stack, worldIn, entityLiving);
 		}*/
 	
+	
 	@Override
 	  protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
 	    {
 	        if (!worldIn.isRemote)
 	        {
+	        	 worldIn.spawnParticle(EnumParticleTypes.REDSTONE, player.posX, player.posY, player.posZ, 0.0D, 0.0D, 0.0D);
 	                player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 300, 1));
 	                player.addPotionEffect(new PotionEffect(MobEffects.POISON, 80, 0));
 	        }

@@ -1,8 +1,53 @@
 {
     "variants": {
-        "facing=north": { "model": "comfycozy:book_stack" },
-        "facing=south": { "model": "comfycozy:book_stack", "y": 180 },
-        "facing=west":  { "model": "comfycozy:book_stack2", "y": 270 },
-        "facing=east":  { "model": "comfycozy:book_stack2", "y": 90 }
+        "facing=north,mode=0": { "model": "comfycozy:book_stack" },
+      "facing=east,mode=0": { "model": "comfycozy:book_stack", "y": 90 },
+          "facing=south,mode=0": { "model": "comfycozy:book_stack", "y": 180 },
+          "facing=west,mode=0": { "model": "comfycozy:book_stack", "y": 270 },
+          
+         "facing=north,mode=1": { "model": "comfycozy:book_stack_leaning" },
+        "facing=east,mode=1": { "model": "comfycozy:book_stack_leaning", "y": 90  },
+        "facing=south,mode=1": { "model": "comfycozy:book_stack_leaning", "y": 180 },
+        "facing=west,mode=1": { "model": "comfycozy:book_stack_leaning", "y": 270 },
+        
+          "facing=north,mode=2": { "model": "comfycozy:book_stack_open" },
+          "facing=east,mode=2": { "model": "comfycozy:book_stack_open", "y": 90 },
+          "facing=south,mode=2": { "model": "comfycozy:book_stack_open", "y": 180 },
+          "facing=west,mode=2": { "model": "comfycozy:book_stack_open", "y": 270 },
+          
+             "facing=north,mode=3": { "model": "comfycozy:book_stack_leaning2" },
+          "facing=east,mode=3": { "model": "comfycozy:book_stack_leaning2", "y": 90 },
+          "facing=south,mode=3": { "model": "comfycozy:book_stack_leaning2", "y": 180 },
+          "facing=west,mode=3": { "model": "comfycozy:book_stack_leaning2", "y": 270 },  
+          
+               "facing=north,mode=4": { "model": "comfycozy:book_stack_open" },
+          "facing=east,mode=4": { "model": "comfycozy:book_stack_open", "y": 90 },
+          "facing=south,mode=4": { "model": "comfycozy:book_stack_open", "y": 180 },
+          "facing=west,mode=4": { "model": "comfycozy:book_stack_open", "y": 270 },
+          
+                "facing=north,mode=5": { "model": "comfycozy:book_stack_open2" },
+          "facing=east,mode=5": { "model": "comfycozy:book_stack_open2", "y": 90 },
+          "facing=south,mode=5": { "model": "comfycozy:book_stack_open2", "y": 180 },
+          "facing=west,mode=5": { "model": "comfycozy:book_stack_open2", "y": 270 },
+          
+          "facing=north,mode=6": { "model": "comfycozy:book_stack_stand" },
+          "facing=east,mode=6": { "model": "comfycozy:book_stack_stand", "y": 90 },
+          "facing=south,mode=6": { "model": "comfycozy:book_stack_stand", "y": 180 },
+          "facing=west,mode=6": { "model": "comfycozy:book_stack_stand", "y": 270 },
+          
+          "facing=north,mode=7": { "model": "comfycozy:book_stack_stand2" },
+          "facing=east,mode=7": { "model": "comfycozy:book_stack_stand2", "y": 90 },
+          "facing=south,mode=7": { "model": "comfycozy:book_stack_stand2", "y": 180 },
+          "facing=west,mode=7": { "model": "comfycozy:book_stack_stand2", "y": 270 },
+          
+                "facing=north,mode=8": { "model": "comfycozy:book_stack_mess" },
+          "facing=east,mode=8": { "model": "comfycozy:book_stack_mess", "y": 90 },
+          "facing=south,mode=8": { "model": "comfycozy:book_stack_mess", "y": 180 },
+          "facing=west,mode=8": { "model": "comfycozy:book_stack_mess", "y": 270 },
+          
+               "facing=north,mode=9": { "model": "comfycozy:book_stack_mess2" },
+          "facing=east,mode=9": { "model": "comfycozy:book_stack_mess2", "y": 90 },
+          "facing=south,mode=9": { "model": "comfycozy:book_stack_mess2", "y": 180 },
+          "facing=west,mode=9": { "model": "comfycozy:book_stack_mess2", "y": 270 }
     }
 }

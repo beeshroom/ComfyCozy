@@ -1,8 +1,13 @@
 {
     "variants": {
-        "facing=north": { "model": "comfycozy:carp_banner" },
-        "facing=south": { "model": "comfycozy:carp_banner", "y": 180 },
-        "facing=west":  { "model": "comfycozy:carp_banner", "y": 270 },
-        "facing=east":  { "model": "comfycozy:carp_banner", "y": 90 }
-    }
-}
+        "facing=north,mode=false": { "model": "comfycozy:carp_banner", "y": 90 },
+        "facing=east,mode=false":  { "model": "comfycozy:carp_banner", "y": 180 },
+        "facing=south,mode=false": { "model": "comfycozy:carp_banner", "y": 270  },
+        "facing=west,mode=false":  { "model": "comfycozy:carp_banner" },
+       
+        "facing=north,mode=true": { "model": "comfycozy:carp_banner_wall" },
+        "facing=east,mode=true":  { "model": "comfycozy:carp_banner_wall", "y": 90 },
+        "facing=south,mode=true": { "model": "comfycozy:carp_banner_wall", "y": 180  },
+        "facing=west,mode=true":  { "model": "comfycozy:carp_banner_wall", "y": 270  }
+        }
+        }

@@ -8,9 +8,13 @@ import bee.beeshroom.ComfyCozy.Main;
 import bee.beeshroom.ComfyCozy.blocks.BlockBase;
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
+import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -36,6 +40,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -44,25 +49,38 @@ import net.minecraft.world.World;
 
 //thank-you turtywurty for your custom block model tutorial on youtube, 
 
-public class book_stack extends BlockBase {
+public class book_stack extends BlockHorizontal {
 
-  public static final PropertyDirection FACING = BlockHorizontal.FACING;
+ // public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	 //   protected static final AxisAlignedBB[] AABB_BY_INDEX = new AxisAlignedBB[], new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5625D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.5625D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.4375D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.4375D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.4375D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.4375D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.5625D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
-	
+	 public static final PropertyInteger MODE = PropertyInteger.create("mode", 0, 2);
+	 
 //this code is copied directly from another mod i made where this code worked fine.
 	public static final AxisAlignedBB BOOKS = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.565D, 0.75D);
 	public static final AxisAlignedBB BOOKS_WE = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.565D, 0.75D);
   
   
   
-	    public book_stack(String name, Material material) {
-		super(name, material);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+	    public book_stack(String name, Material material) 
+	    {
+		super(material);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(MODE, Integer.valueOf(0)));
 		setSoundType(SoundType.WOOD);
 		setHardness(0.2F);
 		setResistance(0.1F);
-		setHarvestLevel("axe", 0);
+		//setHarvestLevel("axe", 0);
+		setRegistryName(name);
+		setUnlocalizedName(name);
+		
+		setCreativeTab(Main.comfycozytab);
+		ModBlocks.BLOCKS.add(this);
+		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}  
+	    
+	    @Override
+		public float getEnchantPowerBonus(World world, BlockPos pos) {
+			return 1;
+		}
 	    
 	    public int quantityDropped(Random random)
 	    {
@@ -223,6 +241,12 @@ public class book_stack extends BlockBase {
 	        return EnumPushReaction.DESTROY;
 	    }			
 	    
+	    
+	    public EnumBlockRenderType getRenderType(IBlockState state)
+	    {
+	        return EnumBlockRenderType.MODEL;
+	    }
+	    
 	  
 	
 	    
@@ -232,6 +256,7 @@ public class book_stack extends BlockBase {
 	     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
 	     * IBlockstate
 	     */
+	    @Override
 	    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	    {
 	        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
@@ -240,47 +265,77 @@ public class book_stack extends BlockBase {
 	    /**
 	     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
 	     */
+	    @Override
 	    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	    {
 	        worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 
 	    }
+	  
 	    
 	    
+	 
 	    
 	    
-	    
-	    /**
-	     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
-	     * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
-	     */
-	    public EnumBlockRenderType getRenderType(IBlockState state)
-	    {
-	        return EnumBlockRenderType.MODEL;
-	    }
-
-	    /**
-	     * Convert the given metadata into a BlockState for this Block
-	     */
+	    @Override
 	    public IBlockState getStateFromMeta(int meta)
 	    {
-	        EnumFacing enumfacing = EnumFacing.getFront(meta);
-
-	        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-	        {
-	            enumfacing = EnumFacing.NORTH;
-	        }
-
-	        return this.getDefaultState().withProperty(FACING, enumfacing);
+	        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(MODE, Integer.valueOf((meta & 15) >> 2));
 	    }
 
-	    /**
-	     * Convert the BlockState into the correct metadata value
-	     */
+	    @Override
 	    public int getMetaFromState(IBlockState state)
 	    {
-	        return ((EnumFacing)state.getValue(FACING)).getIndex();
+	        int i = 0;
+	        i = i | ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
+	        i = i | ((Integer)state.getValue(MODE)).intValue() << 2;
+	        return i;
 	    }
+	   
+	    protected static int getMetaForFacing(EnumFacing facing)
+	    {
+	        switch (facing)
+	        {
+	            case NORTH:
+	                return 0;
+	            case SOUTH:
+	                return 1;
+	            case WEST:
+	                return 2;
+	            case EAST:
+	            default:
+	                return 3;
+	        }
+	    }
+	    protected static EnumFacing getFacing(int meta)
+	    {
+	        switch (meta & 3)
+	        {
+	            case 0:
+	                return EnumFacing.NORTH;
+	            case 1:
+	                return EnumFacing.SOUTH;
+	            case 2:
+	                return EnumFacing.WEST;
+	            case 3:
+	            default:
+	                return EnumFacing.EAST;
+	        }
+	    } 
+	    
+	/*    public IBlockState getStateFromMeta(int meta)
+	    {
+	        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta)).withProperty(MODE, Integer.valueOf((meta & 15) >> 9));
+	    }
+	    public int getMetaFromState(IBlockState state)
+	    {
+	        int i = 0;
+	        i = i | ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
+	        i = i | ((Integer)state.getValue(MODE)).intValue() << 9;
+	        return i;
+	    } */
+	    
+	    
 
 	    /**
 	     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
@@ -302,7 +357,7 @@ public class book_stack extends BlockBase {
 
 	    protected BlockStateContainer createBlockState()
 	    {
-	        return new BlockStateContainer(this, new IProperty[] {FACING});
+	        return new BlockStateContainer(this, new IProperty[] {FACING, MODE});
 	    }
 	    
 	    
@@ -328,5 +383,70 @@ public class book_stack extends BlockBase {
   {
       return BlockFaceShape.UNDEFINED;
   }
+		
+		
+		
+		
+		
+		
+		
+	    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	    {
+	    	  ItemStack itemstack = playerIn.getHeldItem(hand);
+
+	    	    if (!itemstack.isEmpty() && (itemstack.getItem() == ModItems.COZY_HAMMER))
+	    	    	
+	    	    	 if (!worldIn.isRemote)
+	    		        {
+	    		            return this.changeMode(worldIn, pos, state, playerIn);
+	    		        }
+	    	    	 else
+	    		        {
+	    		            //ItemStack itemstack = playerIn.getHeldItem(hand);
+	    		            return this.changeMode(worldIn, pos, state, playerIn) || itemstack.isEmpty();
+	    		        } 
+	    	    return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+	    	    }
+	    
+	    
+	    private boolean changeMode(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
+	    {
+	        {
+	            worldIn.playSound((EntityPlayer)null, pos, SoundsHandler.HAMMER, SoundCategory.BLOCKS, 0.5F, 0.7F);
+	            int i = ((Integer)state.getValue(MODE)).intValue();
+
+	            if (i < 2)
+	            {
+	                worldIn.setBlockState(pos, state.withProperty(MODE, Integer.valueOf(i + 1))); // , 3);
+	                
+	            }
+	            else
+	            {
+	            	worldIn.setBlockState(pos, state.withProperty(MODE, Integer.valueOf(0)));
+	            }
+
+	            return true;
+	        }
+	    }
+	    
+	    
+	    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	    {
+	        return this.canBePlacedOn(worldIn, pos.down());
+	    }
+
+	    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	    {
+	        if (!this.canBePlacedOn(worldIn, pos.down()))
+	        {
+	            this.dropBlockAsItem(worldIn, pos, state, 0);
+	            worldIn.setBlockToAir(pos);
+	        }
+	    }
+
+	    private boolean canBePlacedOn(World worldIn, BlockPos pos)
+	    {
+	        return worldIn.getBlockState(pos).isTopSolid() || worldIn.getBlockState(pos).getBlock() instanceof BlockFence;
+	    }
 }
 

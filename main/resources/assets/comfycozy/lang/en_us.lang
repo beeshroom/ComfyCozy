@@ -1,5 +1,11 @@
+
 itemGroup.comfycozy=Comfy Cozy
 item.cozy_hammer.name=Cozy Hammer
+
+//entity (mobs)
+entity.EntityOatmealSheep.name=Oatmeal Lamb
+entity.EntityMushy.name=Shroomini
+entity.EntityFurnaceGolem.name=Furnace Golem
 
 //food
 item.oats.name=Oats
@@ -9,29 +15,42 @@ item.cinnamon_oatmeal.name=Cinnamon Oatmeal
 item.gold_apple_cinnamon_oatmeal.name=Gold Apple Cinnamon Oatmeal
 item.oatmeal.name=Oatmeal
 tile.strawberry_cake.name=Strawberry Cake
+item.cinnamon_cookie.name=Snickerdoodle
+item.strawberry_jam.name=Strawberry Jam
 
 //materials
 item.cinnamon.name=Cinnamon
-tile.stripped_cinnamon.name=Cinnamon Stick
+item.cinnamon_stick.name=Cinnamon Stick
 
 //blocks
-
-
+tile.glass_panel.name=Glass Panel
+tile.turkey_tail_mushroom.name=Turkey Tail Mushroom
+tile.oat_block.name=Block of Oats
+tile.jam_block.name=Block of Jam
 
 
 //plant
-tile.cinnamon_tree.name=Cinnamon Log
+tile.cinnamon_tree.name=Cinnamon Wood
+tile.cinnamon_log.name=Cinnamon Log
+tile.cinnamon_leaves.name=Cinnamon Leaves
+tile.cinnamon_sapling.name=Cinnamon Sapling
 item.strawberry_seeds.name=Strawberry Seeds
 item.oat_seeds.name=Oat Seeds
 
 //decorations
 tile.bunting.name=Bunting
-tile.checker_bunting.name=Checker Bunting
-tile.heart_bunting.name=Heart Bunting
+tile.bunting_check.name=Checker Bunting
+tile.bunting_heart.name=Heart Bunting
+tile.bunting_spook.name=Spooky Bunting
 tile.carp_banner.name=Carp Banner
+tile.carp_banner_2.name=Carp Banner 
+tile.daruma.name=Daruma
 tile.pole.name=Pole
 tile.bonfire.name=Bonfire
-tile.fishjar.name=Cod in a Jar
+tile.fishjar.name=Fish Tank (Cod)
+tile.fishjar_salmon.name=Fish Tank (Salmon)
+tile.fishjar_clown.name=Fish Tank (Clownfish)
+tile.fishjar_puff.name=Fish Tank (Pufferfish)
 tile.book_stack.name=Pile of Books
 
 //awnings
@@ -52,13 +71,48 @@ tile.awning_dark_gray.name=Dark Gray Awning
 tile.awning_black.name=Black Awning
 tile.awning_brown.name=Brown Awning
 
+tile.weathervane.name=Weathervane
+tile.table.name=Table
+tile.candle_jar.name=Glowstone Jar
+tile.flower_box.name=Planter
+tile.flower_box_white.name=White Planter
+
+//cushions
+tile.cushion_pika.name=Pika Cushion
+tile.cushion_zigzag.name=Zigzag Cushion
+tile.cushion_diamond.name=Diamond Cushion
+tile.cushion_fire.name=Fire Cushion
+tile.cushion_porg.name=Porg Cushion
+
 //block oatmeal bowls
 tile.bowl_oatmeal.name=Bowl of Oatmeal
 tile.bowl_cinnamon.name=Bowl of Cinnamon Oatmeal
 tile.bowl_gold_apple.name=Bowl of Gold Apple Cinnamon Oatmeal
 tile.bowl_strawberry.name=Bowl of Strawberry Oatmeal
+tile.taiga_toast.name=Taiga Toast
 
+//sounds
+items.cozy_hammer.hammer=Cozy Hammer used
+entity.mushy.plant=Shroomini plants mushroom
+entity.mushy.shroomini_ambient=Shroomini ambient
+entity.mushy.shroomini_splat=Shroomini hurt
+entity.mushy.shroomini_death=Shroomini dies
 
+items.cozy_hammer.bonk=Bonk!
+blocks.cinnamon_log.strip=Wood stripped
+
+//mobs
+entity.entitymushy.name=Shroomini
+entity.entitydirtypig.name=Dirty Pig
+entity.entityoatmealsheep.name=Oatmeal Lamb
+entity.entityfurnacegolem.name=Furnace Golem
+
+//armor
+item.mushroom_beret.name=Mushroom Beret
+
+//advancement
+advancements.husbandry.cinnamon_challenge.title=Cinnamon Challenge
+advancements.husbandry.cinnamon_challenge.description=Consume some cinnamon
 
 
 

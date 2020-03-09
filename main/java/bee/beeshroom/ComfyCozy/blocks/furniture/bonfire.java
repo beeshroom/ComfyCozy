@@ -14,8 +14,13 @@ import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -31,9 +36,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -60,16 +67,20 @@ public class bonfire extends BlockBase
 //this code is copied directly from another mod i made where this code worked fine.
  //   public static final AxisAlignedBB BUNTING_VERT = new AxisAlignedBB(0.9375D, 0.0D, 0.46875D, 0.625D, 0.0D, 1.0D);
   //  public static final AxisAlignedBB POLE = new AxisAlignedBB(0.46875D, 0.9375D, 0.0D, 0.54125D, 0.625D, 1.0D);
-	public static final AxisAlignedBB BONFIRE = new AxisAlignedBB(0.0D, .01D, 0.0D, 1D, .5D, 1D);
-	public static final AxisAlignedBB BONFIRE_WE = new AxisAlignedBB(0.0D, .01D, 0.0D, 1D, .5D, 1D);
+    public static final AxisAlignedBB BONFIRE = new AxisAlignedBB(0.03125D, 0.0D, 0.03125D, 0.96875D, 0.9375D, 0.96875D);
+    public static final AxisAlignedBB BONFIRE_WE = new AxisAlignedBB(0.03125D, 0.0D, 0.03125D, 0.96875D, 0.9375D, 0.96875D);
+    //public static final AxisAlignedBB BONFIRE = new AxisAlignedBB(0.0D, .01D, 0.0D, 1D, .5D, 1D);
+	//public static final AxisAlignedBB BONFIRE_WE = new AxisAlignedBB(0.0D, .01D, 0.0D, 1D, .5D, 1D);
 	
 	    public bonfire(String name, Material material) {
 		super(name, material);
 		//this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		setSoundType(SoundType.WOOD);
-		setHardness(0.3F);
+		setHardness(0.5F);
 		setResistance(0.1F);
 		setHarvestLevel("axe", 0);
+		setLightLevel(1.0f);
+		
 
 	/*	setRegistryName(name);
 		setUnlocalizedName(name);
@@ -114,15 +125,7 @@ public class bonfire extends BlockBase
 	{
 		return false;
 	}
-	  
-	    /**
-	     * Checks if this block can be placed exactly at the given position.
-	     */
-	    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-	    {
-	        return true;
-	    }
-	    
+
 	    /**
 	     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
 	     * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
@@ -132,18 +135,42 @@ public class bonfire extends BlockBase
 	        return EnumBlockRenderType.MODEL;
 	    }
 	    
+	  /*  public int quantityDropped(Random random)
+	    {
+	        return 2;
+	    }*/
+
+	/*    private void dropBlock(World worldIn, BlockPos pos, IBlockState state)
+	    {
+	        worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+	        this.dropBlockAsItem(worldIn, pos, state, 0);
+	    } */
 	    public int quantityDropped(Random random)
 	    {
-	        return 1;
+	        return 1 + random.nextInt(2);
 	    }
-
-	    /**
-	     * Get the Item that this Block should drop when harvested.
-	     */
+	    
 	    public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	    {
-	        return Items.COAL;
+	    	 return Items.AIR;
 	    }
+	    
+	    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+	    {
+	        return new ItemStack(Items.COAL, 2, 1);
+	    }
+
+	    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+	    {
+	        super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
+	    }
+
+	    @Override
+	    public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	    {
+	        super.getDrops(drops, world, pos, state, fortune);
+	        drops.add(new ItemStack(Items.COAL, 2, 1));
+	    } 
 
 			  private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
 			    {
@@ -277,12 +304,32 @@ public class bonfire extends BlockBase
 
 	            if (rand.nextDouble() < 0.1D)
 	            {
-	                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+	                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 3.2F, 1.0F, false);
 	                double d3 = (double)pos.getX() + rand.nextDouble() * 0.10000000149011612D;
                     double d8 = (double)pos.getY() + rand.nextDouble();
                     double d13 = (double)pos.getZ() + rand.nextDouble();
                     worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d3, d8, d13, 0.0D, 0.0D, 0.0D);
+                    worldIn.spawnParticle(EnumParticleTypes.FLAME, d3, d8, d13, 0.0D, 0.0D, 0.0D);
 	            }
+	    }
+	    
+	    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	    {
+	        return this.canBePlacedOn(worldIn, pos.down());
+	    }
+
+	    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	    {
+	        if (!this.canBePlacedOn(worldIn, pos.down()))
+	        {
+	            this.dropBlockAsItem(worldIn, pos, state, 0);
+	            worldIn.setBlockToAir(pos);
+	        }
+	    }
+
+	    private boolean canBePlacedOn(World worldIn, BlockPos pos)
+	    {
+	        return worldIn.getBlockState(pos).isTopSolid();
 	    }
 }
 

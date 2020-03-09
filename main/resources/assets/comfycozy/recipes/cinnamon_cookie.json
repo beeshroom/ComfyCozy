@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#X#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat"
+    },
+    "X": 
+    {
+      "item": "comfycozy:cinnamon"
+    }
+  },
+  "result": {
+    "item": "comfycozy:cinnamon_cookie",
+    "count": 8
+  }
+}

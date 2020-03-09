@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 public class strawberry_plant extends BlockBush implements IGrowable
 {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
-		private static final AxisAlignedBB[] strawberry_plant = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.4375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625D, 1.0D)};
+		private static final AxisAlignedBB[] strawberry_plant = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.6375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.8625D, 1.0D)};
 
 				  public strawberry_plant(String name)
 				    {
@@ -254,10 +254,10 @@ public class strawberry_plant extends BlockBush implements IGrowable
 				        return this.isMaxAge(state) ? this.getCrop() : this.getSeed();
 				    }
 				    
-				    public int quantityDropped(Random random)
+				/*    public int quantityDropped(Random random)
 				    {
 				        return 3;
-				    }
+				    } */
 
 				    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 				    {
@@ -307,13 +307,25 @@ public class strawberry_plant extends BlockBush implements IGrowable
     {
         return BlockFaceShape.UNDEFINED;
     }
-/*// considering letting you "pluck" the berries without having to break the plant, but i dont think i will bc that'd conflict 
- * with all those great mods that let you harvest + replant by right clicking 				    
-	 public void onBlockActivated(World worldIn, BlockPos pos, EntityPlayer playerIn) 
+
+	// considering letting you "pluck" the berries without having to break the , but i dont think i will bc that'd conflict 
+ //with all those great mods that let you harvest + replant by right clicking 				    
+/*	 public void onBlockActivated(net.minecraft.util.NonNullList<ItemStack> drops, net.minecraft.world.IBlockAccess world, World worldIn, BlockPos pos, EntityPlayer playerIn, IBlockState state) 
 	 {
-		 super.onBlockActivated(worldIn, pos, playerIn);
-	 
-	 }*/
-	
-	 
+	        super.getDrops(drops, world, pos, state, 0);
+	        int age = getAge(state);
+	        Random rand = world instanceof World ? ((World)world).rand : new Random();
+		 
+		 
+         int i = this.getAge(state);
+
+         if (age > 2)
+		{
+		worldIn.setBlockState(pos, state.withProperty(AGE, 1));
+        {
+            drops.add(new ItemStack(this.getCrop(), 1, 0)); 
+        }
+		
+	 }  
+} */
 }

@@ -1,4 +1,4 @@
-package bee.beeshroom.ComfyCozy.blocks;
+/*package bee.beeshroom.ComfyCozy.blocks;
 
 import javax.annotation.Nullable;
 
@@ -67,9 +67,7 @@ public class stripped_cinnamon extends BlockDirectional
     {
         return BEAM;
     }
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
+  
     @Override
     public boolean isOpaqueCube(IBlockState state)
     {
@@ -108,13 +106,10 @@ public class stripped_cinnamon extends BlockDirectional
             }
         }*/
 
-        return this.getDefaultState().withProperty(FACING, facing);
+/*        return this.getDefaultState().withProperty(FACING, facing);
     }
     
-    /**
-     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
-     * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
-     */
+
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
         return EnumBlockRenderType.MODEL;
@@ -133,11 +128,6 @@ public class stripped_cinnamon extends BlockDirectional
     }
 
 
-    
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
         return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
@@ -175,4 +165,4 @@ public class stripped_cinnamon extends BlockDirectional
     
  
     
-}
+} */

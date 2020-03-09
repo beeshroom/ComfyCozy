@@ -1,6 +1,6 @@
 {
-    "parent": "block/crop",
+    "parent": "block/cross",
     "textures": {
-        "crop": "comfycozy:blocks/strawberry_stage1"
+        "cross": "comfycozy:blocks/strawberry_stage1"
     }
 }

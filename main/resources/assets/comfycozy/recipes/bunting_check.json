@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+" D ",    
+"SSS",
+    "PPP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+ "P": {
+      "item": "minecraft:paper"
+    },
+"D": {
+      "item": "minecraft:dye",
+	"data": 15
+    }
+  },
+  "result": {
+    "item": "comfycozy:bunting_check",
+    "count": 6
+  }
+}

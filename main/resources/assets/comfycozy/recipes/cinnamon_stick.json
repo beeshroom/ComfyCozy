@@ -1,0 +1,18 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "comfycozy:cinnamon_log"
+    }
+    
+    ],
+
+    "result": 
+    {
+        "item": "comfycozy:cinnamon_stick",
+        "count": 4
+    }
+}

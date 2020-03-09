@@ -1,0 +1,50 @@
+{
+    "entity.mushy.shroomini_ambient":
+    {
+        "category": "entity",
+        "subtitle": "entity.mushy.shroomini_ambient",
+        "sounds": [{ "name": "comfycozy:entity/mushy/shroomini_ambient", "stream": true }]
+    },
+    
+    "entity.mushy.shroomini_splat":
+    {
+        "category": "entity",
+        "subtitle": "entity.mushy.shroomini_splat",
+        "sounds": [{ "name": "comfycozy:entity/mushy/shroomini_splat", "stream": true }]
+    },
+    
+      "entity.mushy.plant":
+    {
+        "category": "entity",
+        "subtitle": "entity.mushy.plant",
+        "sounds": [{ "name": "comfycozy:entity/mushy/plant", "stream": true }]
+    },
+    
+    "entity.mushy.shroomini_death":
+    {
+        "category": "entity",
+        "subtitle": "entity.mushy.shroomini_death",
+        "sounds": [{ "name": "comfycozy:entity/mushy/shroomini_death", "stream": true}]
+    },
+    
+        "items.cozy_hammer.hammer":
+    {
+        "category": "items",
+        "subtitle": "items.cozy_hammer.hammer",
+        "sounds": [{ "name": "comfycozy:items/cozy_hammer/hammer", "stream": true }]
+    },
+    
+         "items.cozy_hammer.bonk":
+    {
+        "category": "items",
+        "subtitle": "items.cozy_hammer.bonk",
+        "sounds": [{ "name": "comfycozy:items/cozy_hammer/bonk", "stream": true }]
+    },
+    
+         "blocks.cinnamon_log.strip":
+    {
+        "category": "blocks",
+        "subtitle": "blocks.cinnamon_log.strip",
+        "sounds": [{ "name": "comfycozy:blocks/cinnamon_log/strip", "stream": true }]
+    }
+}

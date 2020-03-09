@@ -1,4 +1,4 @@
-package bee.beeshroom.ComfyCozy.blocks;
+/*package bee.beeshroom.ComfyCozy.blocks;
 
 import java.util.Random;
 import javax.annotation.Nullable;
@@ -42,7 +42,7 @@ public class cinnamon_tree extends BlockBase implements IPlantable
     {
     	super(name, material);
     	// super(Material.WOOD);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(12)));
         this.setTickRandomly(true);
         setHardness(0.3F);
 		setResistance(0.1F);
@@ -111,13 +111,10 @@ public class cinnamon_tree extends BlockBase implements IPlantable
                      net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
                      }
                 }*/
-            }
+ /*           }
         }
     } 
 
-    /**
-     * Checks if this block can be placed exactly at the given position.
-     */
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         IBlockState state = worldIn.getBlockState(pos.down());
@@ -126,6 +123,7 @@ public class cinnamon_tree extends BlockBase implements IPlantable
 
         if (block == this)
         {
+        	  worldIn.setBlockState(pos, state.withProperty(AGE, 0));
             return true;
         }
         else if (block != Blocks.GRASS && block != Blocks.DIRT && block != Blocks.SAND)
@@ -153,12 +151,6 @@ public class cinnamon_tree extends BlockBase implements IPlantable
         }
     }
 
-    /**
-     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor
-     * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
-     * block, etc.
-     */
-   
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         this.checkForDrop(worldIn, pos, state);
@@ -190,18 +182,6 @@ public class cinnamon_tree extends BlockBase implements IPlantable
         return REED_AABB;
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
-  /* 
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return Items.REEDS;
-    }*/
-
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     @Override
     public boolean isOpaqueCube(IBlockState state)
     {
@@ -218,10 +198,7 @@ public class cinnamon_tree extends BlockBase implements IPlantable
         return new ItemStack(ModBlocks.CINNAMON_TREE);
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
-
+    
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(AGE, Integer.valueOf(meta));
@@ -234,9 +211,6 @@ public class cinnamon_tree extends BlockBase implements IPlantable
         return BlockRenderLayer.CUTOUT;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
    
     public int getMetaFromState(IBlockState state)
     {
@@ -246,7 +220,7 @@ public class cinnamon_tree extends BlockBase implements IPlantable
     @Override
     public net.minecraftforge.common.EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
     {
-        return net.minecraftforge.common.EnumPlantType.Beach;
+        return net.minecraftforge.common.EnumPlantType.Plains;
     }
     
     @Override
@@ -260,15 +234,7 @@ public class cinnamon_tree extends BlockBase implements IPlantable
         return new BlockStateContainer(this, new IProperty[] {AGE});
     }
 
-    /**
-     * Get the geometry of the queried face at the given position and state. This is used to decide whether things like
-     * buttons are allowed to be placed on the face, or how glass panes connect to the face, among other things.
-     * <p>
-     * Common values are {@code SOLID}, which is the default, and {@code UNDEFINED}, which represents something that
-     * does not fit the other descriptions and will generally cause other things not to connect to the face.
-     * 
-     * @return an approximation of the form of the given face
-     */
+
  
     public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
@@ -303,4 +269,4 @@ public class cinnamon_tree extends BlockBase implements IPlantable
     } */
 
     
-}
+//}

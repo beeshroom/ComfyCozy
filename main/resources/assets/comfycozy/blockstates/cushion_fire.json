@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "comfycozy:cushion_fire" },
+        "facing=south": { "model": "comfycozy:cushion_fire", "y": 180 },
+        "facing=west":  { "model": "comfycozy:cushion_fire", "y": 270 },
+        "facing=east":  { "model": "comfycozy:cushion_fire", "y": 90 }
+    }
+}

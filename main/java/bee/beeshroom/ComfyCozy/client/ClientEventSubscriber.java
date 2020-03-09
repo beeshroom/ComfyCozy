@@ -7,8 +7,14 @@ import javax.annotation.Nonnull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import bee.beeshroom.ComfyCozy.entity.EntityFurnaceGolem;
+import bee.beeshroom.ComfyCozy.entity.EntityMushy;
 import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheep;
+import bee.beeshroom.ComfyCozy.entity.RenderFurnaceGolem;
+import bee.beeshroom.ComfyCozy.entity.RenderMushy;
 import bee.beeshroom.ComfyCozy.entity.RenderOatmealSheep;
+import bee.beeshroom.ComfyCozy.entity.entitydirtypig.EntityDirtyPig;
+import bee.beeshroom.ComfyCozy.entity.entitydirtypig.RenderDirtyPig;
 import bee.beeshroom.ComfyCozy.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -67,7 +73,9 @@ public final class ClientEventSubscriber {
 	private static void registerEntityRenderers() {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityOatmealSheep.class, RenderOatmealSheep::new);
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityMushy.class, RenderMushy::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDirtyPig.class, RenderDirtyPig::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFurnaceGolem.class, RenderFurnaceGolem::new);
 	}
 
 }

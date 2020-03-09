@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "eye=false,facing=north": { "model": "comfycozy:daruma_eyeless", "y": 0},
+        "eye=false,facing=south": { "model": "comfycozy:daruma_eyeless", "y": 180},
+        "eye=false,facing=east": { "model": "comfycozy:daruma_eyeless", "y": 90},
+        "eye=false,facing=west": { "model": "comfycozy:daruma_eyeless","y": 270},
+       
+        "eye=true,facing=north": { "model": "comfycozy:daruma", "y": 0},
+        "eye=true,facing=south": { "model": "comfycozy:daruma", "y": 180},
+        "eye=true,facing=east": { "model": "comfycozy:daruma", "y": 90},
+        "eye=true,facing=west": { "model": "comfycozy:daruma", "y": 270}
+        }
+        }

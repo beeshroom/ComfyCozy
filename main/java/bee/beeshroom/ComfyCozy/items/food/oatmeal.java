@@ -30,6 +30,11 @@ public class oatmeal  extends ItemFood
 		
 		ModItems.ITEMS.add(this);
 	}
+	
+	 public int getItemBurnTime(ItemStack itemStack)
+	    {
+	        return 0;
+	    }
 
 	 public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	    {

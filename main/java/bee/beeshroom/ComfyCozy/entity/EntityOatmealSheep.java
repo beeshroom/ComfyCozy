@@ -1,12 +1,16 @@
+
 package bee.beeshroom.ComfyCozy.entity;
 
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
+import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import bee.beeshroom.ComfyCozy.util.handlers.LootTableHandler;
 import net.minecraft.block.Block;
@@ -25,6 +29,7 @@ import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -41,6 +46,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
@@ -56,7 +62,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	public class EntityOatmealSheep extends EntityAnimal implements net.minecraftforge.common.IShearable
 	{                                             //changed DYE_COLOR to OAT_FLAVOR
 	    private static final DataParameter<Byte> OAT_FLAVOR = EntityDataManager.<Byte>createKey(EntityOatmealSheep.class, DataSerializers.BYTE);
-	    
+	    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ModItems.OATS, ModItems.STRAWBERRY, ModItems.CINNAMON);
 	     //Internal crafting inventory used to check the result of mixing dyes corresponding to the fleece color when
 	     //breeding sheep.
 	     
@@ -107,7 +113,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        this.tasks.addTask(0, new EntityAISwimming(this));
 	        this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
 	        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-	        this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Items.WHEAT, false));
+	       // this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Items.WHEAT, false));
+	        this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 	        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 	        this.tasks.addTask(5, this.entityAIEatGrass);
 	        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
@@ -188,7 +195,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        }
 	    }
 
-	    public boolean processInteract(EntityPlayer player, EnumHand hand)
+	/*    public boolean processInteract(EntityPlayer player, EnumHand hand)
 	    {
 	        ItemStack itemstack = player.getHeldItem(hand);
 
@@ -215,6 +222,64 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 	        return super.processInteract(player, hand);
 	    }
+	    */
+	    
+	    
+	    
+	    
+	    public boolean processInteract(EntityPlayer player, EnumHand hand)
+	    {
+	        ItemStack itemstack = player.getHeldItem(hand);
+
+	        if (itemstack.getItem() == Items.BOWL && this.getGrowingAge() >= 0 && !player.capabilities.isCreativeMode)
+	        {
+	            itemstack.shrink(1);
+
+	            if (itemstack.isEmpty())
+	            {
+	                player.setHeldItem(hand, new ItemStack(ModItems.OATMEAL));
+	            }
+	            else if (!player.inventory.addItemStackToInventory(new ItemStack(ModItems.OATMEAL)))
+	            {
+	                player.dropItem(new ItemStack(ModItems.OATMEAL), false);
+	            }
+
+	            return true;
+	        }
+	        else if (false && itemstack.getItem() == Items.SHEARS && this.getGrowingAge() >= 0) //Forge Disable, Moved to onSheared
+	        {
+	        	{
+		            if (!this.world.isRemote)
+		            {
+		                this.setSheared(true);
+		                int i = 1 + this.rand.nextInt(3);
+
+		                for (int j = 0; j < i; ++j)
+		                {
+		                	// changed this v EntityItem entityitem = this.entityDropItem(new ItemStack(ModItems.OATS), 1, this.getOatFlavor().getMetadata()), 1.0F);
+		                    EntityItem entityitem = this.entityDropItem(new ItemStack(ModItems.OATS), 1);
+		                    entityitem.motionY += (double)(this.rand.nextFloat() * 0.05F);
+		                    entityitem.motionX += (double)((this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F);
+		                    entityitem.motionZ += (double)((this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F);
+		                }
+		            }
+
+		            itemstack.damageItem(1, player);
+		            this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+		        }
+
+	            return true;
+	        }
+	        else
+	        {
+	            return super.processInteract(player, hand);
+	        }
+	    }
+	    
+	    
+	    
+	    
+	    
 
 	    public static void registerFixesOatmealSheep(DataFixer fixer)
 	    {
@@ -409,7 +474,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
 	        for (int j = 0; j < i; ++j)
 	        	   //ret.add(new ItemStack(ModItems.OATS), 1, this.getOatFlavor().getMetadata());
-	        	ret.add(new ItemStack(ModItems.OATS));
+	        	ret.add(new ItemStack(ModBlocks.OAT_BLOCK));
 
 	        this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
 	        return ret;

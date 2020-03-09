@@ -1,0 +1,25 @@
+{
+    "display": {
+        "icon": {
+            "item": "comfycozy:cinnamon"
+        },
+        "title": {
+            "translate": "advancements.husbandry.cinnamon_challenge.title"
+        },
+        "description": {
+            "translate": "advancements.husbandry.cinnamon_challenge.description"
+        }
+    },
+    "parent": "minecraft:husbandry/plant_seed",
+    "criteria": {
+        "cinnamon": {
+            "trigger": "consume_item",
+            "conditions": {
+                "item": {
+                    "item": "comfycozy:cinnamon"
+                }
+            }
+        }
+       
+        }
+        }

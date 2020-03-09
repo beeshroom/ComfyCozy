@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "bites=0": { "model": "comfycozy:taiga_toast" },
+        "bites=1": { "model": "comfycozy:taiga_toast_bite" },
+        "bites=2": { "model": "comfycozy:taiga_toast_bite" }
+    }
+}

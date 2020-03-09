@@ -20,8 +20,8 @@
 		},
 		{
 			"name": "string",
-			"from": [8, 13, 0.5],
-			"to": [8, 14, 7.5],
+			"from": [8, 13, 0],
+			"to": [8, 14, 7],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 7.5]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 1], "texture": "#1"},
@@ -34,8 +34,8 @@
 		},
 		{
 			"name": "string",
-			"from": [7.5, 13.5, 0.5],
-			"to": [8.5, 13.5, 7.5],
+			"from": [7.5, 13.5, 0],
+			"to": [8.5, 13.5, 7],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 7.5]},
 			"faces": {
 				"north": {"uv": [0, 0, 1, 0], "texture": "#1"},

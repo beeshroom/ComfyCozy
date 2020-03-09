@@ -23,16 +23,10 @@ public class strawberry  extends ItemFood
 		
 		ModItems.ITEMS.add(this);
 	}
-
-	 public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
-	    {
-	        super.onItemUseFinish(stack, worldIn, entityLiving);
-	        return new ItemStack(Items.BOWL);
-	    }
 	
 		@Override
 		public int getMaxItemUseDuration(ItemStack stack) {
-			return 5; 
+			return 14; 
 		} 
 		
 
