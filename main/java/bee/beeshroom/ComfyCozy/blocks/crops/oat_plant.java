@@ -1,14 +1,17 @@
 package bee.beeshroom.ComfyCozy.blocks.crops;
 
+import java.util.List;
 import java.util.Random;
 
-import bee.beeshroom.ComfyCozy.entity.EntityFurnaceGolem;
+import javax.annotation.Nullable;
+
 import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheep;
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
@@ -16,7 +19,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -32,15 +35,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.util.EnumParticleTypes;
 
 //thank you turty wurty ;w;
 //https://www.youtube.com/watch?v=AUEnR5k9yFQ
 
-public class oat_plant extends BlockBush implements IGrowable
+public class oat_plant extends BlockCrops implements IGrowable
 {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 4);
 		private static final AxisAlignedBB[] oat_plant = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.4375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.6625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.9625D, 1.0D)};
-
+		protected static final AxisAlignedBB CARPET_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 				  public oat_plant(String name)
 				    {
 				    	this.setUnlocalizedName(name);
@@ -54,6 +58,12 @@ public class oat_plant extends BlockBush implements IGrowable
 				        ModBlocks.BLOCKS.add(this);
 				    }
 
+			/*	  @Nullable
+				    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+				    {
+				        return CARPET_AABB;
+				    } */
+				  
 				    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 				    {
 				        return oat_plant[((Integer)state.getValue(this.getAgeProperty())).intValue()];
@@ -193,7 +203,7 @@ public class oat_plant extends BlockBush implements IGrowable
 				    {
 				        if (!this.canBlockStay(worldIn, pos, state))
 				        {
-				            this.dropBlockAsItemWithChance(worldIn, fromPos, state, chance, fortune);
+				         //   this.dropBlockAsItemWithChance(worldIn, fromPos, state, chance, fortune);
 				        	worldIn.setBlockToAir(pos);
 				        }
 				    }
@@ -222,16 +232,25 @@ public class oat_plant extends BlockBush implements IGrowable
 				        int age = getAge(state);
 				        Random rand = world instanceof World ? ((World)world).rand : new Random();
 
-				     /*   if (this.isMaxAge(state) && RANDOM.nextInt(2) == 0)
-		                    drops.add(new ItemStack(Items.POISONOUS_POTATO)); */
+				        
+				        if (this.isMaxAge(state) && RANDOM.nextInt(4) == 0)
+		                    drops.add(new ItemStack(ModItems.OATS, 2)); 
+				        if (this.isMaxAge(state) && RANDOM.nextInt(20) == 0)
+		                    drops.add(new ItemStack(ModItems.OATS, 3)); 
+
+				  /*         if (this.isMaxAge(state) && RANDOM.nextInt(2) == 0)
+	                    drops.add(new ItemStack(Items.POISONOUS_POTATO));  */
 				        
 				        if (age >= getMaxAge())
 				        {
-				            int k = 3 + fortune;
+				        	
+				        	/////changed from 3 to 2
+				         //   int k = 2 + fortune;
 
 				            for (int i = 0; i < 3 + fortune; ++i)
 				            {
-				                if (rand.nextInt(2 * getMaxAge()) <= age)
+				            	//changed 2 to 1
+				                if (getMaxAge() > age)
 				                {
 				                    drops.add(new ItemStack(this.getSeed(), 1, 0)); 
 				                }
@@ -242,7 +261,7 @@ public class oat_plant extends BlockBush implements IGrowable
 				    /**
 				     * Spawns this Block's drops into the World as EntityItems.
 				     */
-				    @SuppressWarnings("unused")
+	/*			    @SuppressWarnings("unused")
 					public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
 				    {
 				        super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
@@ -253,7 +272,8 @@ public class oat_plant extends BlockBush implements IGrowable
 
 				            if (i >= this.getMaxAge())
 				            {
-				                int j = 3 + fortune;
+				       //////////     	//changed 3 to 1 //////////////
+				                int j = 1 + fortune;
 
 				                for (int k = 0; k < j; ++k)
 				                {
@@ -265,7 +285,7 @@ public class oat_plant extends BlockBush implements IGrowable
 				                }
 				            }
 				        }
-				    }
+				    }  */
 
 				    /**
 				     * Get the Item that this Block should drop when harvested.
@@ -280,10 +300,10 @@ public class oat_plant extends BlockBush implements IGrowable
 				        return 3;
 				    } */
 
-				    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+			/*	    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 				    {
 				        return new ItemStack(this.getSeed());
-				    }
+				    } */
 
 				    /**
 				     * Whether this IGrowable can grow
@@ -328,7 +348,73 @@ public class oat_plant extends BlockBush implements IGrowable
 				    {
 				        return BlockFaceShape.UNDEFINED;
 				    }
+
+				    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+				    {
+				        if (!this.canBePlacedOn(worldIn, pos.down()))
+				        {
+				        	 spawnAsEntity(worldIn, pos, new ItemStack(this.getSeed()));  
+				            worldIn.setBlockToAir(pos);
+				        }
+				    }  
+				  
+				  private boolean canBePlacedOn(World worldIn, BlockPos pos)
+				    {
+				        return worldIn.getBlockState(pos).getBlock() instanceof BlockFarmland;
+				    }
+				  
+				  
+				  
+				  
+				  public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+				    {
+					  Random rand = worldIn instanceof World ? ((World)worldIn).rand : new Random();
+					  AxisAlignedBB bounds = CARPET_AABB.offset(pos);
+					//i looked at DetectorRail code and Quark's obsidian pressure plate code for this
+					  List<? extends Entity> entities = worldIn.getEntitiesWithinAABB(EntityOatmealSheep.class, bounds);
+					  
+					    if (!entities.isEmpty()) {
+				            for(Entity entity : entities) {
+				        if (!worldIn.isRemote)
+				        {
+				            int i = this.getAge(state);
+
+				            if (i < 4)
+				            {
+				                if (RANDOM.nextInt(975) == 0)
+				                this.updateState(worldIn, pos, state);
+				            }
+				        }
+				    }
+					    }
+				    }
+				  
+				  
+				    protected void updateState(World worldIn, BlockPos pos, IBlockState state)
+				    {
+				    	   int i = this.getAge(state) + this.getBonemealAgeIncrease(worldIn);
+					        int j = this.getMaxAge();
+					       
+					        if (i > j)
+					        {
+					            i = j;
+					        }
+					        
+					       // this.spawnParticles(worldIn, pos);
+					        worldIn.setBlockState(pos, this.withAge(i), 2);
+				    }
 				    
+			/*	    private void spawnParticles(World worldIn, BlockPos pos)
+				    {
+				        Random random = worldIn.rand;
+				        
+				        worldIn.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, (double)((float)pos.getX() + random.nextFloat()), (double)((float)pos.getY() + 1.1F), (double)((float)pos.getZ() + random.nextFloat()), 0.0D, 0.0D, 0.0D);
+				    } */
+				    
+				  
+				  
+				  
+				  
 				/*    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn)
 				    {
 				    	  //int i = ((Integer)state.getValue(AGE)).intValue();

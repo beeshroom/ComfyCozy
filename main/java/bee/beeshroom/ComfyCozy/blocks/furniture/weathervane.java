@@ -1,7 +1,10 @@
 package bee.beeshroom.ComfyCozy.blocks.furniture;
 
 import bee.beeshroom.ComfyCozy.blocks.BlockBase;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -82,14 +85,6 @@ public class weathervane extends BlockBase
 	{
 		return false;
 	}
-	  
-	    /**
-	     * Checks if this block can be placed exactly at the given position.
-	     */
-	    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-	    {
-	        return true;
-	    }
 	    
 	    /**
 	     * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
@@ -223,6 +218,26 @@ public class weathervane extends BlockBase
 	    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
 	    {
 	        return BlockFaceShape.UNDEFINED;
+	    }
+	    
+	    
+	 /*   public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	    {
+	        return this.canBePlacedOn(worldIn, pos.down());
+	    } */
+
+	/*    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	    {
+	        if (!this.canBePlacedOn(worldIn, pos.down()))
+	        {
+	            this.dropBlockAsItem(worldIn, pos, state, 0);
+	            worldIn.setBlockToAir(pos);
+	        }
+	    } */
+
+	    private boolean canBePlacedOn(World worldIn, BlockPos pos)
+	    {
+	        return worldIn.getBlockState(pos).isTopSolid() || worldIn.getBlockState(pos).getBlock() instanceof BlockFence || worldIn.getBlockState(pos).getBlock() instanceof BlockPane;
 	    }
 }
 

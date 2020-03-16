@@ -4,8 +4,11 @@
 package bee.beeshroom.ComfyCozy.events;
 
 import bee.beeshroom.ComfyCozy.entity.EntityFurnaceGolem;
+import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
@@ -40,11 +43,13 @@ public class GolemEvent {
             worldIn.setBlockState(furnace, Blocks.AIR.getDefaultState());
             EntityFurnaceGolem EntityFurnaceGolem = new EntityFurnaceGolem(worldIn);
             EntityFurnaceGolem.setPosition(getCoord(pos.getX()), pos.getY(), getCoord(pos.getZ()));
+            //worldIn.playSound((EntityPlayer)null, pos, SoundsHandler.CARVE, SoundCategory.BLOCKS, 0.3F, 0.1F);  
             worldIn.spawnEntity(EntityFurnaceGolem);
+            
         }
     }
 	private static double getCoord(int c) {
-		return c + Math.signum(c)*0.5D;
+		return c + Math.signum(c)*0.0D;
 	}
 	
 	private static boolean checkStructure(World worldIn, BlockPos furnace, BlockPos pumpkin) {

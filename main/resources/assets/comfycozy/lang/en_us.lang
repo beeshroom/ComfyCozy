@@ -97,9 +97,12 @@ entity.mushy.plant=Shroomini plants mushroom
 entity.mushy.shroomini_ambient=Shroomini ambient
 entity.mushy.shroomini_splat=Shroomini hurt
 entity.mushy.shroomini_death=Shroomini dies
+entity.furnace_golem.carve=*Pumpkin noise*
+entity.dirtypig.dirty=Dirty Pig dirt plop
 
 items.cozy_hammer.bonk=Bonk!
 blocks.cinnamon_log.strip=Wood stripped
+blocks.bonfire.crackle=Bonfire crackles
 
 //mobs
 entity.entitymushy.name=Shroomini
@@ -114,5 +117,5 @@ item.mushroom_beret.name=Mushroom Beret
 advancements.husbandry.cinnamon_challenge.title=Cinnamon Challenge
 advancements.husbandry.cinnamon_challenge.description=Consume some cinnamon
 
-
-
+advancements.husbandry.oatmeal_of_champions.title=Breakfast of Champions
+advancements.husbandry.oatmeal_of_champions.description=Prepare a bowl of Gold Apple Cinnamon Oatmeal.

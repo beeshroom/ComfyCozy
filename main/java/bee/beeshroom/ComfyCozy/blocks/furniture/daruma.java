@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockLever;
+import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -293,7 +294,7 @@ public boolean isOpaqueCube(IBlockState state)
 
 	    private boolean canBePlacedOn(World worldIn, BlockPos pos)
 	    {
-	        return worldIn.getBlockState(pos).isTopSolid() || worldIn.getBlockState(pos).getBlock() instanceof BlockFence;
+	        return worldIn.getBlockState(pos).isTopSolid() || worldIn.getBlockState(pos).getBlock() instanceof BlockFence || worldIn.getBlockState(pos).getBlock() instanceof BlockPane;
 	    }
 	    
 	    
@@ -311,7 +312,7 @@ public boolean isOpaqueCube(IBlockState state)
 	        {
 	        	 state = state.cycleProperty(EYE);
 	                worldIn.setBlockState(pos, state, 2);
-	            float f = ((Boolean)state.getValue(EYE)).booleanValue() ? 0.3F : 0.1F;
+	            float f = ((Boolean)state.getValue(EYE)).booleanValue() ? 0.4F : 0.1F;
 	          //  worldIn.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3F, f);
 	            worldIn.playSound((EntityPlayer)null, pos, SoundsHandler.BONK, SoundCategory.BLOCKS, 0.3F, f);  
 	            worldIn.notifyNeighborsOfStateChange(pos, this, false);

@@ -1,0 +1,27 @@
+{
+    "display": {
+        "icon": {
+            "item": "comfycozy:gold_apple_cinnamon_oatmeal"
+        },
+        "title": {
+            "translate": "advancements.husbandry.oatmeal_of_champions.title"
+        },
+        "description": {
+            "translate": "advancements.husbandry.oatmeal_of_champions.description"
+        }
+    },
+    "parent": "minecraft:husbandry/plant_seed",
+    "criteria": {
+        "elytra": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "comfycozy:gold_apple_cinnamon_oatmeal"
+                    }
+                ]
+            }
+        }
+    }
+    
+    }

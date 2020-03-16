@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderMushy extends RenderLiving<EntityMushy>
 {
 	//public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy.png");
-	  public static final ResourceLocation[] MUSHY_TEXTURES = new ResourceLocation[] {new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_red.png"), new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_brown.png"), new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_truffle.png"), new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_yellow.png"), new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_white.png")};
+	  public static final ResourceLocation[] MUSHY_TEXTURES = new ResourceLocation[] {new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_red.png"), new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_truffle.png"), new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_brown.png"), new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_yellow.png"), new ResourceLocation(Reference.MOD_ID + ":textures/entity/mushy_white.png")};
 	
 	  public RenderMushy(RenderManager p_i47375_1_)
 	    {

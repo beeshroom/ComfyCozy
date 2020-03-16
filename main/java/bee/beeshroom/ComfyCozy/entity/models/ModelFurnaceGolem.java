@@ -1,11 +1,15 @@
 package bee.beeshroom.ComfyCozy.entity.models;
 //Made with Blockbench
 
+import bee.beeshroom.ComfyCozy.entity.EntityFurnaceGolem;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModelFurnaceGolem extends ModelBase {
 	private final ModelRenderer body;
@@ -15,6 +19,7 @@ public class ModelFurnaceGolem extends ModelBase {
 	private final ModelRenderer leg4;
 	private final ModelRenderer head;
 	private final ModelRenderer tail;
+	 // private ModelFurnaceGolem.State state = ModelFurnaceGolem.State.STANDING;
 
 	public ModelFurnaceGolem() {
 		textureWidth = 80;
@@ -77,4 +82,38 @@ public class ModelFurnaceGolem extends ModelBase {
 	    	 this.head.rotateAngleX = headPitch * 0.017453292F;
 	         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
 	    }
+	  
+/*	  public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
+	    {
+	        if (entitylivingbaseIn instanceof EntityFurnaceGolem)
+	        {
+	            EntityFurnaceGolem entityfurnacegolem = (EntityFurnaceGolem)entitylivingbaseIn;
+
+	            if (entityfurnacegolem.isSitting())
+	            {
+	                float f = 0.0F;
+	                //this.body.rotationPointY = 0F;
+	                //this.cap.rotationPointY = 0F;
+	                this.body.offsetY = 0.18F;
+	                this.head.offsetY = 0.18F;
+	            //    ++this.left_leg.rotationPointY;
+	              //  ++this.right_leg.rotationPointY;
+	                //++this.left_leg.rotateAngleX;
+	                //++this.right_leg.rotateAngleX;
+	                this.state = ModelFurnaceGolem.State.SITTING;
+	            }
+	            else
+	            {
+	                this.state = ModelFurnaceGolem.State.STANDING;
+	                this.body.offsetY = 0.0F;
+	                this.head.offsetY = 0.0F;
+	            }
+	        }}
+	  
+	  @SideOnly(Side.CLIENT)
+	    static enum State
+	    {
+	        STANDING,
+	        SITTING;
+	    } */
 }

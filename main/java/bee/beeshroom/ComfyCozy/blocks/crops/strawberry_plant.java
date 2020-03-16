@@ -8,6 +8,10 @@ import bee.beeshroom.ComfyCozy.init.ModItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockPane;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
@@ -30,7 +34,7 @@ import net.minecraft.world.World;
 //thank you turty wurty ;w;
 //https://www.youtube.com/watch?v=AUEnR5k9yFQ
 
-public class strawberry_plant extends BlockBush implements IGrowable
+public class strawberry_plant extends BlockCrops implements IGrowable
 {
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3);
 		private static final AxisAlignedBB[] strawberry_plant = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.6375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.8625D, 1.0D)};
@@ -205,13 +209,22 @@ public class strawberry_plant extends BlockBush implements IGrowable
 				        int age = getAge(state);
 				        Random rand = world instanceof World ? ((World)world).rand : new Random();
 
+					       if (this.isMaxAge(state) && RANDOM.nextInt(10) == 0)
+			                    drops.add(new ItemStack(ModItems.STRAWBERRY, 4)); 
+					       if (this.isMaxAge(state) && RANDOM.nextInt(3) == 0)
+			                    drops.add(new ItemStack(ModItems.STRAWBERRY, 2)); 
+
 				        if (age >= getMaxAge())
 				        {
-				            int k = 3 + fortune;
+				        	/////////changed from 3 to 2
+				         //   int k = 2 + fortune;
 
 				            for (int i = 0; i < 3 + fortune; ++i)
 				            {
-				                if (rand.nextInt(2 * getMaxAge()) <= age)
+				            	
+				            	//changed to 1 from 2
+				               // if (rand.nextInt(1 * getMaxAge()) <= age)
+				            	if (getMaxAge() > age)
 				                {
 				                    drops.add(new ItemStack(this.getSeed(), 1, 0)); 
 				                }
@@ -222,7 +235,7 @@ public class strawberry_plant extends BlockBush implements IGrowable
 				    /**
 				     * Spawns this Block's drops into the World as EntityItems.
 				     */
-				    @SuppressWarnings("unused")
+			/*	    @SuppressWarnings("unused")
 					public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
 				    {
 				        super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
@@ -244,7 +257,7 @@ public class strawberry_plant extends BlockBush implements IGrowable
 				                }
 				            }
 				        }
-				    }
+				    } */
 
 				    /**
 				     * Get the Item that this Block should drop when harvested.
@@ -259,10 +272,10 @@ public class strawberry_plant extends BlockBush implements IGrowable
 				        return 3;
 				    } */
 
-				    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+			/*	    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 				    {
 				        return new ItemStack(this.getSeed());
-				    }
+				    } */
 
 				    /**
 				     * Whether this IGrowable can grow
@@ -307,6 +320,23 @@ public class strawberry_plant extends BlockBush implements IGrowable
     {
         return BlockFaceShape.UNDEFINED;
     }
+	
+	
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    {
+        if (!this.canBePlacedOn(worldIn, pos.down()))
+        {
+        	 spawnAsEntity(worldIn, pos, new ItemStack(this.getSeed()));  
+            worldIn.setBlockToAir(pos);
+        }
+    }  
+  
+  private boolean canBePlacedOn(World worldIn, BlockPos pos)
+    {
+        return worldIn.getBlockState(pos).getBlock() instanceof BlockFarmland;
+    }
+	
+	
 
 	// considering letting you "pluck" the berries without having to break the , but i dont think i will bc that'd conflict 
  //with all those great mods that let you harvest + replant by right clicking 				    
@@ -328,4 +358,6 @@ public class strawberry_plant extends BlockBush implements IGrowable
 		
 	 }  
 } */
+	
+
 }

@@ -12,13 +12,16 @@ import com.google.common.collect.Sets;
 
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
-import bee.beeshroom.ComfyCozy.util.handlers.LootTableHandler;
+//import bee.beeshroom.ComfyCozy.util.handlers.LootTableHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIEatGrass;
+import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -27,7 +30,9 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,6 +40,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -54,7 +60,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTableList;
+//import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -115,11 +121,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 	       // this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Items.WHEAT, false));
 	        this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-	        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
+	      //  this.tasks.addTask(9, new EntityAIFollowParent(this, 0.6D));
+	        // this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
 	        this.tasks.addTask(5, this.entityAIEatGrass);
 	        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
 	        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 	        this.tasks.addTask(8, new EntityAILookIdle(this));
+	        
+
+	      //  this.tasks.addTask(7, new EntityAIFollow(this, 1.0D, 3.0F, 7.0F));
+	    }
+	    
+	    public boolean isBreedingItem(ItemStack stack)
+	    {
+	        return TEMPTATION_ITEMS.contains(stack.getItem());
+	    }
+	    
+	    public boolean canTrample(World world, Block block, BlockPos pos, float fallDistance)
+	    {
+	        return false;
 	    }
 
 	    protected void updateAITasks()
@@ -138,6 +158,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        {
 	            this.sheepTimer = Math.max(0, this.sheepTimer - 1);
 	        }
+	        
+	   /*     if (!this.onGround && this.motionY < 0.0D)
+	        {
+	            this.motionY *= 0.9D;
+	        } */
 
 	        super.onLivingUpdate();
 	    }
@@ -145,7 +170,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	    protected void applyEntityAttributes()
 	    {
 	        super.applyEntityAttributes();
-	        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+	        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.5D);
 	        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
 	    }
 
@@ -155,7 +180,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        this.dataManager.register(OAT_FLAVOR, Byte.valueOf((byte)0));
 	    } 
 
-	    @Nullable
+	/*    @Nullable
 	  protected ResourceLocation getLootTable()
 	    {
 	        if (this.getSheared())
@@ -165,8 +190,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        }
 	     else
 	       {
-	    	 
-	    	 return LootTableHandler.ENTITIES_OATMEALSHEEP_PLAIN;
+	    	 return LootTableHandler.ENTITIES_OATMEALSHEEP;
+	    	// return LootTableHandler.ENTITIES_OATMEALSHEEP_PLAIN;
 	       }
 	      /*     switch (this.getOatFlavor())
 	           {
@@ -177,7 +202,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	           //         return LootTableHandler.ENTITIES_OATMEALSHEEP_PEACH;
 	           } 
 	        } */ 
-	    } 
+	    //} 
 
 	    //
 	     // Handler for {@link World#setEntityState}
@@ -448,7 +473,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 	        if (this.isChild())
 	        {
-	            this.addGrowth(60);
+	            this.addGrowth(45);
 	        }
 	    }
 
@@ -469,7 +494,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	    public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
 	    {
 	        this.setSheared(true);
-	        int i = 1 + this.rand.nextInt(3);
+	        int i = 1 + this.rand.nextInt(2);
 
 	        java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
 	        for (int j = 0; j < i; ++j)
@@ -518,4 +543,28 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 	        DYE_TO_RGB.put(EnumDyeColor.WHITE, new float[] {0.9019608F, 0.9019608F, 0.9019608F});
 	    } */
+	
+
+	    public void onStruckByLightning(EntityLightningBolt lightningBolt)
+	    {
+	    	 if (!this.world.isRemote && !this.isDead)
+	        	 for (int l = 0; l < 4; ++l)
+	        {
+	    	int i = MathHelper.floor(this.posX + (double)((float)(l % 2 * 2 - 1) * 0.25F));
+            int j = MathHelper.floor(this.posY);
+             int k = MathHelper.floor(this.posZ + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
+                BlockPos blockpos = new BlockPos(i, j, k);
+                
+	                if (this.world.getBlockState(blockpos).getMaterial() == Material.AIR)
+	                {
+	                	this.setDead(); 
+	                	this.world.setBlockState(blockpos, ModBlocks.BOWL_OATMEAL.getDefaultState()); 
+	                	 
+	                }
+	           }
+	    }
+	
+	
+	
+	
 	}

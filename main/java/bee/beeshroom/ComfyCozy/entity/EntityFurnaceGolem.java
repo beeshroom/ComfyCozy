@@ -1,39 +1,36 @@
 package bee.beeshroom.ComfyCozy.entity;
 
-import java.util.Random;
-import java.util.Set;
-
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Sets;
-
-import net.minecraft.block.state.IBlockState;
+import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIFollow;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
@@ -45,9 +42,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 {	
-
+	  public int timeUntilNextHeal;
+	  private int fuel;
     private int attackTimer;
+   // private EntityAISit aiSit;
 	 private static final DataParameter<Boolean> ATTACKING = EntityDataManager.<Boolean>createKey(EntityFurnaceGolem.class, DataSerializers.BOOLEAN);
+	//private static final DataParameter<Float> DATA_HEALTH_ID = EntityDataManager.<Float>createKey(EntityFurnaceGolem.class, DataSerializers.FLOAT);
 	 // private static final Set<Item> TAME_ITEMS = Sets.newHashSet(Item.getItemFromBlock(Blocks.DIRT), Item.getItemFromBlock(Blocks.MYCELIUM), Item.getItemFromBlock(Blocks.GRASS));
 	//  private EntityAISit aiSit;
 	 //  private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.COAL);
@@ -55,17 +55,19 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 	
 	  protected void initEntityAI()
 	    {
-		//    this.tasks.addTask(7, new EntityFurnaceGolem.BurnThem(this));
+		/*  this.aiSit = new EntityAISit(this);
+		     this.tasks.addTask(2, this.aiSit);
+	        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F)); */
+		  
 	        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D, 0.0F));
 	       // this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 1.0F));
 	       // this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 	      //  this.tasks.addTask(8, new EntityAILookIdle(this));
-	      //  this.tasks.addTask(3, new EntityAITempt(this, 1.0D, false, TEMPTATION_ITEMS));
 	        this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
-	        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false, new Class[0]));
+	/////took this out/////        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false, new Class[0]));
 	       // this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
 	        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, true, false, IMob.MOB_SELECTOR));
-
+	        this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F)); //added this 
 	       // this.tasks.addTask(8, new EntityAIFollow(this, 1.0D, 3.0F, 7.0F));
 /*    {
 	            public boolean apply(@Nullable EntityLiving p_apply_1_)
@@ -75,6 +77,8 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 	        }));*/
 	    }
 	  
+	
+	  
 	    public static void registerFixesFurnaceGolem(DataFixer fixer)
 	    {
 	        EntityLiving.registerFixesMob(fixer, EntityFurnaceGolem.class);
@@ -83,7 +87,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 	    protected void applyEntityAttributes()
 	    {
 	        super.applyEntityAttributes();
-	        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+	        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D);
 	        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
 	        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.7D);
 	      //  this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.1D);
@@ -94,6 +98,10 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 	    {
 	        super(worldIn);
 	        this.isImmuneToFire = true;
+
+	        this.timeUntilNextHeal = 50 ;
+	      //  this.timeUntilNextHeal = this.rand.nextInt(12) + 15 ;
+	       // this.setTamed(false);
 	    }
 
 	    protected int decreaseAirSupply(int air)
@@ -125,49 +133,78 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 	    {
 	        super.onLivingUpdate();
 
-	        if (!this.world.isRemote && this.getAttackTarget() == null && this.isAttacking())
+	     /*   if (!this.world.isRemote && this.getAttackTarget() == null && this.isAttacking())
 	        {
 	            this.setAttacking(false);
-	        }
+	        } */
 	        if (this.attackTimer > 0)
 	        {
 	            --this.attackTimer;
 	        }
-	        if (this.motionX * this.motionX + this.motionZ * this.motionZ > 2.500000277905201E-7D && this.rand.nextInt(5) == 0)
-	        {
-	            int i = MathHelper.floor(this.posX);
-	            int j = MathHelper.floor(this.posY - 0.20000000298023224D);
-	            int k = MathHelper.floor(this.posZ);
-	            IBlockState iblockstate = this.world.getBlockState(new BlockPos(i, j, k));
 
-	            /*if (iblockstate.getMaterial() != Material.AIR)
-	            {
-	                this.world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D, Block.getStateId(iblockstate));
-	            }*/
-	            
-	        }
+	        if (!this.world.isRemote && --this.timeUntilNextHeal <= 0)
+            {
+	        	if (this.fuel > 0)
+	        	{
+                	
+                	 this.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+                	 this.heal(2f);
+                	 this.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 1.0F, 1.0F);
+                /*	 double d0 = this.rand.nextGaussian() * 0.02D;
+                     double d1 = this.rand.nextGaussian() * 0.02D;
+                     double d2 = this.rand.nextGaussian() * 0.02D;
+                	   this.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);  
+                	*/
+                	 this.timeUntilNextHeal = 50;
+                	   // this.playSound(SoundsHandler.PLANT, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            }
+            
+              
+                	 this.timeUntilNextHeal = 50;
+            }
+	        
 	    }
 	    
+
+	    
+	
 	    public boolean attackEntityAsMob(Entity entityIn)
 	    {
 	        this.attackTimer = 10;
 	        this.world.setEntityState(this, (byte)4);
-	        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float)(1 + this.rand.nextInt(5)));
+	        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float)(2 + this.rand.nextInt(5)));
 
 	        if (flag) 
 	        {
-	        	
+	        	if (this.fuel > 0)
+	            {
+	            	
 	        	//  this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 	        //	this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
 	        	//this.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 1.0F, 1.0F);
-	        	 this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+	        	/////////// this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 	        	entityIn.setFire(3);
 	           // entityIn.motionY += 0.4000000059604645D;
 	            this.applyEnchantments(this, entityIn);
+	            entityIn.motionX += 0.30D;
+	            this.playSound(SoundEvents.ITEM_FIRECHARGE_USE, 0.8F, 1.1F);
+		        this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+		     
+	        }
+	        	if (this.fuel <= 0)
+	            {
+	            
+	            this.applyEnchantments(this, entityIn);
+	            entityIn.motionX += 0.1D;
+	           // this.playSound(SoundEvents.ITEM_FIRECHARGE_USE, 0.8F, 1.1F);
+		    ///nah no particle   // this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+		     
+	        }
 	        }
 	        
-	        this.playSound(SoundEvents.ENTITY_BLAZE_SHOOT, 1.0F, 1.0F);
-	        this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+	        //this.playSound(SoundEvents.ENTITY_BLAZE_SHOOT, 1.0F, 1.0F);
+	////////        this.playSound(SoundEvents.ITEM_FIRECHARGE_USE, 0.8F, 1.1F);
+	 //////       this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
 	      //  this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 	      
 	        return flag; 
@@ -183,8 +220,16 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 	        if (id == 4)
 	        {
 	            this.attackTimer = 10;
-	            this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+	            if (this.fuel > 0)
+	            {
+	            this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY + 0.8D, this.posZ, 0.0D, 0.0D, 0.0D);
+	          //  this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
 	            this.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 1.0F, 1.0F);
+	            }
+	        /*    if (this.fuel <= 0)
+	            {
+	            this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY + 0.8D, this.posZ, 0.0D, 0.0D, 0.0D);
+	            } */
 	        }
 	        else
 	        {
@@ -218,22 +263,17 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
     {
     }
 
-    /*
-    @Nullable
-    protected SoundEvent getAmbientSound()
-    {
-        return SoundEvents.ENTITY_SNOWMAN_AMBIENT;
-    }*/
-    
     protected SoundEvent getAmbientSound()
     {
         if (this.isAttacking())
         {
-            return SoundEvents.BLOCK_FIRE_AMBIENT;
+        	return SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE;
+            //return SoundEvents.BLOCK_FIRE_AMBIENT;
         }
         else
         {
-            return SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE;
+            //return SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE;
+        	return null;
         }
     }
     
@@ -278,27 +318,50 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
         if (entitylivingbaseIn == null)
         {
             this.setAttacking(false);
+            //this.setSprinting(false);
+         /*   if (this.fuel > 0)
+            {
+                --this.fuel;
+            }  */
         }
         else
         {
-            this.setAttacking(true);
+        	
+        	//added this if fuel
+        	if (this.fuel > 0)
+            {
+            	this.setAttacking(true);
+            }
+            
+            
         }
     }
     
     protected void updateAITasks()
     {
-        if (this.isWet())
+    	   
+       if (this.isWet())
         {
             //this.attackEntityFrom(DamageSource.DROWN, 1.0F);
         	this.setAttacking(false);
-        	this.attackTimer = 0;
-        }
+        	this.attackTimer = 80;
+        	this.setAttackTarget(null);
+           // this.setSprinting(false);
+            if (this.fuel > 0)
+            {
+                --this.fuel;
+            }
+        } 
+      //  this.dataManager.set(DATA_HEALTH_ID, Float.valueOf(this.getHealth()));
+        //super.updateAITasks();
     }
     
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
         compound.setBoolean("Angry", this.isAttacking());
+        compound.setShort("Fuel", (short)this.fuel);
+        compound.setInteger("HealTime", this.timeUntilNextHeal);
     }
 
     /**
@@ -308,9 +371,150 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
     {
         super.readEntityFromNBT(compound);
         this.setAttacking(compound.getBoolean("Attacking"));
+        this.fuel = compound.getShort("Fuel");
+       // if (this.aiSit != null) { this.aiSit.setSitting(compound.getBoolean("Sitting")); }
+        if (compound.hasKey("HealTime"))
+        {
+            this.timeUntilNextHeal = compound.getInteger("HealTime");
+        }
     }
     
-    /* 
+    
+    
+    public boolean processInteract(EntityPlayer player, EnumHand hand)
+    {
+    	  ItemStack itemstack = player.getHeldItem(hand);
+    	  
+ //   if (!itemstack.isEmpty())
+ //   {
+     //   if (itemstack.getItem() instanceof Item)
+    //    {
+         //   Item item = (Item)itemstack.getItem();
+
+            //if (super.processInitialInteract(player, hand)) return true;
+            
+    //Furnace Minecraft code referenced	  ///////took away !player.isSneaking() &&  bc it was breaking it maybe? ??? 
+            if (this.fuel + 1500 <= 12000 && itemstack.getItem() == Items.COAL || itemstack.getItem() == Item.getItemFromBlock(Blocks.LOG) || itemstack.getItem() == Item.getItemFromBlock(Blocks.LOG2)) //&& ((Float)this.dataManager.get(DATA_HEALTH_ID)).floatValue() < 20.0F)
+            {
+                if (!player.capabilities.isCreativeMode)
+                {
+                    itemstack.shrink(1);
+                }
+          
+                double d0 = this.rand.nextGaussian() * 0.02D;
+                double d1 = this.rand.nextGaussian() * 0.02D;
+                double d2 = this.rand.nextGaussian() * 0.02D;
+                this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+                this.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+           //     this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+          	  
+                this.fuel += 1500;
+                this.heal(5f);
+                //this.setSprinting(true);
+                
+             //   this.spawnAsEntity(worldIn, pos, new ItemStack(Items.COAL, 2, 1));
+                
+             //   this.heal((float)item.getHealAmount(itemstack));
+                //return true;
+            }
+            
+          /////****************///////vvvvv////Unslash this when you want to try to make them tameaeable again ///vvvvv////************///////////
+            
+       ////////////////// TAME EVENT ///////     
+     /*       if (!this.isTamed() && player.isSneaking())
+            {
+            //////////////////////  
+            if (!this.world.isRemote)
+            {
+                    this.setTamedBy(player);
+                    this.playTameEffect(true);
+                    this.world.setEntityState(this, (byte)7);
+            }
+         ////////////////////////
+            }
+            
+            if (!this.world.isRemote && this.isTamed() && this.isOwner(player))
+            {
+                this.aiSit.setSitting(!this.isSitting());
+                } */
+      return true;
+  
+    
+}
+    
+    public void onUpdate()
+    {
+        super.onUpdate();
+
+        if (this.fuel > 0)
+        {
+        	this.setAttacking(true);
+        	
+            --this.fuel;
+        }
+        
+        if (this.fuel <= 0)
+        {
+        	this.setAttacking(false);
+        	this.setSprinting(false);
+        }
+
+        if (this.fuel > 0 && this.rand.nextInt(10) == 0)
+        {
+            this.setSprinting(true);
+            this.heal(.05f);
+            this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX + 0.2D, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+          //  this.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
+        }
+    }
+
+
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender()
+    {
+    	BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
+
+    	if (this.fuel > 0)
+    	{
+        return 528880;
+    	}
+    	if (this.world.isBlockLoaded(blockpos$mutableblockpos))
+        {
+            blockpos$mutableblockpos.setY(MathHelper.floor(this.posY + (double)this.getEyeHeight()));
+            return this.world.getCombinedLight(blockpos$mutableblockpos, 0);
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    /**
+     * Gets how bright this entity is.
+     */
+    public float getBrightness()
+    {
+    	BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
+
+        if (this.world.isBlockLoaded(blockpos$mutableblockpos))
+        {
+            blockpos$mutableblockpos.setY(MathHelper.floor(this.posY + (double)this.getEyeHeight()));
+            return this.world.getLightBrightness(blockpos$mutableblockpos);
+        }
+    	if (this.fuel > 0)
+    	{
+        return 0.2F;
+    	}
+    	 else
+         {
+             return 0.0F;
+         }
+    	
+    }
+
+
+
+	/* 
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntityFurnace();

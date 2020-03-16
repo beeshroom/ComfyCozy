@@ -101,7 +101,13 @@ public class table extends BlockHorizontal
 	@Override
 	public boolean isFullBlock(IBlockState state) 
 	{
-		return false;
+		return true;
+	}
+	
+	@Override
+	public boolean isTopSolid(IBlockState state) 
+	{
+		return true;
 	}
 	
 	@Override

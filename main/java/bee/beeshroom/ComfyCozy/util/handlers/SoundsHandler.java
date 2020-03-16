@@ -14,6 +14,10 @@ public class SoundsHandler
 	public static SoundEvent HAMMER;
 	public static SoundEvent STRIP;
 	public static SoundEvent BONK;
+	public static SoundEvent CRACKLE;
+	//public static SoundEvent CARVE;
+	//public static SoundEvent FLIP;
+	public static SoundEvent DIRTY;
 	
 	public static void registerSounds()
 	{
@@ -24,6 +28,10 @@ public class SoundsHandler
 		HAMMER = registerSound("items.cozy_hammer.hammer");
 		STRIP = registerSound("blocks.cinnamon_log.strip");
 		BONK = registerSound("items.cozy_hammer.bonk");
+		CRACKLE = registerSound("blocks.bonfire.crackle");
+		//CARVE = registerSound("entity.furnace_golem,.carve");
+	//	FLIP = registerSound("blocks.furniture.flip");
+		DIRTY = registerSound("entity.dirtypig.dirty");
 	}
 	
 	private static SoundEvent registerSound(String name)

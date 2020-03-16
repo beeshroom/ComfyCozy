@@ -26,6 +26,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -58,22 +59,24 @@ public class OatSheepEvent {
         
         if (rnd.nextFloat() <= 0.05f)
         
-        if (checkStructure(worldIn, oat)) {
+        if (checkStructure(worldIn, oat) && worldIn.canSeeSky(pos)) {
            
         	pos = oat;
         
             worldIn.setBlockState(oat, Blocks.AIR.getDefaultState());
             worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ENTITY_SHEEP_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.6F);
             EntityOatmealSheep EntityOatmealSheep = new EntityOatmealSheep(worldIn);
-       	 EntityOatmealSheep.setGrowingAge(-22000);
+       	// EntityOatmealSheep.setGrowingAge(-22000);
+       	 EntityOatmealSheep.setGrowingAge(-29555);
             EntityOatmealSheep.setPosition(getCoord(pos.getX()), pos.getY(), getCoord(pos.getZ()));
+        //   EntityOatmealSheep.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, false, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0, null);    
             worldIn.spawnEntity(EntityOatmealSheep);
             
         }
     }
 	private static double getCoord(int c) {
 		//changed 0.5 to 0.0
-		return c + Math.signum(c)*0.4D;
+		return c + Math.signum(c)*0.0D;
 	}
 	
 	private static boolean checkStructure(World worldIn, BlockPos oat) {

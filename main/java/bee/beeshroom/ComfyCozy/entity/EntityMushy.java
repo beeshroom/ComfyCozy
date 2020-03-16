@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 
+import bee.beeshroom.ComfyCozy.init.ModItems;
 import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -45,8 +46,10 @@ import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntityShoulderRiding;
 import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
@@ -63,6 +66,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -70,6 +74,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -84,17 +89,24 @@ public class EntityMushy extends EntityTameable
 	  private EntityAISit aiSit;
 	  private EntityAITempt aiTempt;
 	  public int timeUntilNextEgg;
+//	private Object addGrowth;
 	  
 	  
 	public EntityMushy(World worldIn) 
 	{
 		
 		super(worldIn);
-        this.setSize(0.4F, 0.7F);
+    //    this.setSize(0.4F, 0.7F);
+        this.setSize(0.8F, 0.14F);
         this.setTamed(false);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
 	}
 
+	   public boolean canTrample(World world, Block block, BlockPos pos, float fallDistance)
+	    {
+	        return false;
+	    }
+	   
 	   public boolean canMateWith(EntityAnimal otherAnimal)
 	    {
 	        return false;
@@ -114,7 +126,7 @@ public class EntityMushy extends EntityTameable
 	        this.tasks.addTask(3, new EntityAITempt(this, 1.0D, false, TEMPTATION_ITEMS));
 	        this.tasks.addTask(1, new EntityAISwimming(this));
 	        this.tasks.addTask(2, this.aiSit);
-	        this.tasks.addTask(0, new EntityAIPanic(this, 1.25D));
+	      //  this.tasks.addTask(0, new EntityAIPanic(this, 1.25D));
 	        this.tasks.addTask(8, new EntityAIWanderAvoidWater(this, 1.0D));
 	        this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 13.0F));
 	        //this.tasks.addTask(2, this.aiSit);
@@ -148,7 +160,7 @@ public class EntityMushy extends EntityTameable
 	    protected void applyEntityAttributes()
 	    {
 	    	super.applyEntityAttributes();
-	        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(7.0D);
+	        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.5D);
 	        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	    }
 
@@ -173,7 +185,7 @@ public class EntityMushy extends EntityTameable
 
 	    protected void playStepSound(BlockPos pos, Block blockIn)
 	    {
-	        this.playSound(SoundEvents.ENTITY_PARROT_STEP, 0.15F, 1.0F);
+	        this.playSound(SoundEvents.ENTITY_PARROT_STEP, 0.13F, 1.0F);
 	    }
 	    
 	    public static void registerFixesOcelot(DataFixer fixer)
@@ -296,9 +308,52 @@ public class EntityMushy extends EntityTameable
 	    } */
 
 
+	/*    private boolean InstantTame(EntityPlayer player)
+	    {
+	        ItemStack itemstack = player.inventory.armorInventory.get(3);
+
+	        if (itemstack.getItem() == ModItems.MUSHROOM_BERET)
+	        {
+	        	  if (!this.world.isRemote)
+		            {
+		                if (!net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
+		                {
+		                    this.setTamedBy(player);
+		                    this.playTameEffect(true);
+		                    this.world.setEntityState(this, (byte)7);
+		                }
+		            }
+	        	return true;
+	        }
+	        else
+	        {
+	           return false;
+	        }
+	    }*/
+	    
+	//    this.setSize(0.9F, 1.3F);
+	    
+	  /*  public void processInteract(EntityPlayer player, ItemStack stack)
+	    {
+	    	 EnumDyeColor enumdyecolor = EnumDyeColor.byDyeDamage(stack.getMetadata());
+	        Item item = stack.getItem();
+	        
+	        if (enumdyecolor == EnumDyeColor.WHITE)
+	        {
+	        	  this.setSize(0.8F, 0.14F);
+	        }
+	       
+	        return;
+	    } */
+	    
+	    
+	    
+	    
 	    public boolean processInteract(EntityPlayer player, EnumHand hand)
 	    {
 	        ItemStack itemstack = player.getHeldItem(hand);
+	///////////////////        EnumDyeColor enumdyecolor = EnumDyeColor.byDyeDamage(itemstack.getMetadata());  ///////////////////
+	        
 
 	        if (!this.isTamed() && TAME_ITEMS.contains(itemstack.getItem()))
 	        {
@@ -324,16 +379,68 @@ public class EntityMushy extends EntityTameable
 	                {
 	                    this.playTameEffect(false);
 	                    this.world.setEntityState(this, (byte)6);
+	                 
+	                    ///////////////////////trying something...//////////////////////////
+	                    
+	                    ItemStack itemstack1 = player.inventory.armorInventory.get(3);
+
+	        	        if (itemstack1.getItem() == ModItems.MUSHROOM_BERET)
+	        	        {
+	        	        	  if (!this.world.isRemote)
+	        		            {
+	        		                if (!net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
+	        		                {
+	        		                    this.setTamedBy(player);
+	        		                    this.playTameEffect(true);
+	        		                    this.world.setEntityState(this, (byte)7);
+	        		                }
+	        		            }
+	        	        	return true;
+	        	        }
+	        	        else
+	        	        {
+	        	           return false;
+	        	        }
 	                }
+	         
 	            }
 
 	            return true;
 	        }
+	 
+	        
+	        
+	        
+	        
 	        else
 	        {
 	        	 if (!this.world.isRemote && this.isTamed() && this.isOwner(player))
 	             {
 	                 this.aiSit.setSitting(!this.isSitting());
+	               
+	                 
+	             ////////////////////    //for future useage///////////////////
+	           /*     if (enumdyecolor == EnumDyeColor.WHITE)
+	                	
+	     	        {
+	                	 itemstack.shrink(1);
+	                	 if (!this.world.isRemote && !this.isDead)
+	                     {
+	                         EntityShroomega entityshroomega = new EntityShroomega(this.world);
+	                         entityshroomega.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+	                         entityshroomega.setNoAI(this.isAIDisabled());
+	                   //     this.getVariant = variant
+	                         if (this.hasCustomName())
+	                         {
+	                        	 entityshroomega.setCustomNameTag(this.getCustomNameTag());
+	                        	 entityshroomega.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
+	                         }
+
+	                         this.world.spawnEntity(entityshroomega);
+	                         this.setDead();
+	                     } 
+	                	 //////////////////////////////////
+	     	       } */
 	             }
 
 	             return super.processInteract(player, hand);
@@ -386,6 +493,7 @@ public class EntityMushy extends EntityTameable
 	            int j = MathHelper.floor(this.posY);
 	             int k = MathHelper.floor(this.posZ + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
 	                BlockPos blockpos = new BlockPos(i, j, k);
+	                this.heal(.2f);
 
 	            if (!net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.world, this))
 	            {
@@ -396,13 +504,45 @@ public class EntityMushy extends EntityTameable
 	            {
 	                if (this.world.getBlockState(blockpos).getMaterial() == Material.AIR && this.world.getLight(blockpos) < 13 && Blocks.BROWN_MUSHROOM.canPlaceBlockAt(this.world, blockpos))
 	                {
-	                	this.world.spawnParticle(EnumParticleTypes.TOWN_AURA, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);    
+	                	 this.heal(5f);
+	              /*  	    double d0 = this.rand.nextGaussian() * 0.02D;
+	                        double d1 = this.rand.nextGaussian() * 0.02D;
+	                        double d2 = this.rand.nextGaussian() * 0.02D;
+	                        this.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+	            */    //	this.world.spawnParticle(EnumParticleTypes.TOWN_AURA, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);    
 	                	 this.playSound(SoundsHandler.PLANT, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-	                    this.world.setBlockState(blockpos, Blocks.BROWN_MUSHROOM.getDefaultState());
-	                    
+	                 
+	                	 if (this.getVariant() <= 1)
+	                	 {
+	                	 this.world.setBlockState(blockpos, Blocks.RED_MUSHROOM.getDefaultState());    
+	                	 }
+	                	 if (this.getVariant() > 1)
+	                	 {
+	                	 this.world.setBlockState(blockpos, Blocks.BROWN_MUSHROOM.getDefaultState());  
+	                	 }
 	                }
 	                this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
 	            }
 	        }
 	    }
+	    
+	    
+	 /*   protected boolean handleEating(EntityPlayer player, ItemStack stack)
+	    {
+	    	  boolean flag = false;
+	    	   int i = 0;
+	           Item item = stack.getItem();
+	    if (this.isTamed() && i == 0)
+        {
+            this.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, 0.0D, 0.0D, 0.0D);
+
+            if (!this.world.isRemote)
+            {
+                this.addGrowth(i);
+            }
+
+            flag = true;
+        }
+	    return flag;
+	    } */
 	}

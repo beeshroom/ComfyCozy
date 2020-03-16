@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 
+import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -100,7 +101,7 @@ public class EntityDirtyPig extends EntityPig
     {
         super(worldIn);
         this.setSize(0.9F, 0.9F);
-        this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+        this.timeUntilNextEgg = this.rand.nextInt(2000) + 4000;
     }
 
     protected void initEntityAI()
@@ -441,9 +442,11 @@ public class EntityDirtyPig extends EntityPig
 
         if (!this.world.isRemote && !this.isChild() && --this.timeUntilNextEgg <= 0)
         {
-            this.playSound(SoundEvents.BLOCK_GRASS_HIT, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+        	  this.world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
+
+            this.playSound(SoundsHandler.DIRTY, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.dropItem(Item.getItemFromBlock(Blocks.DIRT), 1);
-            this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+            this.timeUntilNextEgg = this.rand.nextInt(2000) + 4000;
         }
     }
 

@@ -12,6 +12,7 @@ import bee.beeshroom.ComfyCozy.Main;
 import bee.beeshroom.ComfyCozy.blocks.BlockBase;
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
+import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockFence;
@@ -303,8 +304,8 @@ public class bonfire extends BlockBase
 	            double d4 = rand.nextDouble() * 0.6D - 0.3D;
 
 	            if (rand.nextDouble() < 0.1D)
-	            {
-	                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 3.2F, 1.0F, false);
+	            {//SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE
+	                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, SoundsHandler.CRACKLE, SoundCategory.BLOCKS, 3.2F, 1.0F, false);
 	                double d3 = (double)pos.getX() + rand.nextDouble() * 0.10000000149011612D;
                     double d8 = (double)pos.getY() + rand.nextDouble();
                     double d13 = (double)pos.getZ() + rand.nextDouble();
