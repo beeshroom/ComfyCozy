@@ -1,0 +1,21 @@
+{
+    "display": {
+        "icon": {
+            "item": "comfycozy:bunting"
+        },
+        "title": {
+            "translate": "advancements.comfycozy.root.title"
+        },
+        "description": {
+            "translate": "advancements.comfycozy.root.description"
+        },
+        "background": "comfycozy:textures/blocks/oat_block.png",
+        "show_toast": false,
+        "announce_to_chat": false
+    },
+    "criteria": {
+        "consumed_item": {
+            "trigger": "minecraft:consume_item"
+        }
+    }
+}

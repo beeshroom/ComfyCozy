@@ -6,6 +6,8 @@ import bee.beeshroom.ComfyCozy.Main;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentKnockback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
@@ -39,6 +41,14 @@ public class cozy_hammer extends Item
 		
 		ModItems.ITEMS.add(this);
 	}
+	
+/*	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+		// TODO Auto-generated method stub
+		//EnchantmentKnockback
+		return super.canApplyAtEnchantingTable(stack, enchantment);
+		//return enchantment.type.canEnchantItem(stack.getItem());
+	} */
 	
 	//turtywurty the absolute legend... thankyou for helping me;; i was so lost as to why i couldn't get it to work
 	

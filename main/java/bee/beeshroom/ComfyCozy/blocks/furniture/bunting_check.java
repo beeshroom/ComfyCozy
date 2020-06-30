@@ -70,6 +70,7 @@ public class bunting_check extends BlockHorizontal
 		setSoundType(SoundType.CLOTH);
 		setHardness(0.0F);
 		setResistance(0.1F);
+		 this.translucent = true;
 		//setHarvestLevel("shears", 0);
 		setRegistryName(name);
 		setUnlocalizedName(name);
@@ -148,9 +149,20 @@ public class bunting_check extends BlockHorizontal
 	    
 	    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	    {
+	        IBlockState iblockstate = worldIn.getBlockState(pos.offset(facing.getOpposite()));
+
+	        if (iblockstate.getBlock() == ModBlocks.BUNTING || iblockstate.getBlock() == ModBlocks.BUNTING_CHECK || iblockstate.getBlock() == ModBlocks.BUNTING_HEART || iblockstate.getBlock() == ModBlocks.BUNTING_SPOOK || iblockstate.getBlock() == ModBlocks.BUNTING_GLOW)
+	        {
+	            EnumFacing enumfacing = (EnumFacing)iblockstate.getValue(FACING);
+
+	            if (enumfacing == facing)
+	            {
+	                return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+	            }
+	        }
+
 	        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	    }
-	    
 	    
 	/*    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	    {

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+        "ore": "cropOats"
+    },
+    {
+       "type": "forge:ore_dict",
+        "ore": "cropOats"
+    },
+ {
+      "type": "forge:ore_dict",
+        "ore": "cropPeach"
+    },
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "result": {
+    "item": "comfycozy:peach_oatmeal"
+  }
+}

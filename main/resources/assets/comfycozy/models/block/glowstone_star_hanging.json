@@ -1,0 +1,54 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "comfycozy:blocks/glowstone_shard",
+		"1": "comfycozy:blocks/candle_jar",
+		"particle": "comfycozy:blocks/glowstone_shard"
+	},
+	"elements": [
+		{
+			"from": [1, -1, 8],
+			"to": [15, 13, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 7, 8]},
+			"faces": {
+				"north": {"uv": [1, 2, 15, 16], "texture": "#0"},
+				"south": {"uv": [1, 2, 15, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [1, -1, 8],
+			"to": [15, 13, 8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 7, 8]},
+			"faces": {
+				"north": {"uv": [1, 2, 15, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 14], "texture": "#0"},
+				"south": {"uv": [1, 2, 15, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 14], "texture": "#0"},
+				"up": {"uv": [0, 0, 14, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 14, 0], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 13, 8],
+			"to": [8.5, 16, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [3, 15, 6, 16], "rotation": 90, "texture": "#1"},
+				"south": {"uv": [3, 15, 6, 16], "rotation": 90, "texture": "#1"}
+			}
+		},
+		{
+			"from": [7.5, 13, 8],
+			"to": [8.5, 16, 8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [3, 15, 6, 16], "rotation": 90, "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 2], "texture": "#0"},
+				"south": {"uv": [3, 15, 6, 16], "rotation": 90, "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 2], "texture": "#0"},
+				"up": {"uv": [0, 0, 1, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 1, 0], "texture": "#0"}
+			}
+		}
+	]
+}

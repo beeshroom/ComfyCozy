@@ -1,0 +1,18 @@
+{
+    "pools": [
+        {
+            "rolls": {
+                "min": 2,
+                "max": 6
+            },
+            "entries": [
+               
+                {
+                    "type": "item",
+                    "name": "comfycozy:gold_apple_cinnamon_oatmeal",
+                    "weight": 3
+                }
+            ]
+        }
+    ]
+}

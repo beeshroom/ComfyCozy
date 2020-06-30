@@ -5,7 +5,8 @@
       "item": "minecraft:pumpkin"
     },
     {
-      "item": "comfycozy:cinnamon"
+           "type": "forge:ore_dict",
+        "ore": "cropCinnamon"
     },
     {
       "item": "minecraft:egg"

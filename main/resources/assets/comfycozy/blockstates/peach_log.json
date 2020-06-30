@@ -1,0 +1,9 @@
+{
+    "forge_marker": 1,
+    "variants": {
+        "axis=y":  { "model": "comfycozy:peach_log" },
+        "axis=z":   { "model": "comfycozy:peach_log", "x": 90 },
+        "axis=x":   { "model": "comfycozy:peach_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "comfycozy:peach_log" }
+    }
+}

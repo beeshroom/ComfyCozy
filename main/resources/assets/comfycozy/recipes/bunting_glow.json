@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [   
+"SSS",
+    "DDD"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+"D": {
+      "item": "minecraft:glowstone_dust"
+    }
+  },
+  "result": {
+    "item": "comfycozy:bunting_glow",
+    "count": 6
+  }
+}

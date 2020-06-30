@@ -18,17 +18,14 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeForest;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 //CREDIT to Cadiboo for a lot of this registry code.
 
@@ -64,13 +61,14 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
     final ResourceLocation EntityOatmealSheep = new ResourceLocation(Reference.MOD_ID, "entityoatmealsheep");
     final ResourceLocation EntityMushy = new ResourceLocation(Reference.MOD_ID, "entitymushy");
     final ResourceLocation EntityDirtyPig = new ResourceLocation(Reference.MOD_ID, "entitydirtypig");
+
     final ResourceLocation EntityFurnaceGolem = new ResourceLocation(Reference.MOD_ID, "entityfurnacegolem");
-    
     
 
     event.getRegistry().registerAll(
         EntityEntryBuilder.create()
             .entity(EntityOatmealSheep.class)
+            .egg(16768180, 15447932)
             .id(EntityOatmealSheep, entityId++)
             .name(EntityOatmealSheep.getResourcePath())
             .tracker(32, 5, false)
@@ -78,6 +76,7 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
             
         EntityEntryBuilder.create()
             .entity(EntityMushy.class)
+            .egg(13639962, 16182236)
             .id(EntityMushy, entityId++)
             .name(EntityMushy.getResourcePath())
             .tracker(32, 5, false)
@@ -85,6 +84,7 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
             
             EntityEntryBuilder.create()
             .entity(EntityDirtyPig.class)
+            .egg(13799274, 7490088)
             .id(EntityDirtyPig, entityId++)
             .name(EntityDirtyPig.getResourcePath())
             .tracker(32, 5, false)
@@ -95,7 +95,8 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
             .id(EntityFurnaceGolem, entityId++)
             .name(EntityFurnaceGolem.getResourcePath())
             .tracker(32, 5, false)
-            .build()
+            .build() 
+            
          
                 /*    EntityEntryBuilder.create()
                         .entity(EntityCarpet.class)
@@ -103,6 +104,7 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
                         .name(EntityCarpet.getResourcePath())
                         .tracker(32, 10, false)
                         .build(), */
+            
                         
                        
                   
@@ -114,12 +116,18 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
 
 private static void addSpawns() {
 	//EntityRegistry.addSpawn(EntityMushy.class, 10, 1, 1, EnumCreatureType.CREATURE, getBiomes(BiomeDictionary.Type.MAGICAL));
+	if(ConfigHandler.SHROOMINI)
+    {
 	EntityRegistry.addSpawn(EntityMushy.class, 5, 1, 3, EnumCreatureType.CREATURE, getBiomes(BiomeDictionary.Type.MUSHROOM));
 	EntityRegistry.addSpawn(EntityMushy.class, 45, 2, 3, EnumCreatureType.CREATURE, getBiomes(BiomeDictionary.Type.SPOOKY));
 	EntityRegistry.addSpawn(EntityMushy.class, 35, 1, 1, EnumCreatureType.CREATURE, getBiomes(BiomeDictionary.Type.SWAMP));
 	EntityRegistry.addSpawn(EntityMushy.class, 7, 1, 1, EnumCreatureType.CREATURE, getBiomes(BiomeDictionary.Type.FOREST));
+    }
+	if(ConfigHandler.DIRTY_PIG)
+    {
 	EntityRegistry.addSpawn(EntityDirtyPig.class, 20, 1, 1, EnumCreatureType.CREATURE, getBiomes(BiomeDictionary.Type.FOREST));
 	EntityRegistry.addSpawn(EntityDirtyPig.class, 25, 1, 3, EnumCreatureType.CREATURE, getBiomes(BiomeDictionary.Type.SWAMP));
+    }
 	//copySpawns(EntityPlayerAvoidingCreeper.class, EnumCreatureType.CREATURE, EntityCreeper.class, EnumCreatureType.MONSTER);
 }
 
@@ -207,12 +215,24 @@ public static void furnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
 	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.POLE))
 	{
 		event.setBurnTime(10);
+	}
+	
+	if(event.getItemStack().getItem() == ModItems.CINNAMON_STICK)
+	{
+		event.setBurnTime(10);
 	} 
+	
 	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.CARP_BANNER))
 	{
 		event.setBurnTime(12);
 	} 
-	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.CUSHION_DIAMOND))
+	
+	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.CARP_BANNER_2))
+	{
+		event.setBurnTime(12);
+	} 
+	
+/*	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.CUSHION_DIAMOND))
 	{
 		event.setBurnTime(10);
 	} 
@@ -231,7 +251,7 @@ public static void furnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
 	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.CUSHION_ZIGZAG))
 	{
 		event.setBurnTime(10);
-	}
+	} */
 	
 	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.BUNTING))
 	{
@@ -246,11 +266,17 @@ public static void furnaceFuelBurnTime(FurnaceFuelBurnTimeEvent event)
 		event.setBurnTime(2);
 	}
 	
+	
+	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.CUSHION_RED))
+	{
+		event.setBurnTime(10);
+	} 
+	
+	if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.CUSHION_SILVER))
+	{
+		event.setBurnTime(10);
+	} 
 
 
-
-
-
-
-
-}}
+} 
+}

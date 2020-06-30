@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "comfycozy:blocks/cushion_silver",
+		"particle": "comfycozy:blocks/cushion_silver"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 1],
+			"to": [15, 6, 15],
+			"faces": {
+				"north": {"uv": [2, 4, 16, 10], "texture": "#0"},
+				"east": {"uv": [2, 4, 16, 10], "texture": "#0"},
+				"south": {"uv": [2, 4, 16, 10], "texture": "#0"},
+				"west": {"uv": [2, 4, 16, 10], "texture": "#0"},
+				"up": {"uv": [0, 0, 14, 14], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 0, 14, 14], "texture": "#0"}
+			}
+		}
+	]
+}

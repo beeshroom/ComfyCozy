@@ -9,15 +9,11 @@ import java.util.Random;
 
 import bee.beeshroom.ComfyCozy.blocks.cinnamon_log;
 import bee.beeshroom.ComfyCozy.blocks.crops.oat_plant;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_diamond;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_fire;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_pika;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_porg;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_zigzag;
 import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheep;
 import bee.beeshroom.ComfyCozy.events.ChairEvent.Seat;
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.util.Reference;
+import bee.beeshroom.ComfyCozy.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -59,6 +55,8 @@ public class OatSheepEvent {
         
         if (rnd.nextFloat() <= 0.05f)
         
+        	if(ConfigHandler.OAT_LAMBS)
+            {
         if (checkStructure(worldIn, oat) && worldIn.canSeeSky(pos)) {
            
         	pos = oat;
@@ -71,7 +69,7 @@ public class OatSheepEvent {
             EntityOatmealSheep.setPosition(getCoord(pos.getX()), pos.getY(), getCoord(pos.getZ()));
         //   EntityOatmealSheep.world.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, false, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0, null);    
             worldIn.spawnEntity(EntityOatmealSheep);
-            
+        }
         }
     }
 	private static double getCoord(int c) {

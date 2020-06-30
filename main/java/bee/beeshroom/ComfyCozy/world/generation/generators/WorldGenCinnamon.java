@@ -27,7 +27,7 @@ public class WorldGenCinnamon extends WorldGenAbstractTree
   //  private IBlockState blockStateLeaves = ModBlocks.CINNAMON_LEAVES.getDefaultState();//.withProperty(BlockLeaves.CHECK_DECAY, Boolean.valueOf(false));
     private IBlockState blockStateLeaves = ModBlocks.CINNAMON_LOG.getDefaultState().withProperty(cinnamon_log.REMAINS, Integer.valueOf(4));
     /** The minimum height of a generated tree. */
-    private final int minTreeHeight = 3;
+    private final int minTreeHeight = 4;
     // changed from 3 to 2 bc leaves should be taller now... if i did it right....
 
     /**

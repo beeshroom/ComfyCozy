@@ -1,7 +1,7 @@
 package bee.beeshroom.ComfyCozy.util.handlers;
 
 import bee.beeshroom.ComfyCozy.events.ChairEvent;
-import bee.beeshroom.ComfyCozy.events.GolemEvent;
+//import bee.beeshroom.ComfyCozy.events.GolemEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 public class EventHandler 
@@ -12,8 +12,9 @@ public class EventHandler
 		
 		MinecraftForge.EVENT_BUS.register(chairEvent);
 		
-GolemEvent golemEvent = new GolemEvent();
+/* GolemEvent golemEvent = new GolemEvent();
 		
-		MinecraftForge.EVENT_BUS.register(golemEvent);
-	}
+		MinecraftForge.EVENT_BUS.register(golemEvent); 
+		*/
+	} 
 }

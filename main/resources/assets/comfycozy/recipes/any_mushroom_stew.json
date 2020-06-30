@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+           "type": "forge:ore_dict",
+        "ore": "listAllMushroom"
+        },
+        {
+           "type": "forge:ore_dict",
+        "ore": "listAllMushroom"
+        }, 
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "minecraft:mushroom_stew"
+  }
+}

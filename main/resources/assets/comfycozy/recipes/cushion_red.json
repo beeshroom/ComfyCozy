@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "RRR"
+    ],
+    
+    "key":
+    {
+        "R": {
+      "item": "minecraft:wool",
+      "data": 14
+    }   
+    },
+    
+    "result":
+    {
+        "item": "comfycozy:cushion_red",
+        "count": 2
+    }
+}

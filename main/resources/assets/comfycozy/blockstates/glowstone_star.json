@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "facing=up": { "model": "comfycozy:glowstone_star" },
+        "facing=down": { "model": "comfycozy:glowstone_star_hanging"},
+        "facing=north": { "model": "comfycozy:glowstone_star" },
+        "facing=south": { "model": "comfycozy:glowstone_star", "y": 180 },
+        "facing=west":  { "model": "comfycozy:glowstone_star", "y": 270 },
+        "facing=east":  { "model": "comfycozy:glowstone_star", "y": 90 }
+    }
+}
+

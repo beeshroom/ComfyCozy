@@ -1,0 +1,115 @@
+{
+    "display": {
+        "icon": {
+            "item": "comfycozy:strawberry_cake"
+        },
+        "title": {
+            "translate": "advancements.comfycozy.cozy_master.title"
+        },
+        "description": {
+            "translate": "advancements.comfycozy.cozy_master.description"
+        },
+        "frame": "challenge"
+    },
+    "parent": "comfycozy:comfycozy/root",
+     "rewards": {
+        "experience": 20
+    },
+    "criteria": {
+        "oatmeal": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "item": "comfycozy:oatmeal"
+                }
+            }
+        },
+          "peach": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "item": "comfycozy:peach_oatmeal"
+                }
+            }
+        },
+         "gapple": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "item": "comfycozy:gold_apple_cinnamon_oatmeal"
+                }
+            }
+        },
+        
+         "strawberry": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "item": "comfycozy:strawberry_oatmeal"
+                }
+            }
+        },
+         "cinnamon": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "item": "comfycozy:cinnamon_oatmeal"
+                }
+            }
+        },
+        
+          "cinnamon_cookie": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "item": "comfycozy:cinnamon_cookie"
+                }
+            }
+        },
+        
+         "strawberry_jam": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "item": {
+                    "item": "comfycozy:strawberry_jam"
+                }
+            }
+        },
+        
+           "cobbler": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "comfycozy:peach_cobbler"
+                    }
+                ]
+            }
+        },
+        
+          "toast": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "comfycozy:taiga_toast"
+                    }
+                ]
+            }
+        },
+        
+          "strawberry_cake": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "comfycozy:strawberry_cake"
+                    }
+                ]
+            }
+        }
+        
+        
+       
+        }
+        }

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "bites=0": { "model": "comfycozy:peach_cobbler" },
+        "bites=1": { "model": "comfycozy:peach_cobbler_2" },
+        "bites=2": { "model": "comfycozy:peach_cobbler_empty" }
+    }
+}

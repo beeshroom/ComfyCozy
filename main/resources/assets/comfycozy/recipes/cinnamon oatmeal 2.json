@@ -5,7 +5,8 @@
       "item": "comfycozy:oatmeal"
     },
  {
-      "item": "comfycozy:cinnamon"
+      "type": "forge:ore_dict",
+        "ore": "cropCinnamon"
     }
   ],
   "result": {

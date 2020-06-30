@@ -4,11 +4,11 @@ package bee.beeshroom.ComfyCozy.events;
 
 import java.util.List;
 
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_diamond;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_fire;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_pika;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_porg;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_zigzag;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_gray;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_pink;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_purple;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_red;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_silver;
 import bee.beeshroom.ComfyCozy.util.Reference;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -51,7 +51,8 @@ public class ChairEvent
 			return;
 		}
 		
-		if(state.getBlock() instanceof cushion_fire || state.getBlock() instanceof cushion_zigzag || state.getBlock() instanceof cushion_porg || state.getBlock() instanceof cushion_pika || state.getBlock() instanceof cushion_diamond )
+		//if(state.getBlock() instanceof cushion_fire || state.getBlock() instanceof cushion_zigzag || state.getBlock() instanceof cushion_porg || state.getBlock() instanceof cushion_pika || state.getBlock() instanceof cushion_diamond )
+			if(state.getBlock() instanceof cushion_red || state.getBlock() instanceof cushion_silver || state.getBlock() instanceof cushion_purple || state.getBlock() instanceof cushion_gray || state.getBlock() instanceof cushion_pink )
 		{
 			//List<SeatStair> seats = worldIn.getEntitiesWithinAABB(SeatStair.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)));
 			Seat seat = new Seat(worldIn, pos);
@@ -79,8 +80,10 @@ public class ChairEvent
 		{
 			super.onUpdate();
 			BlockPos pos = getPosition();
-			if(!(getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_fire || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_zigzag || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_porg || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_pika || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_diamond))
-			{
+		//	if(!(getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_fire || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_zigzag || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_porg || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_pika || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_diamond))
+			if(!(getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_red  || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_silver || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_purple || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_gray || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_pink ))
+				
+					{
 				setDead();
 				return;
 			}

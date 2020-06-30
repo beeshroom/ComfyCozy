@@ -11,34 +11,45 @@ import bee.beeshroom.ComfyCozy.blocks.flower_box_white;
 import bee.beeshroom.ComfyCozy.blocks.glass_panel;
 import bee.beeshroom.ComfyCozy.blocks.jam_block;
 import bee.beeshroom.ComfyCozy.blocks.oat_block;
+import bee.beeshroom.ComfyCozy.blocks.peach_leaves;
+import bee.beeshroom.ComfyCozy.blocks.peach_log;
+import bee.beeshroom.ComfyCozy.blocks.peach_planks;
+import bee.beeshroom.ComfyCozy.blocks.peach_sapling;
+import bee.beeshroom.ComfyCozy.blocks.white_mushroom;
+import bee.beeshroom.ComfyCozy.blocks.white_mushroom_block;
 //import bee.beeshroom.ComfyCozy.blocks.stripped_cinnamon;
 import bee.beeshroom.ComfyCozy.blocks.crops.oat_plant;
 import bee.beeshroom.ComfyCozy.blocks.crops.strawberry_plant;
 import bee.beeshroom.ComfyCozy.blocks.food.bowl_cinnamon;
 import bee.beeshroom.ComfyCozy.blocks.food.bowl_gold_apple;
 import bee.beeshroom.ComfyCozy.blocks.food.bowl_oatmeal;
+import bee.beeshroom.ComfyCozy.blocks.food.bowl_peach;
 import bee.beeshroom.ComfyCozy.blocks.food.bowl_strawberry;
+import bee.beeshroom.ComfyCozy.blocks.food.peach_cobbler;
 import bee.beeshroom.ComfyCozy.blocks.food.strawberry_cake;
 import bee.beeshroom.ComfyCozy.blocks.food.taiga_toast;
 import bee.beeshroom.ComfyCozy.blocks.furniture.bonfire;
 import bee.beeshroom.ComfyCozy.blocks.furniture.book_stack;
 import bee.beeshroom.ComfyCozy.blocks.furniture.bunting;
 import bee.beeshroom.ComfyCozy.blocks.furniture.bunting_check;
+import bee.beeshroom.ComfyCozy.blocks.furniture.bunting_glow;
 import bee.beeshroom.ComfyCozy.blocks.furniture.bunting_heart;
 import bee.beeshroom.ComfyCozy.blocks.furniture.bunting_spook;
 import bee.beeshroom.ComfyCozy.blocks.furniture.candle_jar;
 import bee.beeshroom.ComfyCozy.blocks.furniture.carp_banner;
 import bee.beeshroom.ComfyCozy.blocks.furniture.carp_banner_2;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_diamond;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_fire;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_pika;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_porg;
-import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_zigzag;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_green;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_pink;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_purple;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_red;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_silver;
 import bee.beeshroom.ComfyCozy.blocks.furniture.daruma;
 import bee.beeshroom.ComfyCozy.blocks.furniture.fishjar;
 import bee.beeshroom.ComfyCozy.blocks.furniture.fishjar_clown;
 import bee.beeshroom.ComfyCozy.blocks.furniture.fishjar_puff;
 import bee.beeshroom.ComfyCozy.blocks.furniture.fishjar_salmon;
+import bee.beeshroom.ComfyCozy.blocks.furniture.frame;
+import bee.beeshroom.ComfyCozy.blocks.furniture.glowstone_star;
 import bee.beeshroom.ComfyCozy.blocks.furniture.pole;
 import bee.beeshroom.ComfyCozy.blocks.furniture.table;
 import bee.beeshroom.ComfyCozy.blocks.furniture.weathervane;
@@ -60,6 +71,7 @@ public class ModBlocks
 	public static final Block STRAWBERRY_CAKE = new strawberry_cake("strawberry_cake", Material.CAKE);
 	public static final Block TAIGA_TOAST = new taiga_toast("taiga_toast", Material.CAKE);
 //	public static final Block APPLE_PIE = new apple_pie("apple_pie", Material.CAKE);
+	public static final Block PEACH_COBBLER = new peach_cobbler("peach_cobbler", Material.CAKE);
 	
 	//plants
 	public static final Block STRAWBERRY_PLANT = new strawberry_plant("strawberry_plant");
@@ -68,15 +80,25 @@ public class ModBlocks
 	//public static final Block STRIPPED_CINNAMON = new stripped_cinnamon("stripped_cinnamon", Material.WOOD);
 	//public static final Block TURKEY_TAIL_MUSHROOM = new turkey_tail_mushroom("turkey_tail_mushroom", Material.PLANTS);
 	
+	public static final Block CINNAMON_SAPLING = new cinnamon_sapling("cinnamon_sapling", Material.PLANTS);
 	public static final Block CINNAMON_LOG = new cinnamon_log("cinnamon_log", Material.WOOD);
 //	public static final Block CINNAMON_LEAVES = new cinnamon_leaves("cinnamon_leaves", Material.LEAVES);
-	public static final Block CINNAMON_SAPLING = new cinnamon_sapling("cinnamon_sapling", Material.PLANTS);
+	
+	public static final Block PEACH_SAPLING = new peach_sapling("peach_sapling", Material.PLANTS);
+	public static final Block PEACH_LEAVES = new peach_leaves("peach_leaves", Material.LEAVES);
+	public static final Block PEACH_LOG = new peach_log("peach_log", Material.WOOD);
+	public static final Block PEACH_PLANKS = new peach_planks("peach_planks", Material.WOOD);
+	//public static final Block PEACH_DOOR = new peach_door("peach_door", Material.WOOD);
+	
+	public static final Block WHITE_MUSHROOM = new white_mushroom("white_mushroom", Material.PLANTS);
+	public static final Block WHITE_MUSHROOM_BLOCK = new white_mushroom_block("white_mushroom_block", Material.PLANTS);
 	
 	//furniture
 	public static final Block BUNTING = new bunting("bunting", Material.CLOTH);
 	public static final Block BUNTING_CHECK = new bunting_check("bunting_check", Material.CLOTH);
 	public static final Block BUNTING_HEART = new bunting_heart("bunting_heart", Material.CLOTH);
 	public static final Block BUNTING_SPOOK = new bunting_spook("bunting_spook", Material.CLOTH);
+	public static final Block BUNTING_GLOW = new bunting_glow("bunting_glow", Material.CLOTH);
 	
 	public static final Block AWNING_WHITE = new awning_white("awning_white", Material.WOOD);
  	public static final Block AWNING_RED = new awning_red("awning_red", Material.WOOD);
@@ -88,6 +110,7 @@ public class ModBlocks
 	public static final Block POLE = new pole("pole", Material.WOOD);
 	public static final Block CARP_BANNER = new carp_banner("carp_banner", Material.CLOTH);
 	public static final Block CARP_BANNER_2 = new carp_banner_2("carp_banner_2", Material.CLOTH);
+	public static final Block FRAME = new frame("frame", Material.CIRCUITS);
 	public static final Block DARUMA = new daruma("daruma", Material.ROCK);
 	
 	public static final Block BONFIRE = new bonfire("bonfire", Material.WOOD);
@@ -104,12 +127,24 @@ public class ModBlocks
 	public static final Block FLOWER_BOX = new flower_box("flower_box", Material.GROUND);
 	public static final Block FLOWER_BOX_WHITE = new flower_box_white("flower_box_white", Material.GROUND);
 	public static final Block CANDLE_JAR = new candle_jar("candle_jar", Material.WOOD);
+	public static final Block GLOWSTONE_STAR = new glowstone_star("glowstone_star", Material.GLASS);
+
+	
 	//cushion
-	public static final Block CUSHION_FIRE = new cushion_fire("cushion_fire", Material.CLOTH);
+	
+	//public static final Block CUSHION = new cushion("cushion", Material.CLOTH);
+	
+/*	public static final Block CUSHION_FIRE = new cushion_fire("cushion_fire", Material.CLOTH);
 	public static final Block CUSHION_ZIGZAG = new cushion_zigzag("cushion_zigzag", Material.CLOTH);
 	public static final Block CUSHION_PIKA = new cushion_pika("cushion_pika", Material.CLOTH);
 	public static final Block CUSHION_DIAMOND = new cushion_diamond("cushion_diamond", Material.CLOTH);
-	public static final Block CUSHION_PORG = new cushion_porg("cushion_porg", Material.CLOTH);
+	public static final Block CUSHION_PORG = new cushion_porg("cushion_porg", Material.CLOTH); */
+	
+	public static final Block CUSHION_RED = new cushion_red("cushion_red", Material.CLOTH);
+	public static final Block CUSHION_SILVER = new cushion_silver("cushion_silver", Material.CLOTH);
+	public static final Block CUSHION_PURPLE = new cushion_purple("cushion_purple", Material.CLOTH);
+	public static final Block CUSHION_PINK = new cushion_pink("cushion_pink", Material.CLOTH);
+	public static final Block CUSHION_GREEN = new cushion_green("cushion_green", Material.CLOTH);
 
 	//blocks
 	public static final Block GLASS_PANEL = new glass_panel("glass_panel", Material.GLASS);
@@ -120,9 +155,8 @@ public class ModBlocks
 	public static final Block BOWL_OATMEAL = new bowl_oatmeal("bowl_oatmeal", Material.WOOD);
 	public static final Block BOWL_CINNAMON = new bowl_cinnamon("bowl_cinnamon", Material.WOOD);
 	public static final Block BOWL_STRAWBERRY = new bowl_strawberry("bowl_strawberry", Material.WOOD);
+	public static final Block BOWL_PEACH = new bowl_peach("bowl_peach", Material.WOOD);
 	public static final Block BOWL_GOLD_APPLE = new bowl_gold_apple("bowl_gold_apple", Material.WOOD);
 
-	
-	
 	
 }

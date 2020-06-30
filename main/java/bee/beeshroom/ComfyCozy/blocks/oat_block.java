@@ -18,7 +18,7 @@ public class oat_block extends BlockBase {
 	public oat_block(String name, Material material) {
 		super(name, material);
 		setSoundType(SoundType.CLOTH);
-		setHardness(0.7F);
+		setHardness(0.3F);
 		setResistance(0.4F);
 		setHarvestLevel("shovel", 0);
 	}

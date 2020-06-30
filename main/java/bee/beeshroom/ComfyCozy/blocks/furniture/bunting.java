@@ -17,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -62,6 +63,7 @@ public class bunting extends BlockHorizontal
 		//setHarvestLevel("shears", 0);
 		setRegistryName(name);
 		setUnlocalizedName(name);
+		 this.translucent = true;
 		
 		setCreativeTab(Main.comfycozytab);
 		ModBlocks.BLOCKS.add(this);
@@ -137,6 +139,18 @@ public class bunting extends BlockHorizontal
 	    
 	    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	    {
+	        IBlockState iblockstate = worldIn.getBlockState(pos.offset(facing.getOpposite()));
+
+	        if (iblockstate.getBlock() == ModBlocks.BUNTING || iblockstate.getBlock() == ModBlocks.BUNTING_CHECK || iblockstate.getBlock() == ModBlocks.BUNTING_HEART || iblockstate.getBlock() == ModBlocks.BUNTING_SPOOK || iblockstate.getBlock() == ModBlocks.BUNTING_GLOW)
+	        {
+	            EnumFacing enumfacing = (EnumFacing)iblockstate.getValue(FACING);
+
+	            if (enumfacing == facing)
+	            {
+	                return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+	            }
+	        }
+
 	        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	    }
 	    

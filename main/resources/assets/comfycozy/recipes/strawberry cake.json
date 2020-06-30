@@ -7,7 +7,8 @@
   ],
   "key": {
     "S": {
-      "item": "comfycozy:strawberry"
+       "type": "forge:ore_dict",
+        "ore": "cropStrawberry"
     },
     "A": {
       "item": "minecraft:milk_bucket"

@@ -1,5 +1,6 @@
 package bee.beeshroom.ComfyCozy.items.armor;
 
+import bee.beeshroom.ComfyCozy.Main;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.creativetab.CreativeTabs;
@@ -7,8 +8,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 //thankyou Harry's Tech Reviews Tutorial on Custom Armor Models on Youtube
+
 
 public class ArmorModel extends ItemArmor 
 {
@@ -23,13 +27,17 @@ public class ArmorModel extends ItemArmor
 		ModItems.ITEMS.add(this);
 	}
 	
-	/*  @Override
+	//removed override to get rid of an error :>???
+	//@Override
 	public void registerModels() 
 	{
 		Main.proxy.registerModel(this, 0);
-	} */
+	} 
 
+	//removed override?? 
+	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) 
 	{
 		if(itemStack != ItemStack.EMPTY)
@@ -43,8 +51,10 @@ public class ArmorModel extends ItemArmor
 				model.isChild = _default.isChild;
 				model.isRiding = _default.isRiding;
 				model.isSneak = _default.isSneak;
-				model.rightArmPose = _default.rightArmPose;
-				model.leftArmPose = _default.leftArmPose;
+				
+	//	removed these on 6.24.2020 bc im assuming helmets dont care about right and left arm poses....
+				//	model.rightArmPose = _default.rightArmPose;
+			//	model.leftArmPose = _default.leftArmPose;
 				
 				return model;
 			}

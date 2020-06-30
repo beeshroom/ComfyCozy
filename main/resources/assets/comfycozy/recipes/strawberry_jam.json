@@ -2,10 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "comfycozy:strawberry"
+        "type": "forge:ore_dict",
+        "ore": "cropStrawberry"
     },
      {
-      "item": "comfycozy:strawberry"
+       "type": "forge:ore_dict",
+        "ore": "cropStrawberry"
     },
     {
       "item": "minecraft:sugar"

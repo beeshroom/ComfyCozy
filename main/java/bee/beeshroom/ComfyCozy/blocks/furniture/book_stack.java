@@ -413,7 +413,7 @@ public class book_stack extends BlockHorizontal {
 	    private boolean changeMode(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
 	    {
 	        {
-	            worldIn.playSound((EntityPlayer)null, pos, SoundsHandler.HAMMER, SoundCategory.BLOCKS, 0.5F, 0.7F);
+	            worldIn.playSound((EntityPlayer)null, pos, SoundsHandler.HAMMER, SoundCategory.BLOCKS, 0.4F, 0.8F);
 	            int i = ((Integer)state.getValue(MODE)).intValue();
 
 	            if (i < 2)

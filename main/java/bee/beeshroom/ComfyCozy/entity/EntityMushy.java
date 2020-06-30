@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 
+import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
 import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
@@ -396,8 +397,8 @@ public class EntityMushy extends EntityTameable
 	        		                }
 	        		            }
 	        	        	return true;
-	        	        }
-	        	        else
+	        	        } 
+	        	        else 
 	        	        {
 	        	           return false;
 	        	        }
@@ -502,7 +503,7 @@ public class EntityMushy extends EntityTameable
 
 	            if (!this.world.isRemote && --this.timeUntilNextEgg <= 0)
 	            {
-	                if (this.world.getBlockState(blockpos).getMaterial() == Material.AIR && this.world.getLight(blockpos) < 13 && Blocks.BROWN_MUSHROOM.canPlaceBlockAt(this.world, blockpos))
+	                if (this.world.getBlockState(blockpos).getMaterial() == Material.AIR && this.world.getLight(blockpos) < 14 && Blocks.BROWN_MUSHROOM.canPlaceBlockAt(this.world, blockpos))
 	                {
 	                	 this.heal(5f);
 	              /*  	    double d0 = this.rand.nextGaussian() * 0.02D;
@@ -516,12 +517,16 @@ public class EntityMushy extends EntityTameable
 	                	 {
 	                	 this.world.setBlockState(blockpos, Blocks.RED_MUSHROOM.getDefaultState());    
 	                	 }
-	                	 if (this.getVariant() > 1)
+	                	 if (this.getVariant() > 1 && !(this.getVariant() == 4))
 	                	 {
 	                	 this.world.setBlockState(blockpos, Blocks.BROWN_MUSHROOM.getDefaultState());  
 	                	 }
+	                	 if (this.getVariant() == 4)
+	                	 {
+	                	 this.world.setBlockState(blockpos, ModBlocks.WHITE_MUSHROOM.getDefaultState());  
+	                	 }
 	                }
-	                this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
+	                this.timeUntilNextEgg = this.rand.nextInt(6000) + 5000;
 	            }
 	        }
 	    }

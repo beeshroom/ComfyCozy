@@ -2,13 +2,16 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "comfycozy:oats"
+       "type": "forge:ore_dict",
+        "ore": "cropOats"
     },
     {
-      "item": "comfycozy:oats"
+       "type": "forge:ore_dict",
+        "ore": "cropOats"
     },
  {
-      "item": "comfycozy:cinnamon"
+      "type": "forge:ore_dict",
+        "ore": "cropCinnamon"
     },
     {
       "item": "minecraft:bowl"

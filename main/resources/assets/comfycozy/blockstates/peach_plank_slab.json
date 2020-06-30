@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom": { "model": "peach_half_slab" },
+        "half=top": { "model": "peach_upper_slab" }
+    }
+}

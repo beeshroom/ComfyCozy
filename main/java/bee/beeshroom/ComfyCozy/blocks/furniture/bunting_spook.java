@@ -71,6 +71,7 @@ public class bunting_spook extends BlockHorizontal
 		setHardness(0.0F);
 		setResistance(0.1F);
 		//setHarvestLevel("shears", 0);
+		 this.translucent = true;
 		setRegistryName(name);
 		setUnlocalizedName(name);
 		
@@ -145,12 +146,22 @@ public class bunting_spook extends BlockHorizontal
 	     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
 	     * IBlockstate
 	     */
-	    
 	    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	    {
+	        IBlockState iblockstate = worldIn.getBlockState(pos.offset(facing.getOpposite()));
+
+	        if (iblockstate.getBlock() == ModBlocks.BUNTING || iblockstate.getBlock() == ModBlocks.BUNTING_CHECK || iblockstate.getBlock() == ModBlocks.BUNTING_HEART || iblockstate.getBlock() == ModBlocks.BUNTING_SPOOK || iblockstate.getBlock() == ModBlocks.BUNTING_GLOW)
+	        {
+	            EnumFacing enumfacing = (EnumFacing)iblockstate.getValue(FACING);
+
+	            if (enumfacing == facing)
+	            {
+	                return this.getDefaultState().withProperty(FACING, facing.getOpposite());
+	            }
+	        }
+
 	        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	    }
-	    
 	    
 	/*    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	    {

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "comfycozy:blocks/peach_log_top",
+        "side": "comfycozy:blocks/peach_log"
+    }
+}

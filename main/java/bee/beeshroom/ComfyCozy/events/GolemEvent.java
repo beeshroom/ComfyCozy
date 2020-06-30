@@ -1,9 +1,10 @@
-// https://github.com/nivoridocs/strawgolem/blob/master/src/main/java/nivoridocs/strawgolem/StrawGolemCreationEventHandler.java
+ // https://github.com/nivoridocs/strawgolem/blob/master/src/main/java/nivoridocs/strawgolem/StrawGolemCreationEventHandler.java
 // credit to fradige95 on Curseforge / nivoridocs on github !! They graciously allowed me to sample their code. Thank-you!
 
 package bee.beeshroom.ComfyCozy.events;
 
 import bee.beeshroom.ComfyCozy.entity.EntityFurnaceGolem;
+import bee.beeshroom.ComfyCozy.util.handlers.ConfigHandler;
 import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,6 +38,8 @@ public class GolemEvent {
             furnace = pos;
         } else return;
         
+        if(ConfigHandler.FURNACE_GOLEM)
+        { 
         if (checkStructure(worldIn, furnace, pumpkin)) {
             pos = furnace;
             worldIn.setBlockState(pumpkin, Blocks.AIR.getDefaultState());
@@ -47,10 +50,12 @@ public class GolemEvent {
             worldIn.spawnEntity(EntityFurnaceGolem);
             
         }
+        }
     }
 	private static double getCoord(int c) {
 		return c + Math.signum(c)*0.0D;
 	}
+	
 	
 	private static boolean checkStructure(World worldIn, BlockPos furnace, BlockPos pumpkin) {
 		return worldIn.getBlockState(furnace).getBlock() == Blocks.FURNACE
@@ -61,4 +66,4 @@ public class GolemEvent {
 //
 		//
 	//}
-}
+} 

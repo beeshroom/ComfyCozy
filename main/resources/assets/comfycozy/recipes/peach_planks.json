@@ -1,0 +1,18 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "comfycozy:peach_log"
+    }
+    
+    ],
+
+    "result": 
+    {
+        "item": "comfycozy:peach_planks",
+        "count": 4
+    }
+}

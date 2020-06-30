@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 public class ComfyCozyTab extends CreativeTabs
 {
 	public ComfyCozyTab(String label) {super("comfycozy");}
-	public ItemStack getTabIconItem() { return new ItemStack(ModBlocks.FISHJAR_SALMON);}
+	public ItemStack getTabIconItem() { return new ItemStack(ModBlocks.BUNTING);}
 
 	}
 

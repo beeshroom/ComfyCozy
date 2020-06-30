@@ -44,6 +44,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 {	
 	  public int timeUntilNextHeal;
 	  private int fuel;
+	  private boolean attacking;
     private int attackTimer;
    // private EntityAISit aiSit;
 	 private static final DataParameter<Boolean> ATTACKING = EntityDataManager.<Boolean>createKey(EntityFurnaceGolem.class, DataSerializers.BOOLEAN);
@@ -64,7 +65,10 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 	       // this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
 	      //  this.tasks.addTask(8, new EntityAILookIdle(this));
 	        this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
-	/////took this out/////        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false, new Class[0]));
+	/////took this out/////    
+	        
+	        //i added it back in.....
+	   //     this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false, new Class[0]));
 	       // this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, false, true, new Predicate<EntityLiving>()
 	        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLiving.class, 10, true, false, IMob.MOB_SELECTOR));
 	        this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F)); //added this 
@@ -129,6 +133,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
 	        super.collideWithEntity(entityIn);
 	    }
 	    
+	    @SideOnly(Side.CLIENT)
 	    public void onLivingUpdate()
 	    {
 	        super.onLivingUpdate();
@@ -263,6 +268,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
     {
     }
 
+    @SideOnly(Side.CLIENT)
     protected SoundEvent getAmbientSound()
     {
         if (this.isAttacking())
@@ -311,6 +317,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
         return 1.6F;
     }
     
+    @SideOnly(Side.CLIENT)  
     public void setAttackTarget(@Nullable EntityLivingBase entitylivingbaseIn)
     {
         super.setAttackTarget(entitylivingbaseIn);
@@ -336,7 +343,8 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
             
         }
     }
-    
+   
+    @SideOnly(Side.CLIENT)
     protected void updateAITasks()
     {
     	   
@@ -359,7 +367,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setBoolean("Angry", this.isAttacking());
+        compound.setBoolean("Attacking", this.isAttacking());
         compound.setShort("Fuel", (short)this.fuel);
         compound.setInteger("HealTime", this.timeUntilNextHeal);
     }
@@ -442,6 +450,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
     
 }
     
+    @SideOnly(Side.CLIENT)
     public void onUpdate()
     {
         super.onUpdate();
@@ -468,7 +477,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
         }
     }
 
-
+/* BRIGHTNESS ? ? ? Caused crashes. so rip for now.
     @SideOnly(Side.CLIENT)
     public int getBrightnessForRender()
     {
@@ -487,11 +496,12 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
         {
             return 0;
         }
-    }
+    } 
 
-    /**
-     * Gets how bright this entity is.
-     */
+    
+     // Gets how bright this entity is.
+     
+    @SideOnly(Side.CLIENT)
     public float getBrightness()
     {
     	BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(MathHelper.floor(this.posX), 0, MathHelper.floor(this.posZ));
@@ -511,7 +521,7 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
          }
     	
     }
-
+*/
 
 
 	/* 
@@ -605,11 +615,13 @@ public class EntityFurnaceGolem extends EntityGolem //implements IAnimals
         return ((Boolean)this.dataManager.get(ATTACKING)).booleanValue();
     }
 
+    @SideOnly(Side.CLIENT)
     public void setAttacking(boolean attacking)
     {
         this.dataManager.set(ATTACKING, Boolean.valueOf(attacking));
     }
     
+    @SideOnly(Side.CLIENT)
     protected void entityInit()
     {
         super.entityInit();

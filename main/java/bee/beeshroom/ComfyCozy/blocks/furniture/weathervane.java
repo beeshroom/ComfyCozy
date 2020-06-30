@@ -1,6 +1,7 @@
 package bee.beeshroom.ComfyCozy.blocks.furniture;
 
 import bee.beeshroom.ComfyCozy.blocks.BlockBase;
+import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockHorizontal;
@@ -13,12 +14,19 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -238,6 +246,17 @@ public class weathervane extends BlockBase
 	    private boolean canBePlacedOn(World worldIn, BlockPos pos)
 	    {
 	        return worldIn.getBlockState(pos).isTopSolid() || worldIn.getBlockState(pos).getBlock() instanceof BlockFence || worldIn.getBlockState(pos).getBlock() instanceof BlockPane;
+	    }
+	    
+	    @Override
+	    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+	    		EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	    
+	    	worldIn.getBlockState(pos).getBlock().rotateBlock(worldIn, pos, facing);
+
+			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_METAL_HIT, SoundCategory.BLOCKS, 0.5F, 0.6F);
+	    	
+	    	return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	    }
 }
 
