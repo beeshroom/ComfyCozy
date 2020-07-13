@@ -12,6 +12,8 @@ import com.google.common.collect.Sets;
 
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
+import bee.beeshroom.ComfyCozy.util.handlers.ConfigHandler;
+import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 //import bee.beeshroom.ComfyCozy.util.handlers.LootTableHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,7 +22,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIEatGrass;
 import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -60,6 +61,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.world.BlockEvent;
 //import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -68,62 +71,29 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	public class EntityOatmealSheep extends EntityAnimal implements net.minecraftforge.common.IShearable
 	{                                             //changed DYE_COLOR to OAT_FLAVOR
 	    private static final DataParameter<Byte> OAT_FLAVOR = EntityDataManager.<Byte>createKey(EntityOatmealSheep.class, DataSerializers.BYTE);
-	    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT, ModItems.OATS, ModItems.STRAWBERRY, ModItems.CINNAMON);
-	     //Internal crafting inventory used to check the result of mixing dyes corresponding to the fleece color when
-	     //breeding sheep.
-	     
-	/*    private final InventoryCrafting inventoryCrafting = new InventoryCrafting(new Container()
-	    {
-	        
-	         //Determines whether supplied player can use this container
-	        
-	        public boolean canInteractWith(EntityPlayer playerIn)
-	        {
-	            return false;
-	        }
-	    }, 2, 1);
-	    // Map from EnumDyeColor to RGB values for passage to GlStateManager.color() */
-	/*    private static final Map<EnumDyeColor, float[]> DYE_TO_RGB = Maps.newEnumMap(EnumDyeColor.class);   */
-	    //
-	     // Used to control movement as well as wool regrowth. Set to 40 on handleHealthUpdate and counts down with each
-	     // tick.
-	     //
+	    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ModItems.OATS, ModItems.OATMEAL); //, ModItems.STRAWBERRY, ModItems.CINNAMON)
+	
 	    private int sheepTimer;
-	    private EntityAIEatGrass entityAIEatGrass;
-
-/*	    private static float[] createOatFlavor(EnumDyeColor p_192020_0_)
-	    {
-	        float[] afloat = p_192020_0_.getColorComponentValues();
-	        float f = 0.75F;
-	        return new float[] {afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
-	    }  */
-
-	/*    @SideOnly(Side.CLIENT)
-	    public static float[] getDyeRgb(EnumDyeColor dyeColor)
-	    {
-	        return DYE_TO_RGB.get(dyeColor);
-	    }
-	    */
+	  //  private EntityAIEatGrass entityAIEatGrass;
+	    public int oats;
 
 	    public EntityOatmealSheep(World worldIn)
 	    {
 	        super(worldIn);
 	        this.setSize(0.9F, 1.3F);
-	  /*      this.inventoryCrafting.setInventorySlotContents(0, new ItemStack(Items.DYE));
-	        this.inventoryCrafting.setInventorySlotContents(1, new ItemStack(Items.DYE));  */
 	    }
 
 	    protected void initEntityAI()
 	    {
-	        this.entityAIEatGrass = new EntityAIEatGrass(this);
+	       // this.entityAIEatGrass = new EntityAIEatGrass(this);
 	        this.tasks.addTask(0, new EntityAISwimming(this));
 	        this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-	        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
+	       // this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
 	       // this.tasks.addTask(3, new EntityAITempt(this, 1.1D, Items.WHEAT, false));
 	        this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
 	      //  this.tasks.addTask(9, new EntityAIFollowParent(this, 0.6D));
 	        // this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
-	        this.tasks.addTask(5, this.entityAIEatGrass);
+	   //     this.tasks.addTask(5, this.entityAIEatGrass);
 	        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
 	        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 	        this.tasks.addTask(8, new EntityAILookIdle(this));
@@ -132,10 +102,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	      //  this.tasks.addTask(7, new EntityAIFollow(this, 1.0D, 3.0F, 7.0F));
 	    }
 	    
-	    public boolean isBreedingItem(ItemStack stack)
+	/*    public boolean isBreedingItem(ItemStack stack)
 	    {
 	        return TEMPTATION_ITEMS.contains(stack.getItem());
-	    }
+	    } */
 	    
 	    public boolean canTrample(World world, Block block, BlockPos pos, float fallDistance)
 	    {
@@ -144,7 +114,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 	    protected void updateAITasks()
 	    {
-	        this.sheepTimer = this.entityAIEatGrass.getEatingGrassTimer();
+	     //   this.sheepTimer = this.entityAIEatGrass.getEatingGrassTimer();
 	        super.updateAITasks();
 	    }
 
@@ -248,17 +218,29 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        return super.processInteract(player, hand);
 	    }
 	    */
-	    
-	    
-	    
-	    
+
 	    public boolean processInteract(EntityPlayer player, EnumHand hand)
 	    {
+	        Random rnd = new Random();
 	        ItemStack itemstack = player.getHeldItem(hand);
 
-	        if (itemstack.getItem() == Items.BOWL && this.getGrowingAge() >= 0 && !player.capabilities.isCreativeMode)
+	        if (this.oats > 0 && !this.getSheared() && itemstack.getItem() == Items.BOWL && this.getGrowingAge() >= 0)
 	        {
 	            itemstack.shrink(1);
+	            this.playSound(SoundsHandler.OATMEAL, 1.0F, 1.0F);
+	            
+	            if (this.oats > 0)
+	            {
+	            	--this.oats;
+	            }
+	          //  if (rnd.nextFloat() <= 0.5f)
+	          //  if (!this.world.isRemote)
+	            if (this.oats <= 0)
+	            {
+	                this.setSheared(true);
+	                this.oats += 1;
+	                } 
+	            
 
 	            if (itemstack.isEmpty())
 	            {
@@ -271,6 +253,40 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 	            return true;
 	        }
+	        
+	        
+	        //refill oat sheep
+	        else if (this.getSheared() && itemstack.getItem() == ModItems.OATS && this.getGrowingAge() >= 0 || this.getSheared() && itemstack.getItem() == ModItems.OATMEAL && this.getGrowingAge() >= 0)
+	        {
+	        	if (itemstack.getItem() == ModItems.OATS)
+        		{
+		            itemstack.shrink(1);
+        		}
+	        	if (itemstack.getItem() == ModItems.OATMEAL)
+        		{
+		            itemstack.shrink(1);
+		            if (itemstack.isEmpty())
+		            {
+		                player.setHeldItem(hand, new ItemStack(Items.BOWL));
+		            }
+		            else if (!player.inventory.addItemStackToInventory(new ItemStack(Items.BOWL)))
+		            {
+		                player.dropItem(new ItemStack(Items.BOWL), false);
+		            }
+        		}
+	        	
+	            this.playSound(SoundEvents.ENTITY_GENERIC_EAT, 1.0F, 1.0F);
+	            this.setSheared(false);
+	            if (this.oats <= 0)
+	            {
+		               this.oats += 1;
+	            } 
+        
+	            return true;
+	        }
+	        
+	        
+	        
 	        else if (false && itemstack.getItem() == Items.SHEARS && this.getGrowingAge() >= 0) //Forge Disable, Moved to onSheared
 	        {
 	        	{
@@ -295,15 +311,182 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 	            return true;
 	        }
+	   
+	        //adding dumb stuff that no one asked for
+	        //guess i copy paste ever part of this for each ingredient
+	        
+	        //ONE strawberry
+	        else if (itemstack.getItem() == ModItems.STRAWBERRY_OATMEAL) //&& !player.capabilities.isCreativeMode&& this.getGrowingAge() >= 0
+	        {
+	        	if (ConfigHandler.OATSHEEPFLAVOR)
+	        	{
+	            itemstack.shrink(1);
+	            this.playSound(SoundsHandler.OATMEAL, 1.0F, 1.0F);
+	           // this.spawnParticles(EnumParticleTypes.END_ROD);
+
+	        if (!this.world.isRemote && !this.isDead)
+	        {
+	        	//config part goes here
+	            EntityOatmealSheepStrawberry entityoatmealsheepstrawberry = new EntityOatmealSheepStrawberry(this.world);
+	            entityoatmealsheepstrawberry.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+	            entityoatmealsheepstrawberry.setNoAI(this.isAIDisabled());
+	            entityoatmealsheepstrawberry.setHealth(this.getHealth());
+	            entityoatmealsheepstrawberry.renderYawOffset = this.renderYawOffset;
+	            entityoatmealsheepstrawberry.oats += 1;
+
+	            if (this.hasCustomName())
+	            {
+	            	entityoatmealsheepstrawberry.setCustomNameTag(this.getCustomNameTag());
+	            	entityoatmealsheepstrawberry.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
+	            }
+
+	            //testing age stuff
+	            if (this.getGrowingAge() < 0)
+	            {
+	            	entityoatmealsheepstrawberry.setGrowingAge(-25555);
+	            }   
+	            ///
+	            this.world.spawnEntity(entityoatmealsheepstrawberry);
+	            this.setDead();
+
+	            this.dropItem(Items.BOWL, 1);
+	        	}
+	        }
+	        
+	        return true;
+	        }
+	        
+	        // TWO cinnamon 
+	        else if (itemstack.getItem() == ModItems.CINNAMON_OATMEAL) //&& !player.capabilities.isCreativeMode&& this.getGrowingAge() >= 0
+	        {
+	        	if (ConfigHandler.OATSHEEPFLAVOR)
+	        	{
+	            itemstack.shrink(1);
+	            this.playSound(SoundsHandler.OATMEAL, 1.0F, 1.0F);
+	  //          this.spawnParticles(EnumParticleTypes.END_ROD);
+
+	        if (!this.world.isRemote && !this.isDead)
+	        {
+	            EntityOatmealSheepCinnamon entityoatmealsheepcinnamon = new EntityOatmealSheepCinnamon(this.world);
+	            entityoatmealsheepcinnamon.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+	            entityoatmealsheepcinnamon.setNoAI(this.isAIDisabled());
+	            entityoatmealsheepcinnamon.setHealth(this.getHealth());
+	            entityoatmealsheepcinnamon.renderYawOffset = this.renderYawOffset;
+	            entityoatmealsheepcinnamon.oats += 1;
+
+	            if (this.hasCustomName())
+	            {
+	            	entityoatmealsheepcinnamon.setCustomNameTag(this.getCustomNameTag());
+	            	entityoatmealsheepcinnamon.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
+	            }
+
+	            if (this.getGrowingAge() < 0)
+	            {
+	            	entityoatmealsheepcinnamon.setGrowingAge(-25555);
+	            }   
+	            this.world.spawnEntity(entityoatmealsheepcinnamon);
+	            this.setDead();
+
+	            this.dropItem(Items.BOWL, 1);
+	        	}
+	        }
+	        
+	        return true;
+	        }
+	        
+	        //THREE peach
+	        else if (itemstack.getItem() == ModItems.PEACH_OATMEAL) //&& !player.capabilities.isCreativeMode&& this.getGrowingAge() >= 0
+	        {
+	        	if (ConfigHandler.OATSHEEPFLAVOR)
+	        	{
+	            itemstack.shrink(1);
+	            this.playSound(SoundsHandler.OATMEAL, 1.0F, 1.0F);
+	       //     this.spawnParticles(EnumParticleTypes.END_ROD);
+
+	        if (!this.world.isRemote && !this.isDead)
+	        {
+	            EntityOatmealSheepPeach entityoatmealsheeppeach = new EntityOatmealSheepPeach(this.world);
+	            entityoatmealsheeppeach.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+	            entityoatmealsheeppeach.setNoAI(this.isAIDisabled());
+	            entityoatmealsheeppeach.setHealth(this.getHealth());
+	            entityoatmealsheeppeach.renderYawOffset = this.renderYawOffset;
+	            entityoatmealsheeppeach.oats += 1;
+
+	            if (this.hasCustomName())
+	            {
+	            	entityoatmealsheeppeach.setCustomNameTag(this.getCustomNameTag());
+	            	entityoatmealsheeppeach.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
+	            }
+
+	            if (this.getGrowingAge() < 0)
+	            {
+	            	entityoatmealsheeppeach.setGrowingAge(-25555);
+	            }   
+	            this.world.spawnEntity(entityoatmealsheeppeach);
+	            this.setDead();
+
+	            this.dropItem(Items.BOWL, 1);
+	        	}
+	        }
+	        
+	        return true;
+	        }
+	        
+	        //FOUR gold apple
+	        else if (itemstack.getItem() == ModItems.GOLD_APPLE_CINNAMON_OATMEAL) //&& !player.capabilities.isCreativeMode&& this.getGrowingAge() >= 0
+	        {
+	        	if ((ConfigHandler.OATSHEEPFLAVOR) && (ConfigHandler.GAPPLESHEEP))
+	        	{
+	            itemstack.shrink(1);
+	            this.playSound(SoundsHandler.OATMEAL, 1.0F, 1.0F);
+	  //          this.spawnParticles(EnumParticleTypes.END_ROD);
+
+	        if (!this.world.isRemote && !this.isDead)
+	        {
+	            EntityOatmealSheepGoldApple entityoatmealsheepgoldapple = new EntityOatmealSheepGoldApple(this.world);
+	            entityoatmealsheepgoldapple.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+	            entityoatmealsheepgoldapple.setNoAI(this.isAIDisabled());
+	            entityoatmealsheepgoldapple.setHealth(this.getHealth());
+	            entityoatmealsheepgoldapple.renderYawOffset = this.renderYawOffset;
+	            entityoatmealsheepgoldapple.oats += 1;
+
+	            if (this.hasCustomName())
+	            {
+	            	entityoatmealsheepgoldapple.setCustomNameTag(this.getCustomNameTag());
+	            	entityoatmealsheepgoldapple.setAlwaysRenderNameTag(this.getAlwaysRenderNameTag());
+	            }
+
+	            if (this.getGrowingAge() < 0)
+	            {
+	            	entityoatmealsheepgoldapple.setGrowingAge(-25555);
+	            }   
+	            this.world.spawnEntity(entityoatmealsheepgoldapple);
+	            this.setDead();
+
+	            this.dropItem(Items.BOWL, 1);
+	        	}
+	        }
+	        
+	        return true;
+	        }
+	        
+	        /// and anything after this was here before i started adding dumb stuff
 	        else
 	        {
 	            return super.processInteract(player, hand);
 	        }
 	    }
-	    
-	    
-	    
-	    
+	    /*    @SideOnly(Side.CLIENT)
+	    private void spawnParticles(EnumParticleTypes particleType)
+	    {
+	        for (int i = 0; i < 5; ++i)
+	        {
+	            double d0 = this.rand.nextGaussian() * 0.02D;
+	            double d1 = this.rand.nextGaussian() * 0.02D;
+	            double d2 = this.rand.nextGaussian() * 0.02D;
+	            this.world.spawnParticle(particleType, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 1.0D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+	        }
+	    } */
 	    
 
 	    public static void registerFixesOatmealSheep(DataFixer fixer)
@@ -350,6 +533,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        super.writeEntityToNBT(compound);
 	        compound.setBoolean("Sheared", this.getSheared());
 	  //      compound.setByte("Color", (byte)this.getOatFlavor().getMetadata());
+	        compound.setShort("oats", (short)this.oats);
 	    }
 
 	    //
@@ -359,6 +543,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	    {
 	        super.readEntityFromNBT(compound);
 	        this.setSheared(compound.getBoolean("Sheared"));
+	        this.oats = compound.getShort("oats");
+	        
 	      //  this.setOatFlavor(EnumDyeColor.byMetadata(compound.getByte("Color")));
 	    }
 
@@ -431,28 +617,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	        public static EnumDyeColor getRandomOatFlavor(Random random)
 	    {
 	        	return EnumDyeColor.WHITE;
-	        	/*     int i = random.nextInt(100);
-
-	     if (i < 5)
-	        {
-	            return EnumDyeColor.BLACK;
-	        }
-	        else if (i < 10)
-	        {
-	            return EnumDyeColor.GRAY;
-	        }
-	        else if (i < 15)
-	        {
-	            return EnumDyeColor.SILVER;
-	        }
-	        else if (i < 18)
-	        {
-	            return EnumDyeColor.BROWN;
-	        }
-	        else
-	        {
-	            return random.nextInt(500) == 0 ? EnumDyeColor.PINK : EnumDyeColor.WHITE;
-	        }  */
+	        	//     int i = random.nextInt(100);
 	    }
 
 	    public EntityOatmealSheep createChild(EntityAgeable ageable)
@@ -467,15 +632,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	     // This function applies the benefits of growing back wool and faster growing up to the acting entity. (This
 	     // function is used in the AIEatGrass)
 	     //
-	    public void eatGrassBonus()
+	/*    public void eatGrassBonus()
 	    {
 	        this.setSheared(false);
+
+	        if (this.oats < 1)
+		       {
+		        this.oats += 1;
+		       }
 
 	        if (this.isChild())
 	        {
 	            this.addGrowth(45);
 	        }
-	    }
+	    } */
 
 	    //
 	     // Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
@@ -485,6 +655,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
 	    {
 	        livingdata = super.onInitialSpawn(difficulty, livingdata);
+	        this.oats += 1;
 	       this.setOatFlavor(getRandomOatFlavor(this.world.rand));
 	        return livingdata;
 	    }
@@ -494,56 +665,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 	    public java.util.List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
 	    {
 	        this.setSheared(true);
-	        int i = 1 + this.rand.nextInt(2);
+	        int i = 4 + this.rand.nextInt(2);
 
 	        java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
 	        for (int j = 0; j < i; ++j)
 	        	   //ret.add(new ItemStack(ModItems.OATS), 1, this.getOatFlavor().getMetadata());
-	        	ret.add(new ItemStack(ModBlocks.OAT_BLOCK));
+	        	ret.add(new ItemStack(ModItems.OATS));
 
 	        this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
 	        return ret;
 	    }
 
-	   //
-	     // Attempts to mix both parent sheep to come up with a mixed dye color.
-	     //
-	/*    private EnumDyeColor getDyeColorMixFromParents(EntityAnimal father, EntityAnimal mother)
-	    {
-	        int i = ((EntityOatmealSheep)father).getFleeceColor().getDyeDamage();
-	        int j = ((EntityOatmealSheep)mother).getFleeceColor().getDyeDamage();
-	        this.inventoryCrafting.getStackInSlot(0).setItemDamage(i);
-	        this.inventoryCrafting.getStackInSlot(1).setItemDamage(j);
-	        ItemStack itemstack = CraftingManager.findMatchingResult(this.inventoryCrafting, ((EntityOatmealSheep)father).world);
-	        int k;
-
-	        if (itemstack.getItem() == Items.DYE)
-	        {
-	            k = itemstack.getMetadata();
-	        }
-	        else
-	        {
-	            k = this.world.rand.nextBoolean() ? i : j;
-	        }
-
-	        return EnumDyeColor.byDyeDamage(k); 
-	    } */
-
 	    public float getEyeHeight()
 	    {
 	        return 0.95F * this.height;
 	    }
-
-	/*    static
-	    {
-	        for (EnumDyeColor enumdyecolor : EnumDyeColor.values())
-	        {
-	            DYE_TO_RGB.put(enumdyecolor, createOatFlavor(enumdyecolor));
-	        }
-
-	        DYE_TO_RGB.put(EnumDyeColor.WHITE, new float[] {0.9019608F, 0.9019608F, 0.9019608F});
-	    } */
-	
 
 	    public void onStruckByLightning(EntityLightningBolt lightningBolt)
 	    {

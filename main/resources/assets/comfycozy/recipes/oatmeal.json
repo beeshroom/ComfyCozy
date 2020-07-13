@@ -6,7 +6,7 @@
         "ore": "cropOats"
     },
     {
-      "type": "forge:ore_dict",
+       "type": "forge:ore_dict",
         "ore": "cropOats"
     },
     {

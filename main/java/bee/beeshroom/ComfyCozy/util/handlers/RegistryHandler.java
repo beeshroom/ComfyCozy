@@ -8,6 +8,10 @@ import org.apache.logging.log4j.Logger;
 import bee.beeshroom.ComfyCozy.entity.EntityFurnaceGolem;
 import bee.beeshroom.ComfyCozy.entity.EntityMushy;
 import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheep;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepCinnamon;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepGoldApple;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepPeach;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepStrawberry;
 import bee.beeshroom.ComfyCozy.entity.entitydirtypig.EntityDirtyPig;
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
@@ -64,6 +68,11 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
 
     final ResourceLocation EntityFurnaceGolem = new ResourceLocation(Reference.MOD_ID, "entityfurnacegolem");
     
+    final ResourceLocation EntityOatmealSheepStrawberry = new ResourceLocation(Reference.MOD_ID, "entityoatmealsheepstrawberry");
+    final ResourceLocation EntityOatmealSheepCinnamon = new ResourceLocation(Reference.MOD_ID, "entityoatmealsheepcinnamon");
+    final ResourceLocation EntityOatmealSheepPeach = new ResourceLocation(Reference.MOD_ID, "entityoatmealsheeppeach");
+    final ResourceLocation EntityOatmealSheepGoldApple = new ResourceLocation(Reference.MOD_ID, "entityoatmealsheepgoldapple");
+    
 
     event.getRegistry().registerAll(
         EntityEntryBuilder.create()
@@ -95,7 +104,35 @@ public static void onRegisterEntitiesEvent(@Nonnull final RegistryEvent.Register
             .id(EntityFurnaceGolem, entityId++)
             .name(EntityFurnaceGolem.getResourcePath())
             .tracker(32, 5, false)
-            .build() 
+            .build(),
+            
+                    EntityEntryBuilder.create()
+                        .entity(EntityOatmealSheepStrawberry.class)
+                        .id(EntityOatmealSheepStrawberry, entityId++)
+                        .name(EntityOatmealSheepStrawberry.getResourcePath())
+                        .tracker(32, 5, false)
+                        .build(),
+                        
+                        EntityEntryBuilder.create()
+                        .entity(EntityOatmealSheepCinnamon.class)
+                        .id(EntityOatmealSheepCinnamon, entityId++)
+                        .name(EntityOatmealSheepCinnamon.getResourcePath())
+                        .tracker(32, 5, false)
+                        .build(),
+                        
+                        EntityEntryBuilder.create()
+                        .entity(EntityOatmealSheepPeach.class)
+                        .id(EntityOatmealSheepPeach, entityId++)
+                        .name(EntityOatmealSheepPeach.getResourcePath())
+                        .tracker(32, 5, false)
+                        .build(),
+                        
+                        EntityEntryBuilder.create()
+                        .entity(EntityOatmealSheepGoldApple.class)
+                        .id(EntityOatmealSheepGoldApple, entityId++)
+                        .name(EntityOatmealSheepGoldApple.getResourcePath())
+                        .tracker(32, 5, false)
+                        .build()
             
          
                 /*    EntityEntryBuilder.create()

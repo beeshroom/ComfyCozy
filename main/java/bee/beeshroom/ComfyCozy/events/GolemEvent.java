@@ -58,7 +58,7 @@ public class GolemEvent {
 	
 	
 	private static boolean checkStructure(World worldIn, BlockPos furnace, BlockPos pumpkin) {
-		return worldIn.getBlockState(furnace).getBlock() == Blocks.FURNACE
+			return worldIn.getBlockState(furnace).getBlock() == Blocks.FURNACE
 				&& worldIn.getBlockState(pumpkin).getBlock() == Blocks.PUMPKIN;
 	}
 	

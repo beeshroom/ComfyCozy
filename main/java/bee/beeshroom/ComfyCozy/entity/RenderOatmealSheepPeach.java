@@ -1,0 +1,31 @@
+package bee.beeshroom.ComfyCozy.entity;
+
+import bee.beeshroom.ComfyCozy.entity.layers.LayerOatmealSheepOatsPeach;
+import bee.beeshroom.ComfyCozy.entity.models.ModelOatmealSheepPeach2;
+import bee.beeshroom.ComfyCozy.util.Reference;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
+public class RenderOatmealSheepPeach extends RenderLiving<EntityOatmealSheepPeach>
+{//changed from textures/entity
+	private static final ResourceLocation SHEARED_OATMEALSHEEP_TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/entity/oatmealsheep/oatmealsheep.png");
+
+    public RenderOatmealSheepPeach(RenderManager p_i47195_1_)
+    {
+        super(p_i47195_1_, new ModelOatmealSheepPeach2(), 0.7F);
+        this.addLayer(new LayerOatmealSheepOatsPeach(this));
+    }	
+
+    /**
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
+     */
+    @Override
+    protected ResourceLocation getEntityTexture(EntityOatmealSheepPeach entity)
+    {
+        return SHEARED_OATMEALSHEEP_TEXTURES;
+    }
+}

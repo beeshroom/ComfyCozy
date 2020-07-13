@@ -102,16 +102,21 @@ public class EntityMushy extends EntityTameable
         this.setTamed(false);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
 	}
+	
+	 public Item isBreedingItem(Items item)
+	    {
+	        return Items.ACACIA_BOAT;
+	    }
 
 	   public boolean canTrample(World world, Block block, BlockPos pos, float fallDistance)
 	    {
 	        return false;
 	    }
 	   
-	   public boolean canMateWith(EntityAnimal otherAnimal)
+	/*   public boolean canMateWith(EntityAnimal otherAnimal)
 	    {
 	        return false;
-	    }
+	    } */
 
 	   @Override 
 	   @Nullable

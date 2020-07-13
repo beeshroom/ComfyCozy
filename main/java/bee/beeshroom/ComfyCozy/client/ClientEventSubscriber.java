@@ -10,9 +10,17 @@ import org.apache.logging.log4j.Logger;
 import bee.beeshroom.ComfyCozy.entity.EntityFurnaceGolem;
 import bee.beeshroom.ComfyCozy.entity.EntityMushy;
 import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheep;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepCinnamon;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepGoldApple;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepPeach;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepStrawberry;
 import bee.beeshroom.ComfyCozy.entity.RenderFurnaceGolem;
 import bee.beeshroom.ComfyCozy.entity.RenderMushy;
 import bee.beeshroom.ComfyCozy.entity.RenderOatmealSheep;
+import bee.beeshroom.ComfyCozy.entity.RenderOatmealSheepCinnamon;
+import bee.beeshroom.ComfyCozy.entity.RenderOatmealSheepGoldApple;
+import bee.beeshroom.ComfyCozy.entity.RenderOatmealSheepPeach;
+import bee.beeshroom.ComfyCozy.entity.RenderOatmealSheepStrawberry;
 import bee.beeshroom.ComfyCozy.entity.entitydirtypig.EntityDirtyPig;
 import bee.beeshroom.ComfyCozy.entity.entitydirtypig.RenderDirtyPig;
 import bee.beeshroom.ComfyCozy.util.Reference;
@@ -76,6 +84,11 @@ public final class ClientEventSubscriber {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMushy.class, RenderMushy::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityDirtyPig.class, RenderDirtyPig::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFurnaceGolem.class, RenderFurnaceGolem::new);
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityOatmealSheepStrawberry.class, RenderOatmealSheepStrawberry::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityOatmealSheepCinnamon.class, RenderOatmealSheepCinnamon::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityOatmealSheepPeach.class, RenderOatmealSheepPeach::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityOatmealSheepGoldApple.class, RenderOatmealSheepGoldApple::new);
 	}
 
 }

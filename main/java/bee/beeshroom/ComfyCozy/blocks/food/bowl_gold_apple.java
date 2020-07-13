@@ -88,11 +88,11 @@ public class bowl_gold_apple extends BlockBase
 	    
 	    private boolean eatOatmeal(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
 	    {
-	        if (!player.canEat(false))
+	    /*    if (!player.canEat(false))
 	        {
 	            return false;
 	        }
-	        else
+	        else */
 	        {
 	            //player.getFoodStats().addStats(6, .6F);
 	            int i = ((Integer)state.getValue(BITES)).intValue();
@@ -146,6 +146,7 @@ public class bowl_gold_apple extends BlockBase
 	        if (!this.canBlockStay(worldIn, pos))
 	        {
 	        	spawnAsEntity(worldIn, pos, new ItemStack(Items.BOWL, 1));
+	        	worldIn.setBlockToAir(pos);
 	        }
 	    }
 
@@ -215,7 +216,7 @@ public class bowl_gold_apple extends BlockBase
 	    }
 	    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	    {
-	        return new ItemStack(ModItems.OATMEAL);
+	        return new ItemStack(ModItems.GOLD_APPLE_CINNAMON_OATMEAL);
 	    }
 	    
 	    

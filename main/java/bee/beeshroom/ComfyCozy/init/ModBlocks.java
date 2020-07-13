@@ -43,6 +43,7 @@ import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_pink;
 import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_purple;
 import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_red;
 import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_silver;
+import bee.beeshroom.ComfyCozy.blocks.furniture.cushion_white;
 import bee.beeshroom.ComfyCozy.blocks.furniture.daruma;
 import bee.beeshroom.ComfyCozy.blocks.furniture.fishjar;
 import bee.beeshroom.ComfyCozy.blocks.furniture.fishjar_clown;
@@ -56,6 +57,7 @@ import bee.beeshroom.ComfyCozy.blocks.furniture.weathervane;
 import bee.beeshroom.ComfyCozy.blocks.furniture.awnings.awning_green;
 import bee.beeshroom.ComfyCozy.blocks.furniture.awnings.awning_light_blue;
 import bee.beeshroom.ComfyCozy.blocks.furniture.awnings.awning_pink;
+import bee.beeshroom.ComfyCozy.blocks.furniture.awnings.awning_purple;
 import bee.beeshroom.ComfyCozy.blocks.furniture.awnings.awning_red;
 import bee.beeshroom.ComfyCozy.blocks.furniture.awnings.awning_white;
 import bee.beeshroom.ComfyCozy.blocks.furniture.awnings.awning_yellow;
@@ -105,6 +107,7 @@ public class ModBlocks
 	public static final Block AWNING_YELLOW = new awning_yellow("awning_yellow", Material.WOOD);
 	public static final Block AWNING_GREEN = new awning_green("awning_green", Material.WOOD);
 	public static final Block AWNING_LIGHT_BLUE = new awning_light_blue("awning_light_blue", Material.WOOD);
+	public static final Block AWNING_PURPLE = new awning_purple("awning_purple", Material.WOOD);
 	public static final Block AWNING_PINK = new awning_pink("awning_pink", Material.WOOD);
 	
 	public static final Block POLE = new pole("pole", Material.WOOD);
@@ -145,6 +148,7 @@ public class ModBlocks
 	public static final Block CUSHION_PURPLE = new cushion_purple("cushion_purple", Material.CLOTH);
 	public static final Block CUSHION_PINK = new cushion_pink("cushion_pink", Material.CLOTH);
 	public static final Block CUSHION_GREEN = new cushion_green("cushion_green", Material.CLOTH);
+	public static final Block CUSHION_WHITE = new cushion_white("cushion_white", Material.CLOTH);
 
 	//blocks
 	public static final Block GLASS_PANEL = new glass_panel("glass_panel", Material.GLASS);

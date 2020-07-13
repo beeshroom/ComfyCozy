@@ -3,12 +3,13 @@ package bee.beeshroom.ComfyCozy.blocks.crops;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheep;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepCinnamon;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepGoldApple;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepPeach;
+import bee.beeshroom.ComfyCozy.entity.EntityOatmealSheepStrawberry;
 import bee.beeshroom.ComfyCozy.init.ModBlocks;
 import bee.beeshroom.ComfyCozy.init.ModItems;
-import bee.beeshroom.ComfyCozy.util.handlers.SoundsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFarmland;
@@ -20,22 +21,15 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.util.EnumParticleTypes;
 
 //thank you turty wurty ;w;
 //https://www.youtube.com/watch?v=AUEnR5k9yFQ
@@ -372,6 +366,10 @@ public class oat_plant extends BlockCrops implements IGrowable
 					  AxisAlignedBB bounds = CARPET_AABB.offset(pos);
 					//i looked at DetectorRail code and Quark's obsidian pressure plate code for this
 					  List<? extends Entity> entities = worldIn.getEntitiesWithinAABB(EntityOatmealSheep.class, bounds);
+					  entities = worldIn.getEntitiesWithinAABB(EntityOatmealSheepCinnamon.class, bounds);
+					  entities = worldIn.getEntitiesWithinAABB(EntityOatmealSheepStrawberry.class, bounds);
+					  entities = worldIn.getEntitiesWithinAABB(EntityOatmealSheepPeach.class, bounds);
+					  entities = worldIn.getEntitiesWithinAABB(EntityOatmealSheepGoldApple.class, bounds);
 					  
 					    if (!entities.isEmpty()) {
 				            for(Entity entity : entities) {

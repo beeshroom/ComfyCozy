@@ -28,14 +28,11 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 //thank-you turtywurty for your custom block model tutorial on youtube and to Cake code
@@ -139,6 +136,7 @@ public class bowl_oatmeal extends BlockBase
 	        if (!this.canBlockStay(worldIn, pos))
 	        {
 	        	spawnAsEntity(worldIn, pos, new ItemStack(Items.BOWL, 1));
+	        	worldIn.setBlockToAir(pos);
 	        }
 	    }
 

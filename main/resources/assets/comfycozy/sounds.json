@@ -53,6 +53,13 @@
         "category": "entity",
         "subtitle": "entity.dirtypig.dirty",
         "sounds": [{ "name": "comfycozy:entity/dirtypig/dirty", "stream": false}]
+    },
+    
+        "entity.oatmealsheep.oatmeal":
+    {
+        "category": "entity",
+        "subtitle": "entity.oatmealsheep.oatmeal",
+        "sounds": [{ "name": "comfycozy:entity/oatmealsheep/oatmeal", "stream": false }]
     }
     
 

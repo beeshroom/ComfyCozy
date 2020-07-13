@@ -139,6 +139,7 @@ public class bowl_peach extends BlockBase
 	        if (!this.canBlockStay(worldIn, pos))
 	        {
 	        	spawnAsEntity(worldIn, pos, new ItemStack(Items.BOWL, 1));
+	        	worldIn.setBlockToAir(pos);
 	        }
 	    }
 
@@ -208,7 +209,7 @@ public class bowl_peach extends BlockBase
 	    }
 	    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	    {
-	        return new ItemStack(ModItems.OATMEAL);
+	        return new ItemStack(ModItems.PEACH_OATMEAL);
 	    }
 	    
 	    

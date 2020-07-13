@@ -103,6 +103,7 @@ tile.cushion_red.name=Red Cushion
 tile.cushion_purple.name=Purple Cushion
 tile.cushion_pink.name=Pink Cushion
 tile.cushion_green.name=Green Cushion
+tile.cushion_white.name=White Cushion
 
 //new cushion (scrapped)
 tile.cushion.white.name=White Cushion
@@ -125,6 +126,7 @@ entity.mushy.shroomini_splat=Shroomini hurt
 entity.mushy.shroomini_death=Shroomini dies
 entity.furnace_golem.carve=*Pumpkin noise*
 entity.dirtypig.dirty=Dirty Pig drops dirt
+entity.oatmealsheep.oatmeal=Schlop
 
 items.cozy_hammer.bonk=Bonk!
 blocks.cinnamon_log.strip=Wood stripped
@@ -135,6 +137,8 @@ entity.entitymushy.name=Shroomini
 entity.entitydirtypig.name=Dirty Pig
 entity.entityoatmealsheep.name=Oatmeal Lamb
 entity.entityfurnacegolem.name=Furnace Golem
+
+entity.entityoatmealsheepstrawberry.name=Strawberry Oatmeal Lamb
 
 //armor
 item.mushroom_beret.name=Mushroom Beret

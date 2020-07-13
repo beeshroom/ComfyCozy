@@ -2,8 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-           "type": "forge:ore_dict",
-        "ore": "listAllMushroom"
+            "item": "minecraft:red_mushroom"
         },
         {
            "type": "forge:ore_dict",

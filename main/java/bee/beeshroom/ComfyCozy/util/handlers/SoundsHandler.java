@@ -18,6 +18,7 @@ public class SoundsHandler
 	//public static SoundEvent CARVE;
 	//public static SoundEvent FLIP;
 	public static SoundEvent DIRTY;
+	public static SoundEvent OATMEAL;
 	
 	public static void registerSounds()
 	{
@@ -32,6 +33,7 @@ public class SoundsHandler
 		//CARVE = registerSound("entity.furnace_golem,.carve");
 	//	FLIP = registerSound("blocks.furniture.flip");
 		DIRTY = registerSound("entity.dirtypig.dirty");
+		OATMEAL = registerSound("entity.oatmealsheep.oatmeal");
 	}
 	
 	private static SoundEvent registerSound(String name)

@@ -172,22 +172,19 @@ public class peach_cobbler extends BlockBase
 	     */
 	    public int quantityDropped(Random random)
 	    {
-	        return 1;
+	        return 0;
 	    }
-
-	    /**
-	     * Get the Item that this Block should drop when harvested.
-	     */
-	/*    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	    {
-	        return ModItems.STRAWBERRY;
-	    } */
 
 	    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	    {
 	        return new ItemStack(ModBlocks.PEACH_COBBLER);
 	    }
 
+	    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	    {
+	        return Item.getItemFromBlock(Blocks.COBBLESTONE);
+	    }
+	    
 	    /**
 	     * Convert the given metadata into a BlockState for this Block
 	     */
