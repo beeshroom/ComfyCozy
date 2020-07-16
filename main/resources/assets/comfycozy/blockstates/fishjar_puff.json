@@ -1,9 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "comfycozy:fishjar_puff", "y": 270},
-        "facing=south": { "model": "comfycozy:fishjar_puff", "y": 90 },
-        "facing=west":  { "model": "comfycozy:fishjar_puff", "y": 180 },
-        "facing=east":  { "model": "comfycozy:fishjar_puff" }
-    }
-}
-

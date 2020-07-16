@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PBP",
+    "PBP"
+  ],
+  "key": {
+    "B":
+    {
+      "item": "minecraft:bamboo"
+    },
+    "P":
+    {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "comfycozy:tabanata",
+    "count": 1
+  }
+}

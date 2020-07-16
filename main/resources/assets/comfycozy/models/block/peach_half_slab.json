@@ -1,8 +1,0 @@
-{
-    "parent": "block/half_slab",
-    "textures": {
-        "bottom": "comfycozy:blocks/peach_planks",
-        "top": "comfycozy:blocks/peach_planks",
-        "side": "comfycozy:blocks/peach_planks"
-    }
-}

@@ -1,9 +1,0 @@
-{
-    "variants": {
-        "remains=0": { "model": "comfycozy:cinnamon_tree2" },
-          "remains=1": { "model": "comfycozy:cinnamon_tree_stage1" },
-            "remains=2": { "model": "comfycozy:cinnamon_tree_stage2" },
-              "remains=3": { "model": "comfycozy:stripped_cinnamon" }, 
-                 "remains=4": { "model": "comfycozy:cinnamon_tree_bushy" }                      
-}
-}

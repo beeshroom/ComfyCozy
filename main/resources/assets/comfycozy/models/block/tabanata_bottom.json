@@ -1,0 +1,30 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "comfycozy:blocks/bamboo_stalk",
+		"particle": "comfycozy:blocks/bamboo_stalk"
+	},
+	"elements": [
+		{
+			"name": "body",
+			"from": [7, 0, 8],
+			"to": [9, 16, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 9]},
+			"faces": {
+				"north": {"uv": [0, 0, 2, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 2, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 2, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 2, 16], "texture": "#0"},
+				"up": {"uv": [13, 0, 15, 2], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [14, 0, 16, 2], "rotation": 180, "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "VoxelShapes",
+			"origin": [14, 19, 3],
+			"children": [0]
+		}
+	]
+}

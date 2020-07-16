@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "comfycozy:blocks/strawberry_stage2"
-    }
-}

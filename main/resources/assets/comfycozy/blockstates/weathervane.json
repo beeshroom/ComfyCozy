@@ -1,9 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "comfycozy:weathervane"},
-        "facing=south": { "model": "comfycozy:weathervane", "y": 90 },
-        "facing=west":  { "model": "comfycozy:weathervane", "y": 180 },
-        "facing=east":  { "model": "comfycozy:weathervane", "y": 270 }
-    }
-}
-

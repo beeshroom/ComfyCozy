@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "bites=0": { "model": "comfycozy:bowl_cinnamon" },
-        "bites=1": { "model": "comfycozy:bowl_empty" },
-        "bites=2": { "model": "comfycozy:bowl_empty" }
-    }
-}
