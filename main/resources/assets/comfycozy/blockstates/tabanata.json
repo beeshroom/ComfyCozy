@@ -1,6 +1,6 @@
-
 {
     "variants": {
-        "": { "model": "comfycozy:block/tabanata" }
+        "half=lower": { "model": "comfycozy:block/tabanata_bottom" },
+        "half=upper":    { "model": "comfycozy:block/tabanata" }
     }
 }

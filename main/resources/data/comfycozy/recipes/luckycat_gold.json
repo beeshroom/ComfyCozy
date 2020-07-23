@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggg",
+    "glg",
+    "ggg"
+  ],
+  "key": {
+    "l":
+    {
+      "item": "comfycozy:luckycat_white"
+    },
+    "g":
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "comfycozy:luckycat_gold",
+    "count": 1
+  }
+}

@@ -2,6 +2,7 @@ package bee.beeshroom.comfycozy;
 
 import bee.beeshroom.comfycozy.init.BlockInit;
 import bee.beeshroom.comfycozy.init.ItemInit;
+import bee.beeshroom.comfycozy.init.TileEntityInit;
 import bee.beeshroom.comfycozy.sounds.SoundList;
 import bee.beeshroom.comfycozy.util.RegistryHandler;
 import net.minecraft.client.renderer.RenderType;
@@ -47,12 +48,12 @@ public class comfycozy
 
        // ParticleInit.PARTICLE_TYPES.register(modEventBus);
         SoundList.SOUNDS.register(modEventBus);
-     //   PotionInit.POTIONS.register(modEventBus);
-     //   PotionInit.POTION_EFFECTS.register(modEventBus);
+       // PotionList.POTIONS.register(modEventBus);
+       // PotionList.EFFECTS.register(modEventBus);
      //   EnchantmentInit.ENCHANTMENTS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
-       // ModTileEntityTypes.TILE_ENTITY_TYPES.register(modEventBus);
+        TileEntityInit.TILE_ENTITY_TYPES.register(modEventBus);
       //  ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
       //  ModEntityTypes.ENTITY_TYPES.register(modEventBus);
 

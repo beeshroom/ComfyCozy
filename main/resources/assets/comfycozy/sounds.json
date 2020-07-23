@@ -9,5 +9,16 @@
         "stream": "true"
       }
     ]
+  },
+  "block.lucky_cat_attack":
+  {
+    "category": "block",
+    "subtitle": "block.lucky_cat_attack.sub",
+    "sounds": [
+      {
+        "name": "comfycozy:block/lucky_cat_attack",
+        "stream": "true"
+      }
+    ]
   }
 }

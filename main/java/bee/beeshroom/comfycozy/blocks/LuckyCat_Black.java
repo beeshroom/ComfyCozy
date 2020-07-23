@@ -1,9 +1,14 @@
 package bee.beeshroom.comfycozy.blocks;
 
+import bee.beeshroom.comfycozy.init.TileEntityInit;
 import bee.beeshroom.comfycozy.sounds.SoundList;
-import net.minecraft.advancements.criterion.MobEffectsPredicate;
+import bee.beeshroom.comfycozy.tileentity.BlackLuckyCat;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
@@ -11,14 +16,16 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.BeaconTileEntity;
+import net.minecraft.tileentity.BellTileEntity;
+import net.minecraft.tileentity.ConduitTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -31,23 +38,24 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.sound.SoundEvent;
 import net.minecraftforge.common.ToolType;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
+import static net.minecraft.block.HorizontalBlock.HORIZONTAL_FACING;
 import static net.minecraft.block.RedstoneTorchBlock.LIT;
 
 //thanks TechnoVision
 
-public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
+public class LuckyCat_Black extends HorizontalBlock implements IWaterLoggable {
     public static final BooleanProperty POWERED = LIT;
-    private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    private static final DirectionProperty FACING = HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final VoxelShape SHAPE = Block.makeCuboidShape(1,0, 1, 15, 16, 15);
 
-    public LuckyCat_White() {
+    public LuckyCat_Black() {
         super(Properties.create(Material.EARTH)
                 .hardnessAndResistance(2.0f, 2.0f)
                 .sound(SoundType.STONE)
@@ -57,7 +65,6 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
         );
      //   this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWERED, Boolean.valueOf(false)));
         this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWERED, Boolean.valueOf(false)).with(WATERLOGGED, Boolean.valueOf(false)));
-
     }
 
     @Override
@@ -86,26 +93,45 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
         }
     }
 
+    public void onEntityWalk(World p_176199_1_, BlockPos p_176199_2_, Entity p_176199_3_) {
+        if (p_176199_3_ instanceof MonsterEntity) {
+            p_176199_3_.attackEntityFrom(DamageSource.MAGIC, 1.0F);
+        }
+
+        super.onEntityWalk(p_176199_1_, p_176199_2_, p_176199_3_);
+    }
+
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
         ItemStack itemstack = player.getHeldItem(handIn);
         Item item = itemstack.getItem();
 
-        if ((item == Items.GOLD_INGOT) && player.isPotionActive(Effects.LUCK)){
+    /*    if ((item == Items.GOLD_INGOT) && player.isPotionActive(Effects.LUCK)){
             worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.BLOCKS, 1.0F, 1.0f);
         }
-
-        if ((item == Items.GOLD_INGOT) && !player.isPotionActive(Effects.LUCK))
+        */
+        if ((item == Items.GOLD_INGOT))
       {
           {
                 if (!worldIn.isRemote)
                 {
+                 player.removePotionEffect(Effects.BAD_OMEN);
+                    player.removePotionEffect(Effects.NAUSEA);
+                    player.removePotionEffect(Effects.SLOWNESS);
+                    player.removePotionEffect(Effects.BLINDNESS);
+                    player.removePotionEffect(Effects.POISON);
+                    player.removePotionEffect(Effects.MINING_FATIGUE);
+                    player.removePotionEffect(Effects.UNLUCK);
+                    player.removePotionEffect(Effects.WEAKNESS);
+                    player.removePotionEffect(Effects.WITHER);
                     player.addPotionEffect(new EffectInstance(Effects.LUCK, 3600, 0));
+                 //   player.addPotionEffect(new EffectInstance(Effects.LUCK, 3600, 0));
                       }
           worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1.0F, 1.0f);
 
           if(!player.abilities.isCreativeMode) itemstack.shrink(1);
                // return ActionResultType.SUCCESS;
+              //TileEntityInit.LUCKYCAT_BLACK.get().create();
             }
 }
         if (!worldIn.isRemote)  //(itemstack.isEmpty() && player.isSneaking())
@@ -119,7 +145,7 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
 
           //  BlockState blockstate = this.func_226939_d_(state, worldIn, pos);
           //  float f = blockstate.get(LIT) ? 0.6F : 0.5Freturn ActionResultType.SUCCESS;
-            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
+            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 0.8f);
         return ActionResultType.SUCCESS;
     }
 
@@ -166,7 +192,6 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
         return state.rotate(mirrorIn.toRotation(state.get(FACING)));
     }
 
-
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING, POWERED, WATERLOGGED);
     }
@@ -190,7 +215,6 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
         return 0.7F;
     }
 
-
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         Block block = worldIn.getBlockState(pos.down()).getBlock();
         if (!worldIn.isRemote) {
@@ -204,7 +228,7 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
                     //BlockState blockstate1 = state.cycle(LIT);
                         if (block == Blocks.NOTE_BLOCK)
                         {
-                            worldIn.playSound((PlayerEntity)null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 2.0F, 1.0f);
+                            worldIn.playSound((PlayerEntity)null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 2.0F, 0.8f);
                         }
                         //trying a do/while, i dunno ;;
                         // update: THAT BROKE THE GAME SO BAD LOL
@@ -220,5 +244,31 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
         if (state.get(LIT) && !worldIn.isBlockPowered(pos)) {
             worldIn.setBlockState(pos, state.cycle(LIT), 2);
         }
+    }
+
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+            return TileEntityInit.LUCKYCAT_BLACK.get().create();
+    }
+
+/*   public void onBlockPlacedBy(World p_180633_1_, BlockPos p_180633_2_, BlockState p_180633_3_, @Nullable LivingEntity p_180633_4_, ItemStack p_180633_5_) {
+        if (p_180633_5_.hasDisplayName()) {
+            TileEntity lvt_6_1_ = p_180633_1_.getTileEntity(p_180633_2_);
+            if (lvt_6_1_ instanceof BeaconTileEntity) {
+                ((BeaconTileEntity)lvt_6_1_).setCustomName(p_180633_5_.getDisplayName());
+            }
+        }
+    } */
+
+
+//i slashed this out
+    public TileEntity createNewTileEntity(IBlockReader p_196283_1_) {
+        return new BlackLuckyCat();
     }
 }

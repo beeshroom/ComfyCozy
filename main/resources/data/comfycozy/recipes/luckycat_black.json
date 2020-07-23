@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "www",
+    "wgw",
+    "www"
+  ],
+  "key": {
+    "w":
+    {
+      "item": "minecraft:black_terracotta"
+    },
+    "g":
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "comfycozy:luckycat_black",
+    "count": 1
+  }
+}

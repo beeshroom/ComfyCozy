@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=north,lit=false": { "model": "comfycozy:block/luckycat_black"},
+        "facing=south,lit=false": { "model": "comfycozy:block/luckycat_black", "y": 180},
+        "facing=east,lit=false,": { "model": "comfycozy:block/luckycat_black", "y": 90},
+        "facing=west,lit=false,": { "model": "comfycozy:block/luckycat_black","y": 270},
+        "facing=north,lit=true": { "model": "comfycozy:block/luckycat_black_wave"},
+        "facing=south,lit=true": { "model": "comfycozy:block/luckycat_black_wave", "y": 180},
+        "facing=east,lit=true": { "model": "comfycozy:block/luckycat_black_wave", "y": 90},
+        "facing=west,lit=true": { "model": "comfycozy:block/luckycat_black_wave", "y": 270}
+        }
+        }

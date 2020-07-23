@@ -100,9 +100,9 @@
 		},
 		{
 			"name": "arm",
-			"from": [12, 7, 6],
-			"to": [15, 13, 8],
-			"rotation": {"angle": 0, "axis": "y", "origin": [20, 15, 14]},
+			"from": [12, 6, 6],
+			"to": [15, 12, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [20, 14, 14]},
 			"faces": {
 				"north": {"uv": [0, 10, 3, 16], "texture": "#0"},
 				"east": {"uv": [0, 0, 1, 1], "texture": "#0"},

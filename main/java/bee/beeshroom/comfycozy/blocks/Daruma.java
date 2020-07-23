@@ -61,7 +61,7 @@ public class Daruma extends HorizontalBlock implements IWaterLoggable {
 
     public Daruma() {
         super(Block.Properties.create(Material.EARTH)
-                .hardnessAndResistance(2.0f, 1.0f)
+                .hardnessAndResistance(2.0f, 3.0f)
                 .sound(SoundType.STONE)
                 .harvestLevel(0)
                 .harvestTool(ToolType.PICKAXE)
@@ -102,7 +102,7 @@ public class Daruma extends HorizontalBlock implements IWaterLoggable {
         } else {
             BlockState blockstate = this.func_226939_d_(state, worldIn, pos);
             float f = blockstate.get(POWERED) ? 0.6F : 0.5F;
-            worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundCategory.BLOCKS, 0.5F, .2f);
+            worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF, SoundCategory.BLOCKS, 0.5F, .2f);
             return ActionResultType.SUCCESS;
         }
     }

@@ -1,7 +1,6 @@
 package bee.beeshroom.comfycozy.blocks;
 
 import bee.beeshroom.comfycozy.sounds.SoundList;
-import net.minecraft.advancements.criterion.MobEffectsPredicate;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,8 +10,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.state.BooleanProperty;
@@ -31,7 +28,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.sound.SoundEvent;
 import net.minecraftforge.common.ToolType;
 
 import java.util.Random;
@@ -40,14 +36,14 @@ import static net.minecraft.block.RedstoneTorchBlock.LIT;
 
 //thanks TechnoVision
 
-public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
+public class LuckyCat_Gold extends HorizontalBlock implements IWaterLoggable {
     public static final BooleanProperty POWERED = LIT;
     private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final VoxelShape SHAPE = Block.makeCuboidShape(1,0, 1, 15, 16, 15);
 
-    public LuckyCat_White() {
+    public LuckyCat_Gold() {
         super(Properties.create(Material.EARTH)
                 .hardnessAndResistance(2.0f, 2.0f)
                 .sound(SoundType.STONE)
@@ -90,6 +86,7 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
     {
         ItemStack itemstack = player.getHeldItem(handIn);
         Item item = itemstack.getItem();
+        //cant figure out how to use this: if (!player.getActivePotionEffect(Effects.LUCK))
 
         if ((item == Items.GOLD_INGOT) && player.isPotionActive(Effects.LUCK)){
             worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.BLOCKS, 1.0F, 1.0f);
@@ -119,7 +116,7 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
 
           //  BlockState blockstate = this.func_226939_d_(state, worldIn, pos);
           //  float f = blockstate.get(LIT) ? 0.6F : 0.5Freturn ActionResultType.SUCCESS;
-            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
+            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 0.7f);
         return ActionResultType.SUCCESS;
     }
 
@@ -204,7 +201,7 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
                     //BlockState blockstate1 = state.cycle(LIT);
                         if (block == Blocks.NOTE_BLOCK)
                         {
-                            worldIn.playSound((PlayerEntity)null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 2.0F, 1.0f);
+                            worldIn.playSound((PlayerEntity)null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 2.0F, 0.7f);
                         }
                         //trying a do/while, i dunno ;;
                         // update: THAT BROKE THE GAME SO BAD LOL
