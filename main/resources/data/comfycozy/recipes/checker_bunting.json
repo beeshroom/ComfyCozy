@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "ppp",
+    "w  "
+  ],
+  "key": {
+    "s":
+    {
+      "item": "minecraft:string"
+    },
+    "p":
+    {
+      "item": "minecraft:paper"
+    },
+    "w":
+    {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "result": {
+    "item": "comfycozy:checker_bunting",
+    "count": 6
+  }
+}

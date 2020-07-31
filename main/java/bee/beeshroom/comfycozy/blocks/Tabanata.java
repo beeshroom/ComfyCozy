@@ -31,10 +31,10 @@ import javax.annotation.Nullable;
 public class Tabanata extends Block {
 
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-
-    protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
-    protected static final VoxelShape SHAPE_LARGE_LEAVES = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
-    protected static final VoxelShape SHAPE_COLLISION = Block.makeCuboidShape(6.5D, 0.0D, 6.5D, 9.5D, 16.0D, 9.5D);
+    protected static final VoxelShape SHAPE = Block.makeCuboidShape(4.499999999999998, 0, 5, 11.499999999999998, 16, 12);
+ //   protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
+  //  protected static final VoxelShape SHAPE_LARGE_LEAVES = Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+    protected static final VoxelShape SHAPE_COLLISION = Block.makeCuboidShape(6.499999999999998, 0, 7, 9.499999999999998, 16, 10);
 
     public Tabanata() {
         super(Block.Properties.create(Material.WOOD)
@@ -44,11 +44,6 @@ public class Tabanata extends Block {
                         .harvestTool(ToolType.PICKAXE)
                 //    .setRequiresTool()
         );
-    }
-
-    public Tabanata(Properties properties)
-    {
-        super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER));
     }
 
@@ -79,23 +74,23 @@ public class Tabanata extends Block {
         worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), flags);
     }
 
-    public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
-        super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+  /*  public void harvestBlock(World worldIn, PlayerEntity item, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+        super.harvestBlock(worldIn, item, pos, Blocks.AIR.getDefaultState(), te, stack);
     }
 
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity item) {
         DoubleBlockHalf doubleblockhalf = state.get(HALF);
         BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
         BlockState blockstate = worldIn.getBlockState(blockpos);
         if (blockstate.getBlock() == this && blockstate.get(HALF) != doubleblockhalf) {
             worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-            worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
-            if (!worldIn.isRemote && !player.isCreative()) {
-                spawnDrops(state, worldIn, pos, (TileEntity) null, player, player.getHeldItemMainhand());
-                spawnDrops(blockstate, worldIn, blockpos, (TileEntity) null, player, player.getHeldItemMainhand());
+            worldIn.playEvent(item, 2001, blockpos, Block.getStateId(blockstate));
+            if (!worldIn.isRemote && !item.isCreative()) {
+                spawnDrops(state, worldIn, pos, (TileEntity) null, item, item.getHeldItemMainhand());
+                spawnDrops(blockstate, worldIn, blockpos, (TileEntity) null, item, item.getHeldItemMainhand());
             }
         }
-    }
+    } */
 
         public VoxelShape getCollisionShape (BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext
         context){
@@ -138,7 +133,32 @@ public class Tabanata extends Block {
         }
 
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        Block block = state.getBlock();
         return true;
+    }
+
+    public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+        super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+    }
+
+    /**
+     * Called before the Block is set to air in the world. Called regardless of if the item's tool can actually collect
+     * this block
+     */
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        DoubleBlockHalf doubleblockhalf = state.get(HALF);
+        BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
+        BlockState blockstate = worldIn.getBlockState(blockpos);
+        if (blockstate.getBlock() == this && blockstate.get(HALF) != doubleblockhalf) {
+            worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+            worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+            if (!worldIn.isRemote && !player.isCreative()) {
+                spawnDrops(state, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
+                spawnDrops(blockstate, worldIn, blockpos, (TileEntity)null, player, player.getHeldItemMainhand());
+            }
+        }
+
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 
     }

@@ -1,6 +1,7 @@
 package bee.beeshroom.comfycozy.tileentity;
 
 import bee.beeshroom.comfycozy.blocks.LuckyCat_Black;
+import bee.beeshroom.comfycozy.init.BlockInit;
 import bee.beeshroom.comfycozy.init.TileEntityInit;
 import bee.beeshroom.comfycozy.sounds.SoundList;
 import com.google.common.collect.Lists;
@@ -36,6 +37,7 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.UUID;
 
+import static bee.beeshroom.comfycozy.blocks.LuckyCat_Black.POWERED;
 import static net.minecraft.block.RedstoneTorchBlock.LIT;
 import static net.minecraft.inventory.EquipmentSlotType.HEAD;
 
@@ -97,8 +99,8 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
 
     public void tick() {
         ++this.ticksExisted;
-        long i = this.world.getGameTime();
-        if (i % 40L == 0L) {
+       long i = this.world.getGameTime();
+        if (i % 30L == 0L) {
             //this.setActive(this.shouldBeActive());
             if (!this.world.isRemote && this.isActive()) {
                 this.addEffectsToPlayers();
@@ -156,7 +158,8 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
         }
 
         this.setEyeOpen(this.prismarinePositions.size() >= 42);*/
-      return this.prismarinePositions.size() >= 16;
+      //changed 16 to 12
+      return this.prismarinePositions.size() >= 12;
      // return true;
     }
 
@@ -179,19 +182,28 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
                    //i think itd be funny if it targetted ppl wearing mob skulls
                     // playerentity.addPotionEffect(new EffectInstance(Effects.CONDUIT_POWER, 260, 0, false, false));
                   //  playerentity.attackEntityFrom(DamageSource.MAGIC, 0.5F);
-                    playerentity.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 260, 0, false, false));
-                 //   playerentity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 260, 0, false, false)); */
+                   // playerentity.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 15, 1, false, false));
 
-                    if (playerentity.isPotionActive(Effects.INVISIBILITY)) {
+                    playerentity.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 260, 1, false, false));
+                    playerentity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 130, 3, false, false));
+
+                    if (!playerentity.isPotionActive(Effects.WEAKNESS))
+                    {
+                    if (playerentity.isPotionActive(Effects.INVISIBILITY) || (this.pos.withinDistance(new BlockPos(playerentity), (double)j) && (itemstack.getItem() == Blocks.SKELETON_SKULL.asItem()) || (itemstack.getItem() == Blocks.WITHER_SKELETON_SKULL.asItem()) || (itemstack.getItem() == Blocks.ZOMBIE_HEAD.asItem()) || (itemstack.getItem() == Blocks.CREEPER_HEAD.asItem()))) {
                         if (!world.isRemote) {
-                            this.spawnParticles();
-                            BlackLuckyCat.this.playSound(SoundList.LUCKY_CAT_ATTACK.get());
-                            this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
+                           // this.spawnParticles();
+                            this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.9f);
 
                             playerentity.removePotionEffect(Effects.INVISIBILITY);
                         }
+                    } }
+
+                   if (!playerentity.isPotionActive(Effects.WEAKNESS))
+                    {
+                        this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.9f);
                     }
 
+                   //tried making them get pushed away, but didnt get it working in a satisfying way, oh well
                  /*   double x = playerentity.getPosX() - pos.getX() -6D;
                     double y = playerentity.getPosY() - pos.getY() -6D;
                     double z = playerentity.getPosZ() - pos.getZ() -6D;
@@ -217,7 +229,7 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
             if (!list.isEmpty()) {
                 this.target = list.get(this.world.rand.nextInt(list.size()));
             }
-        } else if (!this.target.isAlive() || !this.pos.withinDistance(new BlockPos(this.target), 8.0D)) {
+        } else if (!this.target.isAlive() || !this.pos.withinDistance(new BlockPos(this.target), 8.0D) || this.target.isPotionActive(Effects.SLOWNESS)) {
             this.target = null;
         }
         else if (this.target.hasCustomName())
@@ -226,26 +238,36 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
         }
 
         if (this.target != null) {
-            if (!world.isRemote) {
-                this.spawnParticles();
-                BlackLuckyCat.this.playSound(SoundList.LUCKY_CAT_ATTACK.get());
-                this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
-            }
-           // this.target.attackEntityFrom(DamageSource.MAGIC, 1.0F);
-            this.target.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 260, 0, false, false));
-         //   this.target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 260, 1, false, false));
 
-          double x = target.getPosX() - pos.getX();
+            if (!this.target.isPotionActive(Effects.SLOWNESS)) {
+                this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.9f);
+            }
+
+         //   this.target.addPotionEffect(new EffectInstance(Effects.GLOWING, 5, 0, false, false));
+
+            // this.target.attackEntityFrom(DamageSource.MAGIC, 1.0F);
+            this.target.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 320, 5, false, false));
+            this.target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 260, 5, false, false));
+
+         /* double x = target.getPosX() - pos.getX() * 2D;
           double y = target.getPosY() - pos.getY();
-          double z = target.getPosZ() - pos.getZ();
-             this.target.setMotion(target.getMotion().x, target.getMotion().y, target.getMotion().z);
+          double z = target.getPosZ() - pos.getZ() * 2D;
+             this.target.setMotion(x, target.getMotion().y, z);*/
+
+            //double x = pos.getX() - pos.getX() * 1.2D;
+           // double y = target.getPosY() - pos.getY();
+          //  double z = pos.getZ() - pos.getZ()  * 1.2D;
+          //  this.target.setMotion(target.getMotion().x, y, target.getMotion().z);
+
+            //!world.isRemote &&
+
+            this.target = null;
         }
 
         if (livingentity != this.target) {
             BlockState blockstate = this.getBlockState();
             this.world.notifyBlockUpdate(this.pos, blockstate, blockstate, 2);
         }
-
     }
 
     private void updateClientTarget() {
@@ -257,7 +279,6 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
                 this.targetUuid = null;
             }
         }
-
     }
 
     private AxisAlignedBB getAreaOfEffect() {
@@ -272,6 +293,7 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
         List<LivingEntity> list = this.world.getEntitiesWithinAABB(LivingEntity.class, this.getAreaOfEffect(), (p_205032_1_) -> {
             return p_205032_1_.getUniqueID().equals(this.targetUuid);
         });
+        //return list.size() == 1 ? list.get(0) : null;
         return list.size() == 1 ? list.get(0) : null;
     }
 

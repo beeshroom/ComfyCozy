@@ -92,7 +92,8 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
         Item item = itemstack.getItem();
 
         if ((item == Items.GOLD_INGOT) && player.isPotionActive(Effects.LUCK)){
-            worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.BLOCKS, 1.0F, 1.0f);
+            return ActionResultType.PASS;
+           // worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.BLOCKS, 1.0F, 1.0f);
         }
 
         if ((item == Items.GOLD_INGOT) && !player.isPotionActive(Effects.LUCK))
@@ -102,24 +103,27 @@ public class LuckyCat_White extends HorizontalBlock implements IWaterLoggable {
                 {
                     player.addPotionEffect(new EffectInstance(Effects.LUCK, 3600, 0));
                       }
-          worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1.0F, 1.0f);
+          worldIn.playSound((PlayerEntity)null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
 
           if(!player.abilities.isCreativeMode) itemstack.shrink(1);
                // return ActionResultType.SUCCESS;
             }
 }
-        if (!worldIn.isRemote)  //(itemstack.isEmpty() && player.isSneaking())
+      if (!worldIn.isRemote && !(item == Items.GOLD_INGOT))
+          //(itemstack.isEmpty() && item.isSneaking())
         {
             //BlockState blockstate1 = state.cycle(LIT);
             worldIn.setBlockState(pos, state.cycle(LIT), 2);
        //     worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
           //  return ActionResultType.SUCCESS;
+            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
+
         }
-       // else
+    //  else
 
           //  BlockState blockstate = this.func_226939_d_(state, worldIn, pos);
           //  float f = blockstate.get(LIT) ? 0.6F : 0.5Freturn ActionResultType.SUCCESS;
-            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
+           // worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
         return ActionResultType.SUCCESS;
     }
 

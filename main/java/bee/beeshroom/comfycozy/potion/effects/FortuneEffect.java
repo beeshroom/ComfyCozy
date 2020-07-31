@@ -1,22 +1,13 @@
-/*package bee.beeshroom.comfycozy.potion.effects;
+package bee.beeshroom.comfycozy.potion.effects;
 
 import bee.beeshroom.comfycozy.init.ItemInit;
-import bee.beeshroom.comfycozy.lists.PotionList;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.potion.*;
-import net.minecraft.util.Hand;
-import net.minecraft.world.storage.loot.functions.ApplyBonus;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.EnumSet;
 
 public class FortuneEffect extends Effect {
     public FortuneEffect(EffectType type, int color) {
@@ -42,7 +33,7 @@ public class FortuneEffect extends Effect {
 
 
     public static void addBrewingRecipes() {
-        addMix(Potions.AWKWARD, Items.BELL, PotionList.FORTUNE_POTION.get());
+        addMix(Potions.AWKWARD, ItemInit.LUCKY_PICKAXE.get(), Potions.LUCK);
     }
 
 
@@ -58,4 +49,3 @@ public class FortuneEffect extends Effect {
         return false;
     }
 }
-*/

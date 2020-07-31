@@ -2,11 +2,19 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "tabanata",
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "comfycozy:tabanata",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
           "name": "comfycozy:tabanata"
         }
       ],

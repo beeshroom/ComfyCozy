@@ -3,6 +3,10 @@
 "item.comfycozy.oats": "Oats",
 "item.comfycozy.oatmeal": "Oatmeal",
   "item.comfycozy.oat_seed_item": "Oat Seeds",
+  "item.comfycozy.lucky_bell": "Lucky Bell",
+  "item.comfycozy.lucky_pickaxe": "Lucky Pickaxe",
+
+  "block.comfycozy.book_stack": "Book Stack",
 
   "block.comfycozy.daruma": "Daruma",
 
@@ -12,8 +16,20 @@
   "block.comfycozy.luckycat_black": "Black Lucky Cat",
   "block.comfycozy.luckycat_gold": "Golden Lucky Cat",
 
+  "block.comfycozy.bunting": "Bunting",
+  "block.comfycozy.checker_bunting": "Checker Bunting",
+  "block.comfycozy.spooky_bunting": "Spooky Bunting",
+  "block.comfycozy.heart_bunting": "Heart Bunting",
+
+  "block.comfycozy.fishtank": "Fish Tank",
+
   "block.mystical_meow": "Mystical meow",
   "block.mystical_meow.sub": "Mystical meow",
   "block.lucky_cat_attack": "Luck Cat protection",
-  "block.lucky_cat_attack.sub": "Lucky Cat protection"
+  "block.lucky_cat_attack.sub": "Lucky Cat echoes",
+  "block.lucky": "Lucky",
+  "block.lucky.sub": "Lucky!",
+
+
+  "effect.comfycozy.fortune": "Fortunate"
 }

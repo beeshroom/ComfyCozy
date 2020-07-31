@@ -1,4 +1,4 @@
-/*package bee.beeshroom.comfycozy.lists;
+package bee.beeshroom.comfycozy.lists;
 
 import bee.beeshroom.comfycozy.comfycozy;
 import bee.beeshroom.comfycozy.init.ItemInit;
@@ -19,13 +19,12 @@ public class PotionList {
     public static final DeferredRegister<Effect> EFFECTS = new DeferredRegister<>(ForgeRegistries.POTIONS, comfycozy.MOD_ID);
 
     public static final RegistryObject<Effect> FORTUNE_EFFECT = EFFECTS.register("fortune", () -> new FortuneEffect(EffectType.BENEFICIAL, 0xd4ff00));
+   // public static final RegistryObject<Effect> OBLIVIOUS_EFFECT = EFFECTS.register("oblivious", () -> new ObliviousEffect(EffectType.BENEFICIAL, 0xd4ff00));
 
 
-    public static final DeferredRegister<Potion> POTIONS = new DeferredRegister<>(ForgeRegistries.POTION_TYPES, comfycozy.MOD_ID);
+   // public static final DeferredRegister<Potion> POTIONS = new DeferredRegister<>(ForgeRegistries.POTION_TYPES, comfycozy.MOD_ID);
 
-    public static final RegistryObject<Potion> FORTUNE_POTION = POTIONS.register("fortune", () -> new Potion(new EffectInstance(FORTUNE_EFFECT.get(), 3600)));
-
-
+ //  public static final RegistryObject<Potion> FORTUNE_POTION = POTIONS.register("fortune", () -> new Potion(new EffectInstance(FORTUNE_EFFECT.get(), 3600)));
 
 
 
@@ -49,16 +48,21 @@ public class PotionList {
 
 
     public static void addBrewingRecipes() {
-        addMix(Potions.AWKWARD, Items.BELL, PotionList.FORTUNE_POTION.get());
+ //       addMix(Potions.AWKWARD, Items.BELL, PotionList.FORTUNE_POTION.get());
+
+     //  addMix(Potions.AWKWARD, Items.BELL, PotionList.OBLIVIOUS_POTION.get());
+
+        addMix(Potions.AWKWARD, ItemInit.LUCKY_PICKAXE.get(), Potions.LUCK);
     }
 
-
-
     public static class FortuneEffect extends Effect {
-
         public FortuneEffect(EffectType typeIn, int liquidColorIn) {
             super(typeIn, liquidColorIn);
         }
-
     }
-}*/
+ /*   public static class ObliviousEffect extends Effect {
+        public ObliviousEffect(EffectType typeIn, int liquidColorIn) {
+            super(typeIn, liquidColorIn);
+        }
+    } */
+}

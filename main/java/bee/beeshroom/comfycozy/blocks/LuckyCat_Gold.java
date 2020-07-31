@@ -1,11 +1,19 @@
 package bee.beeshroom.comfycozy.blocks;
 
+import bee.beeshroom.comfycozy.init.ItemInit;
+import bee.beeshroom.comfycozy.init.TileEntityInit;
+import bee.beeshroom.comfycozy.lists.PotionList;
 import bee.beeshroom.comfycozy.sounds.SoundList;
+import bee.beeshroom.comfycozy.tileentity.BlackLuckyCat;
+import bee.beeshroom.comfycozy.tileentity.GoldLuckyCat;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,6 +24,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -29,6 +38,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.world.NoteBlockEvent;
 
 import java.util.Random;
 
@@ -44,9 +54,9 @@ public class LuckyCat_Gold extends HorizontalBlock implements IWaterLoggable {
     public static final VoxelShape SHAPE = Block.makeCuboidShape(1,0, 1, 15, 16, 15);
 
     public LuckyCat_Gold() {
-        super(Properties.create(Material.EARTH)
-                .hardnessAndResistance(2.0f, 2.0f)
-                .sound(SoundType.STONE)
+        super(Properties.create(Material.IRON)
+                .hardnessAndResistance(6.0f, 5.0f)
+                .sound(SoundType.METAL)
                 .harvestLevel(0)
                 .harvestTool(ToolType.PICKAXE)
                 //.setRequiresTool()
@@ -86,37 +96,117 @@ public class LuckyCat_Gold extends HorizontalBlock implements IWaterLoggable {
     {
         ItemStack itemstack = player.getHeldItem(handIn);
         Item item = itemstack.getItem();
-        //cant figure out how to use this: if (!player.getActivePotionEffect(Effects.LUCK))
+        //cant figure out how to use this: if (!item.getActivePotionEffect(Effects.LUCK))
 
-        if ((item == Items.GOLD_INGOT) && player.isPotionActive(Effects.LUCK)){
-            worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.BLOCKS, 1.0F, 1.0f);
+        if ((item == Items.GOLDEN_PICKAXE) && player.isPotionActive(PotionList.FORTUNE_EFFECT.get())){
+            return ActionResultType.PASS;
+         //   worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.BLOCKS, 1.0F, 1.0f);
         }
 
-        if ((item == Items.GOLD_INGOT) && !player.isPotionActive(Effects.LUCK))
+        if ((item == Items.GOLDEN_PICKAXE) && !player.isPotionActive(PotionList.FORTUNE_EFFECT.get()))
       {
           {
                 if (!worldIn.isRemote)
                 {
-                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 3600, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 4800, 0));
+                    player.addPotionEffect(new EffectInstance(PotionList.FORTUNE_EFFECT.get(), 5600, 0));
                       }
-          worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1.0F, 1.0f);
-
+          worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1.0F, .8F);
           if(!player.abilities.isCreativeMode) itemstack.shrink(1);
+
+            //  Fortunify(itemstack);
+          //    player.setItemStackToSlot(Hand.MAIN_HAND, new ItemStack(ItemInit.LUCKY_PICKAXE.get(), 1));
+           player.addItemStackToInventory(new ItemStack(ItemInit.LUCKY_PICKAXE.get(), 1));
+          //  player.setHeldItem(Hand.MAIN_HAND, itemstack);
+
+          //    spawnAsEntity(worldIn, player.getPosition(), new ItemStack(ItemInit.LUCKY_PICKAXE.get(), 1));
+
                // return ActionResultType.SUCCESS;
             }
 }
-        if (!worldIn.isRemote)  //(itemstack.isEmpty() && player.isSneaking())
+
+        if ((item == Items.GOLD_INGOT) && !player.isPotionActive(Effects.LUCK) && !player.isPotionActive(PotionList.FORTUNE_EFFECT.get()))
+        {
+            {
+                if (!worldIn.isRemote)
+                {
+                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 4800, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.INSTANT_HEALTH, 1, 0));
+                }
+                worldIn.playSound((PlayerEntity)null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, .7f);
+
+                if(!player.abilities.isCreativeMode) itemstack.shrink(1);
+                // return ActionResultType.SUCCESS;
+            }
+        }
+
+        if ((item == Items.GOLD_INGOT) && player.isPotionActive(PotionList.FORTUNE_EFFECT.get()))
+        {
+            {
+                if (!worldIn.isRemote)
+                {
+                    player.addPotionEffect(new EffectInstance(PotionList.FORTUNE_EFFECT.get(), 4800, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 4800, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.INSTANT_HEALTH, 1, 0));
+                }
+                worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1.0F, .8F);
+                //worldIn.playSound((PlayerEntity)null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, .8f);
+
+                if(!player.abilities.isCreativeMode) itemstack.shrink(1);
+                // return ActionResultType.SUCCESS;
+            }
+        }
+
+        if ((item == Items.EMERALD) && !player.isPotionActive(Effects.LUCK) && !player.isPotionActive(PotionList.FORTUNE_EFFECT.get()))
+        {
+            {
+                if (!worldIn.isRemote)
+                {
+                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 9000, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.INSTANT_HEALTH, 1, 0));
+                }
+                worldIn.playSound((PlayerEntity)null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, .7f);
+
+                if(!player.abilities.isCreativeMode) itemstack.shrink(1);
+                // return ActionResultType.SUCCESS;
+            }
+        }
+
+        if ((item == Items.EMERALD) && player.isPotionActive(PotionList.FORTUNE_EFFECT.get()))
+        {
+            {
+                if (!worldIn.isRemote)
+                {
+                    player.addPotionEffect(new EffectInstance(PotionList.FORTUNE_EFFECT.get(), 4800, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 9000, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.INSTANT_HEALTH, 1, 0));
+                }
+                worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1.0F, .8F);
+
+              //  worldIn.playSound((PlayerEntity)null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, .7f);
+
+                if(!player.abilities.isCreativeMode) itemstack.shrink(1);
+                // return ActionResultType.SUCCESS;
+            }
+        }
+
+
+        if (!worldIn.isRemote && !(item == Items.GOLD_INGOT) && !(item == Items.EMERALD) && !(item == Items.GOLDEN_PICKAXE))
+        //(itemstack.isEmpty() && item.isSneaking())
         {
             //BlockState blockstate1 = state.cycle(LIT);
             worldIn.setBlockState(pos, state.cycle(LIT), 2);
        //     worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
           //  return ActionResultType.SUCCESS;
+            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 0.7f);
+
+
         }
-       // else
+        //else
 
           //  BlockState blockstate = this.func_226939_d_(state, worldIn, pos);
           //  float f = blockstate.get(LIT) ? 0.6F : 0.5Freturn ActionResultType.SUCCESS;
-            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 0.7f);
+      //      worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 0.7f);
         return ActionResultType.SUCCESS;
     }
 
@@ -218,4 +308,27 @@ public class LuckyCat_Gold extends HorizontalBlock implements IWaterLoggable {
             worldIn.setBlockState(pos, state.cycle(LIT), 2);
         }
     }
+
+
+  /*  private void Fortunify(ItemStack stack) {
+       // if (!stack.isEnchanted()) {
+            stack.addEnchantment(Enchantments.FORTUNE, 1);
+            stack.addEnchantment(Enchantments.LOOTING, 1);
+        } */
+//}
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return TileEntityInit.LUCKYCAT_GOLD.get().create();
+    }
+
+    public TileEntity createNewTileEntity(IBlockReader p_196283_1_) {
+        return new GoldLuckyCat();
+    }
+
 }

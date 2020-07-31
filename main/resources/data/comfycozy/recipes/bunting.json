@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "ppp"
+  ],
+  "key": {
+    "s":
+    {
+      "item": "minecraft:string"
+    },
+    "p":
+    {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "comfycozy:bunting",
+    "count": 6
+  }
+}

@@ -12,5 +12,9 @@ public class SoundList {
     public static final DeferredRegister<SoundEvent> SOUNDS = new DeferredRegister<>(ForgeRegistries.SOUND_EVENTS, comfycozy.MOD_ID);
 
     public static final RegistryObject<SoundEvent> MYSTICAL_MEOW = SOUNDS.register("block.mystical_meow", () -> new SoundEvent(new ResourceLocation(comfycozy.MOD_ID, "block.mystical_meow")));
-    public static final RegistryObject<SoundEvent> LUCKY_CAT_ATTACK = SOUNDS.register("block.lucky_cat_attack", () -> new SoundEvent(new ResourceLocation(comfycozy.MOD_ID, "block.luck_cat_attack")));
+
+    public static final RegistryObject<SoundEvent> LUCKY_CAT_ATTACK = SOUNDS.register("block.lucky_cat_attack", () -> new SoundEvent(new ResourceLocation(comfycozy.MOD_ID, "block.lucky_cat_attack")));
+
+    public static final RegistryObject<SoundEvent> LUCKY = SOUNDS.register("block.lucky", () -> new SoundEvent(new ResourceLocation(comfycozy.MOD_ID, "block.lucky")));
+
 }

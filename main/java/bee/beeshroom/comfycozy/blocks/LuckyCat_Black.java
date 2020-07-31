@@ -1,5 +1,6 @@
 package bee.beeshroom.comfycozy.blocks;
 
+import bee.beeshroom.comfycozy.init.BlockInit;
 import bee.beeshroom.comfycozy.init.TileEntityInit;
 import bee.beeshroom.comfycozy.sounds.SoundList;
 import bee.beeshroom.comfycozy.tileentity.BlackLuckyCat;
@@ -22,10 +23,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.BeaconTileEntity;
-import net.minecraft.tileentity.BellTileEntity;
-import net.minecraft.tileentity.ConduitTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -39,6 +37,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
+import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -106,14 +105,14 @@ public class LuckyCat_Black extends HorizontalBlock implements IWaterLoggable {
         ItemStack itemstack = player.getHeldItem(handIn);
         Item item = itemstack.getItem();
 
-    /*    if ((item == Items.GOLD_INGOT) && player.isPotionActive(Effects.LUCK)){
+    /*    if ((item == Items.GOLD_INGOT) && item.isPotionActive(Effects.LUCK)){
             worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_VILLAGER_NO, SoundCategory.BLOCKS, 1.0F, 1.0f);
         }
         */
         if ((item == Items.GOLD_INGOT))
       {
           {
-                if (!worldIn.isRemote)
+                if (!worldIn.isRemote && ((player.isPotionActive(Effects.BAD_OMEN)) || (player.isPotionActive(Effects.NAUSEA)) || (player.isPotionActive(Effects.SLOWNESS)) || (player.isPotionActive(Effects.BLINDNESS)) || (player.isPotionActive(Effects.POISON)) || (player.isPotionActive(Effects.MINING_FATIGUE)) || (player.isPotionActive(Effects.UNLUCK)) || (player.isPotionActive(Effects.WEAKNESS)) || (player.isPotionActive(Effects.WITHER)) ))
                 {
                  player.removePotionEffect(Effects.BAD_OMEN);
                     player.removePotionEffect(Effects.NAUSEA);
@@ -125,27 +124,30 @@ public class LuckyCat_Black extends HorizontalBlock implements IWaterLoggable {
                     player.removePotionEffect(Effects.WEAKNESS);
                     player.removePotionEffect(Effects.WITHER);
                     player.addPotionEffect(new EffectInstance(Effects.LUCK, 3600, 0));
-                 //   player.addPotionEffect(new EffectInstance(Effects.LUCK, 3600, 0));
+                 //   item.addPotionEffect(new EffectInstance(Effects.LUCK, 3600, 0));
                       }
-          worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1.0F, 1.0f);
+          worldIn.playSound((PlayerEntity)null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, .8f);
 
           if(!player.abilities.isCreativeMode) itemstack.shrink(1);
                // return ActionResultType.SUCCESS;
               //TileEntityInit.LUCKYCAT_BLACK.get().create();
             }
 }
-        if (!worldIn.isRemote)  //(itemstack.isEmpty() && player.isSneaking())
+        if (!worldIn.isRemote && !(item == Items.GOLD_INGOT))
+        //(itemstack.isEmpty() && item.isSneaking())
         {
             //BlockState blockstate1 = state.cycle(LIT);
             worldIn.setBlockState(pos, state.cycle(LIT), 2);
        //     worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 1.0f);
           //  return ActionResultType.SUCCESS;
+            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 0.8f);
+
         }
-       // else
+        //else
 
           //  BlockState blockstate = this.func_226939_d_(state, worldIn, pos);
           //  float f = blockstate.get(LIT) ? 0.6F : 0.5Freturn ActionResultType.SUCCESS;
-            worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 0.8f);
+         //   worldIn.playSound((PlayerEntity) null, pos, SoundList.MYSTICAL_MEOW.get(), SoundCategory.BLOCKS, 1.0F, 0.8f);
         return ActionResultType.SUCCESS;
     }
 

@@ -25,6 +25,15 @@ public class BlockInit
 
  public static final RegistryObject<Block> LUCKYCAT_GOLD = BLOCKS.register("luckycat_gold", LuckyCat_Gold::new);
 
+    public static final RegistryObject<Block> BUNTING = BLOCKS.register("bunting", Bunting::new);
+    public static final RegistryObject<Block> SPOOKY_BUNTING = BLOCKS.register("spooky_bunting", Bunting::new);
+    public static final RegistryObject<Block> CHECKER_BUNTING = BLOCKS.register("checker_bunting", Bunting::new);
+    public static final RegistryObject<Block> HEART_BUNTING = BLOCKS.register("heart_bunting", Bunting::new);
+
+    public static final RegistryObject<Block> BOOK_STACK = BLOCKS.register("book_stack", BookStack::new);
+
+    public static final RegistryObject<Block> FISHTANK = BLOCKS.register("fishtank", FishTank::new);
+
 
     //block items
 

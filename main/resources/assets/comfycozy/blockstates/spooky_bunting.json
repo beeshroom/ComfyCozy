@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "facing=north,long=false": { "model": "comfycozy:block/spooky_bunting", "y": 270  },
+        "facing=south,long=false": { "model": "comfycozy:block/spooky_bunting", "y": 270  },
+        "facing=east,long=false":  { "model": "comfycozy:block/spooky_bunting", "y": 180 },
+         "facing=west,long=false":  { "model": "comfycozy:block/spooky_bunting", "y": 180 },
+       
+        "facing=north,long=true": { "model": "comfycozy:block/spooky_bunting_long", "y": 270 },
+        "facing=south,long=true": { "model": "comfycozy:block/spooky_bunting_long", "y": 270  },
+        "facing=east,long=true":  { "model": "comfycozy:block/spooky_bunting_long", "y": 180 },
+        "facing=west,long=true":  { "model": "comfycozy:block/spooky_bunting_long", "y": 180  }
+        }
+        }

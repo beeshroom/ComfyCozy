@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "ppp",
+    "r  "
+  ],
+  "key": {
+    "s":
+    {
+      "item": "minecraft:string"
+    },
+    "p":
+    {
+      "item": "minecraft:paper"
+    },
+    "r":
+    {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "result": {
+    "item": "comfycozy:heart_bunting",
+    "count": 6
+  }
+}

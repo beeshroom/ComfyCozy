@@ -3,15 +3,17 @@ package bee.beeshroom.comfycozy;
 import bee.beeshroom.comfycozy.init.BlockInit;
 import bee.beeshroom.comfycozy.init.ItemInit;
 import bee.beeshroom.comfycozy.init.TileEntityInit;
+import bee.beeshroom.comfycozy.lists.PotionList;
 import bee.beeshroom.comfycozy.sounds.SoundList;
 import bee.beeshroom.comfycozy.util.RegistryHandler;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.potion.Potions;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,8 +50,8 @@ public class comfycozy
 
        // ParticleInit.PARTICLE_TYPES.register(modEventBus);
         SoundList.SOUNDS.register(modEventBus);
-       // PotionList.POTIONS.register(modEventBus);
-       // PotionList.EFFECTS.register(modEventBus);
+     //   PotionList.POTIONS.register(modEventBus);
+        PotionList.EFFECTS.register(modEventBus);
      //   EnchantmentInit.ENCHANTMENTS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
@@ -79,11 +81,19 @@ public class comfycozy
         LOGGER.debug("Registered BlockItems!");
     }
 
-    private void setup(final FMLCommonSetupEvent event) { }
+    private void setup(final FMLCommonSetupEvent event) {
+        BrewingRecipeRegistry.addRecipe(Ingredient.fromStacks(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.AWKWARD)), Ingredient.fromItems(ItemInit.LUCKY_PICKAXE.get()), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION),  Potions.LUCK));
+        PotionList.addBrewingRecipes();
+    }
 
     private void clientSetup(final FMLClientSetupEvent event)
     {
         RenderTypeLookup.setRenderLayer(BlockInit.TABANATA.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.BUNTING.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.CHECKER_BUNTING.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.SPOOKY_BUNTING.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.HEART_BUNTING.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.FISHTANK.get(), RenderType.getCutout());
     }
 
 

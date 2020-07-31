@@ -20,5 +20,16 @@
         "stream": "true"
       }
     ]
+  },
+  "block.lucky":
+  {
+    "category": "block",
+    "subtitle": "block.lucky.sub",
+    "sounds": [
+      {
+        "name": "comfycozy:block/lucky",
+        "stream": "true"
+      }
+    ]
   }
 }

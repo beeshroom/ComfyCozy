@@ -1,0 +1,32 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "comfycozy:blocks/bunting",
+		"particle": "block/white_wool"
+	},
+	"elements": [
+		{
+			"name": "string",
+			"from": [0, 13, 8],
+			"to": [16, 13.8, 8],
+			"faces": {
+				"north": {"uv": [15, 0, 16, 16], "rotation": 90, "texture": "#0"},
+				"east": {"uv": [15, 4, 16, 5], "texture": "#0"},
+				"south": {"uv": [15, 0, 16, 16], "rotation": 270, "texture": "#0"},
+				"west": {"uv": [15, 4, 16, 5], "texture": "#0"},
+				"up": {"uv": [15, 4, 16, 5], "texture": "#0"},
+				"down": {"uv": [15, 4, 16, 5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "flags",
+			"from": [0.5, 9, 8],
+			"to": [15.5, 13, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 17, 15]},
+			"faces": {
+				"north": {"uv": [0, 4, 15, 8], "texture": "#0"},
+				"south": {"uv": [15, 4, 0, 8], "texture": "#0"}
+			}
+		}
+	]
+}

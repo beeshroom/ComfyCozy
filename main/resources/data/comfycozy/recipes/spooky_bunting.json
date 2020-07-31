@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "ppp",
+    "z b"
+  ],
+  "key": {
+    "s":
+    {
+      "item": "minecraft:string"
+    },
+    "p":
+    {
+      "item": "minecraft:paper"
+    },
+    "b":
+    {
+      "item": "minecraft:bone"
+    },
+    "z":
+    {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "result": {
+    "item": "comfycozy:spooky_bunting",
+    "count": 6
+  }
+}
