@@ -31,5 +31,37 @@
         "stream": "true"
       }
     ]
+  },
+  "entity.shroomin_death":
+  {
+    "category": "entity",
+    "subtitle": "entity.shroomin_death.sub",
+    "sounds": [
+      {
+        "name": "comfycozy:entity/shroomin_death",
+        "stream": "true"
+      }
+    ]
+  },
+  "entity.shroomin_splat":
+  {
+    "category": "entity",
+    "subtitle": "entity.shroomin_splat.sub",
+    "sounds": [
+      {
+        "name": "comfycozy:entity/shroomin_splat",
+        "stream": "true"
+      }
+    ]
+  },
+  "entity.shroomin_eat": {
+    "category": "entity",
+    "subtitle": "entity.shroomin_eat.sub",
+    "sounds": [
+      {
+        "name": "comfycozy:entity/shroomin_eat",
+        "stream": "true"
+      }
+    ]
   }
 }

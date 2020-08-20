@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "comfycozy:block/oat_stage0" },
+        "age=1": { "model": "comfycozy:block/oat_stage1" },
+        "age=2": { "model": "comfycozy:block/oat_stage1" },
+        "age=3": { "model": "comfycozy:block/oat_stage2" },
+        "age=4": { "model": "comfycozy:block/oat_stage2" },
+        "age=5": { "model": "comfycozy:block/oat_stage3" },
+        "age=6": { "model": "comfycozy:block/oat_stage3" },
+        "age=7": { "model": "comfycozy:block/oat_stage4" }
+}
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "comfycozy:bunting"
+    },
+    {
+      "item": "comfycozy:bunting"
+    },
+    {
+      "item": "comfycozy:bunting"
+    },
+    {
+      "item": "comfycozy:bunting"
+    },
+    {
+      "item": "comfycozy:bunting"
+    },
+    {
+      "item": "comfycozy:bunting"
+    },
+    {
+      "item": "minecraft:red_dye"
+    }
+  ],
+  "result": {
+    "item": "comfycozy:heart_bunting",
+    "count": 6
+  }
+}

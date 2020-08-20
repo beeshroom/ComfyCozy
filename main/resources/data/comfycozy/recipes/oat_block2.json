@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "comfycozy:oat_block"
+    }
+  ],
+  "result": {
+    "item": "comfycozy:oats",
+        "count": 9
+    
+  }
+}

@@ -37,7 +37,7 @@ public class LuckEvent
             //amplifier == 0 &&
             if (random.nextInt(4) == 0) {
                 if (!world.isRemote) {
-                    livingentity.world.playSound((PlayerEntity) null, livingentity.getPosition(), SoundList.LUCKY.get(), SoundCategory.PLAYERS, 1.0F, 1.0f);
+                    livingentity.world.playSound((PlayerEntity) null, livingentity.getPosition(), SoundList.LUCKY.get(), SoundCategory.PLAYERS, 0.8F, 0.9f);
                 }
                 livingentity.extinguish();
                 livingentity.world.addParticle((ParticleTypes.HAPPY_VILLAGER), livingentity.getPosX(), livingentity.getPosY() + 0.15D, livingentity.getPosZ(), 4.0D, 0.5D, 0.5D);

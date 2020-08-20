@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "cdc",
+    "ccc"
+  ],
+  "key": {
+    "c":
+    {
+      "item": "comfycozy:white_cushion"
+    },
+    "d":
+    {
+      "item": "minecraft:yellow_dye"
+    }
+  },
+  "result": {
+    "item": "comfycozy:yellow_cushion",
+    "count": 8
+  }
+}

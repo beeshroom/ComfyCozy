@@ -1,0 +1,41 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "comfycozy:blocks/clover4",
+		"1": "comfycozy:blocks/clover_stem",
+		"particle": "comfycozy:blocks/clover4"
+	},
+	"elements": [
+		{
+			"from": [0, 2, 0],
+			"to": [16, 2, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.8, 8]},
+			"faces": {
+				"up": {"uv": [0, 16, 16, 0], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 0, -0.2],
+			"to": [7.5, 2, 15.8],
+			"rotation": {"angle": -45, "axis": "y", "origin": [7.5, 8, 12.8]},
+			"faces": {
+				"east": {"uv": [0, 9, 16, 11], "texture": "#1"},
+				"west": {"uv": [16, 9, 0, 11], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0.7, 0, 1.4],
+			"to": [0.7, 2, 17.4],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8.5, 8, 13.9]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 1], "texture": "#1"},
+				"east": {"uv": [0, 9, 16, 11], "texture": "#1"},
+				"south": {"uv": [0, 0, 1, 1], "texture": "#1"},
+				"west": {"uv": [16, 9, 0, 11], "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 1], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 1], "rotation": 270, "texture": "#1"}
+			}
+		}
+	]
+}

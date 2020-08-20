@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
@@ -23,10 +24,13 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.stats.ServerStatisticsManager;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -114,6 +118,10 @@ public class LuckyCat_Black extends HorizontalBlock implements IWaterLoggable {
           {
                 if (!worldIn.isRemote && ((player.isPotionActive(Effects.BAD_OMEN)) || (player.isPotionActive(Effects.NAUSEA)) || (player.isPotionActive(Effects.SLOWNESS)) || (player.isPotionActive(Effects.BLINDNESS)) || (player.isPotionActive(Effects.POISON)) || (player.isPotionActive(Effects.MINING_FATIGUE)) || (player.isPotionActive(Effects.UNLUCK)) || (player.isPotionActive(Effects.WEAKNESS)) || (player.isPotionActive(Effects.WITHER)) ))
                 {
+                    //was gonna try to make it so it will cause phantoms not to spawn via telling the game you have slept,
+                    // but im not sure how to do that atm moment, so i will withold for now.
+                    //player.isSleeping();
+
                  player.removePotionEffect(Effects.BAD_OMEN);
                     player.removePotionEffect(Effects.NAUSEA);
                     player.removePotionEffect(Effects.SLOWNESS);

@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "ooo",
+        "ooo",
+        "ooo"
+    ],
+    
+    "key":
+    {
+         "o":
+      {
+        "item": "comfycozy:oats"
+      }
+    },
+    
+    "result":
+    {
+        "item": "comfycozy:oat_block",
+        "count": 1
+    }
+}

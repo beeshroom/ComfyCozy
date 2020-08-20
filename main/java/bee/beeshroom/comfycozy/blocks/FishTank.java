@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import javafx.scene.layout.Pane;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
@@ -62,10 +63,35 @@ public class FishTank extends Block implements IWaterLoggable {
                         .sound(SoundType.GLASS)
                         .harvestLevel(0)
                         .harvestTool(ToolType.PICKAXE)
+                        .notSolid()
                 //.setRequiresTool()
         );
         //   this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(POWERED, Boolean.valueOf(false)));
         this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, Boolean.valueOf(false)));
+    }
+
+   // public notSolid();
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return 1.0F;
+    }
+
+    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+        return true;
+    }
+
+    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return false;
+    }
+
+    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return false;
+    }
+
+    public boolean canEntitySpawn(BlockState state, IBlockReader worldIn, BlockPos pos, EntityType<?> type) {
+        return false;
     }
 
     @Override
@@ -103,11 +129,6 @@ public class FishTank extends Block implements IWaterLoggable {
 
     public IFluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
-    }
-
-    @Override
-    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return 0.7F;
     }
 
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {

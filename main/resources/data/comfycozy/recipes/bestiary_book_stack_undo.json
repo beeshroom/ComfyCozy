@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "comfycozy:bestiary_book_stack"
+    }
+  ],
+  "result": {
+    "item": "minecraft:book",
+    "count": 3
+  }
+}

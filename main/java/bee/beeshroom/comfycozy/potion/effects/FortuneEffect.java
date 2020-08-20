@@ -1,5 +1,6 @@
 package bee.beeshroom.comfycozy.potion.effects;
 
+import bee.beeshroom.comfycozy.init.BlockInit;
 import bee.beeshroom.comfycozy.init.ItemInit;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -33,7 +34,7 @@ public class FortuneEffect extends Effect {
 
 
     public static void addBrewingRecipes() {
-        addMix(Potions.AWKWARD, ItemInit.LUCKY_PICKAXE.get(), Potions.LUCK);
+        addMix(Potions.AWKWARD, Item.getItemFromBlock(BlockInit.FOUR_LEAF_CLOVER.get()), Potions.LUCK);
     }
 
 

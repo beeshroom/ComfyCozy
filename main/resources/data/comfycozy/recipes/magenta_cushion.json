@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "www"
+  ],
+  "key": {
+    "w":
+    {
+      "item": "minecraft:magenta_wool"
+    }
+  },
+  "result": {
+    "item": "comfycozy:magenta_cushion",
+    "count": 3
+  }
+}

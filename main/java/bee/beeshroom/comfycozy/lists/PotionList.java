@@ -1,6 +1,7 @@
 package bee.beeshroom.comfycozy.lists;
 
 import bee.beeshroom.comfycozy.comfycozy;
+import bee.beeshroom.comfycozy.init.BlockInit;
 import bee.beeshroom.comfycozy.init.ItemInit;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -52,7 +53,7 @@ public class PotionList {
 
      //  addMix(Potions.AWKWARD, Items.BELL, PotionList.OBLIVIOUS_POTION.get());
 
-        addMix(Potions.AWKWARD, ItemInit.LUCKY_PICKAXE.get(), Potions.LUCK);
+        addMix(Potions.AWKWARD, Item.getItemFromBlock(BlockInit.FOUR_LEAF_CLOVER.get()), Potions.LUCK);
     }
 
     public static class FortuneEffect extends Effect {

@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [
+            { "model": "comfycozy:block/four_leaf_clover" },
+            { "model": "comfycozy:block/four_leaf_clover", "y": 90 },
+            { "model": "comfycozy:block/four_leaf_clover", "y": 180 },
+            { "model": "comfycozy:block/four_leaf_clover", "y": 270 }
+        ]
+    }
+}

@@ -157,12 +157,12 @@ public class LuckyCat_Gold extends HorizontalBlock implements IWaterLoggable {
             }
         }
 
-        if ((item == Items.EMERALD) && !player.isPotionActive(Effects.LUCK) && !player.isPotionActive(PotionList.FORTUNE_EFFECT.get()))
+        if ((item == Items.EMERALD) && !player.isPotionActive(PotionList.FORTUNE_EFFECT.get()))
         {
             {
                 if (!worldIn.isRemote)
                 {
-                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 9000, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 9000, 1));
                     player.addPotionEffect(new EffectInstance(Effects.INSTANT_HEALTH, 1, 0));
                 }
                 worldIn.playSound((PlayerEntity)null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, .7f);
@@ -172,13 +172,13 @@ public class LuckyCat_Gold extends HorizontalBlock implements IWaterLoggable {
             }
         }
 
-        if ((item == Items.EMERALD) && player.isPotionActive(PotionList.FORTUNE_EFFECT.get()))
+        if ((item == Items.EMERALD) && player.isPotionActive(PotionList.FORTUNE_EFFECT.get()) && !player.isPotionActive(Effects.LUCK))
         {
             {
                 if (!worldIn.isRemote)
                 {
                     player.addPotionEffect(new EffectInstance(PotionList.FORTUNE_EFFECT.get(), 4800, 0));
-                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 9000, 0));
+                    player.addPotionEffect(new EffectInstance(Effects.LUCK, 9000, 1));
                     player.addPotionEffect(new EffectInstance(Effects.INSTANT_HEALTH, 1, 0));
                 }
                 worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 1.0F, .8F);

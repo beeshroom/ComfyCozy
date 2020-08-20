@@ -172,14 +172,19 @@ public class GoldLuckyCat extends TileEntity implements ITickableTileEntity {
                 ItemStack itemstack = playerentity.getHeldItemMainhand();
                 Item item = itemstack.getItem();
                 if ((this.pos.withinDistance(new BlockPos(playerentity), (double) j))) {
+
+                    if (!playerentity.isPotionActive(Effects.LUCK))
+                    {
+                        this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.7f);
+                    }
+
                     playerentity.addPotionEffect(new EffectInstance(Effects.LUCK, 320, 0, false, false));
+
 
                     if (item == ItemInit.LUCKY_PICKAXE.get() && !itemstack.isEnchanted()) {
                             itemstack.addEnchantment(Enchantments.FORTUNE, 1);
                             itemstack.addEnchantment(Enchantments.LOOTING, 1);
-
-                        itemstack.addEnchantment(Enchantments.BINDING_CURSE, 1);
-                        itemstack.addEnchantment(Enchantments.VANISHING_CURSE, 1);
+                           // itemstack.addEnchantment(Enchantments.VANISHING_CURSE, 1);
                         }
                     }
                 }

@@ -1,12 +1,27 @@
 {
   "itemGroup.comfycozy": "Comfy Cozy",
 "item.comfycozy.oats": "Oats",
-"item.comfycozy.oatmeal": "Oatmeal",
-  "item.comfycozy.oat_seed_item": "Oat Seeds",
+  "block.comfycozy.oats": "Oat Seeds",
+  "item.comfycozy.oat_seeds": "Oat Seeds",
+  "block.comfycozy.oat_block": "Block of Oats",
+  "item.comfycozy.oatmeal": "Oatmeal",
+  "item.comfycozy.sweet_berry_oatmeal": "Sweet Berry Oatmeal",
+
+  "block.comfycozy.bowloatmeal": "Bowl of Oatmeal",
+  "block.comfycozy.bowlsweetberryoatmeal": "Bowl of Sweet Berry Oatmeal",
+
+  "block.comfycozy.iris": "Iris",
+  "block.comfycozy.golem_flower": "Golem Flower",
+  "block.comfycozy.clover": "Clover",
+  "block.comfycozy.four_leaf_clover": "Four Leaf Clover",
+  "block.comfycozy.glass_panel": "Glass Panel",
+
   "item.comfycozy.lucky_bell": "Lucky Bell",
   "item.comfycozy.lucky_pickaxe": "Lucky Pickaxe",
 
   "block.comfycozy.book_stack": "Book Stack",
+  "block.comfycozy.book_stack_alt": "Book Stack",
+  "block.comfycozy.bestiary_book_stack": "Bestiary Book Stack",
 
   "block.comfycozy.daruma": "Daruma",
 
@@ -23,6 +38,30 @@
 
   "block.comfycozy.fishtank": "Fish Tank",
 
+
+  "block.comfycozy.red_cushion": "Red Cushion",
+  "block.comfycozy.orange_cushion": "Orange Cushion",
+  "block.comfycozy.yellow_cushion": "Yellow Cushion",
+  "block.comfycozy.lime_cushion": "Lime Cushion",
+  "block.comfycozy.green_cushion": "Green Cushion",
+  "block.comfycozy.cyan_cushion": "Cyan Cushion",
+  "block.comfycozy.light_blue_cushion": "Light Blue Cushion",
+  "block.comfycozy.blue_cushion": "Blue Cushion",
+  "block.comfycozy.purple_cushion": "Purple Cushion",
+  "block.comfycozy.magenta_cushion": "Magenta Cushion",
+  "block.comfycozy.pink_cushion": "Pink Cushion",
+  "block.comfycozy.white_cushion": "White Cushion",
+  "block.comfycozy.light_gray_cushion": "Light Gray Cushion",
+  "block.comfycozy.gray_cushion": "Gray Cushion",
+  "block.comfycozy.black_cushion": "Black Cushion",
+  "block.comfycozy.brown_cushion": "Brown Cushion",
+
+
+
+
+
+
+
   "block.mystical_meow": "Mystical meow",
   "block.mystical_meow.sub": "Mystical meow",
   "block.lucky_cat_attack": "Luck Cat protection",
@@ -30,6 +69,18 @@
   "block.lucky": "Lucky",
   "block.lucky.sub": "Lucky!",
 
+  "entity.shroomin_splat": "Shroomin hurts",
+  "entity.shroomin_splat.sub": "Shroomin hurts",
+  "entity.shroomin_death": "Shroomin dies",
+  "entity.shroomin_death.sub": "Shroomin dies",
 
-  "effect.comfycozy.fortune": "Fortunate"
+  "entity.shroomin_eat": "Shroomin eats",
+  "entity.shroomin_eat.sub": "Shroomin eats",
+
+
+  "effect.comfycozy.fortune": "Fortunate",
+
+
+  "entity.comfycozy.shroomin": "Shroomin",
+  "entity.comfycozy.shroomin_entity": "Shroomin"
 }

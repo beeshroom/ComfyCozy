@@ -179,29 +179,30 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
                 if ((this.pos.withinDistance(new BlockPos(playerentity), (double)j) && playerentity.isPotionActive(Effects.INVISIBILITY) || (this.pos.withinDistance(new BlockPos(playerentity), (double)j) && (itemstack.getItem() == Blocks.SKELETON_SKULL.asItem()) || (itemstack.getItem() == Blocks.WITHER_SKELETON_SKULL.asItem()) || (itemstack.getItem() == Blocks.ZOMBIE_HEAD.asItem()) || (itemstack.getItem() == Blocks.CREEPER_HEAD.asItem())) ))
                 {
 
+                    if (!playerentity.isPotionActive(Effects.WEAKNESS))
+                    {
+                        this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.8f);
+                    }
+
                    //i think itd be funny if it targetted ppl wearing mob skulls
                     // playerentity.addPotionEffect(new EffectInstance(Effects.CONDUIT_POWER, 260, 0, false, false));
                   //  playerentity.attackEntityFrom(DamageSource.MAGIC, 0.5F);
                    // playerentity.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 15, 1, false, false));
 
-                    playerentity.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 260, 1, false, false));
-                    playerentity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 130, 3, false, false));
+                    playerentity.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 260, 1, true, false));
+                    playerentity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 130, 3, true, false));
 
-                    if (!playerentity.isPotionActive(Effects.WEAKNESS))
-                    {
+                  //  if (!playerentity.isPotionActive(Effects.WEAKNESS))
+                  //  {
                     if (playerentity.isPotionActive(Effects.INVISIBILITY) || (this.pos.withinDistance(new BlockPos(playerentity), (double)j) && (itemstack.getItem() == Blocks.SKELETON_SKULL.asItem()) || (itemstack.getItem() == Blocks.WITHER_SKELETON_SKULL.asItem()) || (itemstack.getItem() == Blocks.ZOMBIE_HEAD.asItem()) || (itemstack.getItem() == Blocks.CREEPER_HEAD.asItem()))) {
                         if (!world.isRemote) {
                            // this.spawnParticles();
-                            this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.9f);
+                          //  this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 08f);
 
                             playerentity.removePotionEffect(Effects.INVISIBILITY);
                         }
-                    } }
+                    } //}
 
-                   if (!playerentity.isPotionActive(Effects.WEAKNESS))
-                    {
-                        this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.9f);
-                    }
 
                    //tried making them get pushed away, but didnt get it working in a satisfying way, oh well
                  /*   double x = playerentity.getPosX() - pos.getX() -6D;
@@ -240,7 +241,7 @@ public class BlackLuckyCat extends TileEntity implements ITickableTileEntity {
         if (this.target != null) {
 
             if (!this.target.isPotionActive(Effects.SLOWNESS)) {
-                this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.9f);
+                this.world.playSound((PlayerEntity) null, pos, SoundList.LUCKY_CAT_ATTACK.get(), SoundCategory.BLOCKS, 1.0F, 0.8f);
             }
 
          //   this.target.addPotionEffect(new EffectInstance(Effects.GLOWING, 5, 0, false, false));

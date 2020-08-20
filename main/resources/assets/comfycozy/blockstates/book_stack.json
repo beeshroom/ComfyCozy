@@ -1,24 +1,50 @@
 {
     "variants": {
-        "facing=north": [
-            { "model": "comfycozy:block/book_stack"},
-            { "model": "comfycozy:block/book_stack2"},
-            { "model": "comfycozy:block/book_stack3"}
-        ],
-        "facing=south": [
-        { "model": "comfycozy:block/book_stack", "y": 180},
-            { "model": "comfycozy:block/book_stack2", "y": 180},
-            { "model": "comfycozy:block/book_stack3", "y": 180}
-        ],
-        "facing=east": [
-        { "model": "comfycozy:block/book_stack", "y": 90},
-            { "model": "comfycozy:block/book_stack2", "y": 90},
-            { "model": "comfycozy:block/book_stack3", "y": 90}
-        ],
-        "facing=west": [
-        { "model": "comfycozy:block/book_stack","y": 270},
-            { "model": "comfycozy:block/book_stack2","y": 270},
-            { "model": "comfycozy:block/book_stack3","y": 270}
-        ]
-        }
+        "book_style=1,book_color=1,facing=north": { "model": "comfycozy:block/book_stack", "y": 0  },
+        "book_style=1,book_color=1,facing=south": { "model": "comfycozy:block/book_stack", "y": 180  },
+        "book_style=1,book_color=1,facing=east":  { "model": "comfycozy:block/book_stack", "y": 90 },
+        "book_style=1,book_color=1,facing=west":  { "model": "comfycozy:block/book_stack", "y": 270 },
+
+        "book_style=2,book_color=1,facing=north": { "model": "comfycozy:block/book_stack_leaning", "y": 0  },
+        "book_style=2,book_color=1,facing=south": { "model": "comfycozy:block/book_stack_leaning", "y": 180  },
+        "book_style=2,book_color=1,facing=east":  { "model": "comfycozy:block/book_stack_leaning", "y": 90 },
+        "book_style=2,book_color=1,facing=west":  { "model": "comfycozy:block/book_stack_leaning", "y": 270 },
+
+        "book_style=3,book_color=1,facing=north,": { "model": "comfycozy:block/book_stack_laying", "y": 0  },
+        "book_style=3,book_color=1,facing=south": { "model": "comfycozy:block/book_stack_laying", "y": 180  },
+        "book_style=3,book_color=1,facing=east":  { "model": "comfycozy:block/book_stack_laying", "y": 90 },
+        "book_style=3,book_color=1,facing=west":  { "model": "comfycozy:block/book_stack_laying", "y": 270 },
+
+
+        "book_style=1,book_color=2,facing=north": { "model": "comfycozy:block/book_stack2", "y": 0  },
+        "book_style=1,book_color=2,facing=south": { "model": "comfycozy:block/book_stack2", "y": 180  },
+        "book_style=1,book_color=2,facing=east":  { "model": "comfycozy:block/book_stack2", "y": 90 },
+        "book_style=1,book_color=2,facing=west":  { "model": "comfycozy:block/book_stack2", "y": 270 },
+
+        "book_style=2,book_color=2,facing=north": { "model": "comfycozy:block/book_stack_leaning2", "y": 0  },
+        "book_style=2,book_color=2,facing=south": { "model": "comfycozy:block/book_stack_leaning2", "y": 180  },
+        "book_style=2,book_color=2,facing=east":  { "model": "comfycozy:block/book_stack_leaning2", "y": 90 },
+        "book_style=2,book_color=2,facing=west":  { "model": "comfycozy:block/book_stack_leaning2", "y": 270 },
+
+        "book_style=3,book_color=2,facing=north,": { "model": "comfycozy:block/book_stack_laying2", "y": 0  },
+        "book_style=3,book_color=2,facing=south": { "model": "comfycozy:block/book_stack_laying2", "y": 180  },
+        "book_style=3,book_color=2,facing=east":  { "model": "comfycozy:block/book_stack_laying2", "y": 90 },
+        "book_style=3,book_color=2,facing=west":  { "model": "comfycozy:block/book_stack_laying2", "y": 270 },
+
+
+        "book_style=1,book_color=3,facing=north": { "model": "comfycozy:block/book_stack3", "y": 0  },
+        "book_style=1,book_color=3,facing=south": { "model": "comfycozy:block/book_stack3", "y": 180  },
+        "book_style=1,book_color=3,facing=east":  { "model": "comfycozy:block/book_stack3", "y": 90 },
+        "book_style=1,book_color=3,facing=west":  { "model": "comfycozy:block/book_stack3", "y": 270 },
+
+        "book_style=2,book_color=3,facing=north": { "model": "comfycozy:block/book_stack_leaning3", "y": 0  },
+        "book_style=2,book_color=3,facing=south": { "model": "comfycozy:block/book_stack_leaning3", "y": 180  },
+        "book_style=2,book_color=3,facing=east":  { "model": "comfycozy:block/book_stack_leaning3", "y": 90 },
+        "book_style=2,book_color=3,facing=west":  { "model": "comfycozy:block/book_stack_leaning3", "y": 270 },
+
+        "book_style=3,book_color=3,facing=north,": { "model": "comfycozy:block/book_stack_laying3", "y": 0  },
+        "book_style=3,book_color=3,facing=south": { "model": "comfycozy:block/book_stack_laying3", "y": 180  },
+        "book_style=3,book_color=3,facing=east":  { "model": "comfycozy:block/book_stack_laying3", "y": 90 },
+        "book_style=3,book_color=3,facing=west":  { "model": "comfycozy:block/book_stack_laying3", "y": 270 }
+    }
         }

@@ -1,5 +1,10 @@
 {
     "variants": {
-        "normal": { "model": "comfycozy:oat_block" }
+        "": [
+            {"model": "comfycozy:block/oat_block" },
+            {"model": "comfycozy:block/oat_block", "y": 90},
+            {"model": "comfycozy:block/oat_block", "y": 180},
+            {"model": "comfycozy:block/oat_block", "y": 270}
+            ]
     }
 }

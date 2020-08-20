@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "g g",
+    "ggg"
+  ],
+  "key": {
+    "g":
+    {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "comfycozy:fishtank",
+    "count": 1
+  }
+}

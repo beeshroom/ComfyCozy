@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "bites=0": { "model": "comfycozy:block/bowl_sweet_berry_oatmeal", "y": 0  },
+
+        "bites=1": { "model": "comfycozy:block/bowl", "y": 0  }
+    }
+        }

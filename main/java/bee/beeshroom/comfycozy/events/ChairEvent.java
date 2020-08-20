@@ -1,114 +1,75 @@
 /* package bee.beeshroom.comfycozy.events;
 
+import bee.beeshroom.comfycozy.blocks.Cushion;
+import bee.beeshroom.comfycozy.comfycozy;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.PlayerEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.item.minecart.MinecartEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.state.properties.Half;
+import net.minecraft.state.properties.SlabType;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.item.PlayerInteractEvent;
+import net.minecraftforge.event.entity.EntityMountEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+import java.lang.ref.Reference;
 import java.util.List;
 
-//@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
+@Mod.EventBusSubscriber(modid = comfycozy.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChairEvent
 {
-    @SubscribeEvent
-    public static void onInteractWithBlock(PlayerInteractEvent.RightClickBlock event)
-    {
-        PlayerEntity item = event.getPlayer();
-        if(item.getRidingEntity() != null)
+	@SubscribeEvent
+	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	{
+		if(!event.getWorld().isRemote)
+		{
+			World world = event.getWorld();
+			BlockPos pos = event.getPos();
+			BlockState state = world.getBlockState(pos);
+			Block block = world.getBlockState(pos).getBlock();
+			PlayerEntity player = event.getPlayer();
+
+			if((block instanceof Cushion) && player.getHeldItemMainhand().isEmpty() && world.getBlockState(pos.up()).isAir(world, pos.up()))
+			{
+				CushionEntity sit = new CushionEntity(world, pos);
+
+					world.addEntity(sit);
+					player.startRiding(sit);
+
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityMount(EntityMountEvent event)
+	{
+		if(!event.getWorldObj().isRemote && event.isDismounting())
+		{
+			Entity player = event.getEntityBeingMounted();
+
+			if(player instanceof CushionEntity)
+				player.remove();
+		}
+	}
+
+private static boolean isValidBlock(World world, BlockPos pos, BlockState state, Block block)
         {
-            return;
+        boolean isValid = block instanceof Cushion;
+        return isValid;
         }
 
-        World worldIn = event.getWorld();
-        BlockPos pos = event.getPos();
-        Vec3d vec = new Vec3d(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-        double maxDist = 3.5D;
-        if((vec.x - item.getPosX()) * (vec.x - item.getPosX()) + (vec.y - item.getPosY()) * (vec.y - item.getPosY()) + (vec.z - item.getPosZ()) * (vec.z - item.getPosZ()) > maxDist * maxDist)
-        {
-            return;
-        }
 
-        BlockState state = worldIn.getBlockState(pos);
-        ItemStack mainStack = item.getHeldItemMainhand();
-        ItemStack offStack = item.getHeldItemOffhand();
-        if(!mainStack.isEmpty() || !offStack.isEmpty())
-        {
-            return;
-        }
-
-        //if(state.getBlock() instanceof cushion_fire || state.getBlock() instanceof cushion_zigzag || state.getBlock() instanceof cushion_porg || state.getBlock() instanceof cushion_pika || state.getBlock() instanceof cushion_diamond )
-        if(state.getBlock() instanceof cushion)
-        {
-            //List<SeatStair> seats = worldIn.getEntitiesWithinAABB(SeatStair.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)));
-            Seat seat = new Seat(worldIn, pos);
-            worldIn.addEntity(seat);
-          //  worldIn.spawnEntity(seat);
-            item.startRiding(seat);
-        }
-    }
-
-    public class Seat extends Entity
-    {
-        public Seat(World worldIn, BlockPos pos)
-        {
-            this(worldIn);
-            setPosition(pos.getX() + 0.5D, pos.getY() + 0.135D, pos.getZ() + 0.5D);
-        }
-
-        public Seat(World worldIn)
-        {
-            super(worldIn);
-           // setSize(0.0F, 0.0F);
-        }
-
-        @Override
-        public void onUpdate()
-        {
-            super.onUpdate();
-            BlockPos pos = getPosition();
-            //	if(!(getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_fire || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_zigzag || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_porg || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_pika || getEntityWorld().getBlockState(pos).getBlock() instanceof cushion_diamond))
-            if(!(getEntityWorld().getBlockState(pos).getBlock() instanceof cushion))
-            {
-                this.remove();
-                return;
-            }
-
-            List<Entity> passengers = getPassengers();
-            if(passengers.isEmpty())
-            {
-                this.remove();
-            }
-            for(Entity entity : passengers)
-            {
-                if(entity.isSneaking())
-                {
-                    this.remove();
-                }
-            }
-        }
-
-        @Override
-        protected void entityInit()
-        {
-
-        }
-
-        @Override
-        protected void readAdditional(CompoundNBT compound)
-        {
-
-        }
-
-        @Override
-        protected void writeAdditional(CompoundNBT compound)
-        {
-
-        }
-    }
-}*/
+        } */

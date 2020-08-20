@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+     "item": "comfycozy:book_stack_alt"
+    }
+  ],
+  "result": {
+    "item": "minecraft:book",
+    "count": 3
+  }
+}

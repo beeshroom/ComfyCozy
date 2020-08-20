@@ -1,4 +1,4 @@
-/*package bee.beeshroom.comfycozy.blocks;
+package bee.beeshroom.comfycozy.blocks;
 
 import bee.beeshroom.comfycozy.init.ItemInit;
 import net.minecraft.block.Block;
@@ -14,12 +14,12 @@ public class OatCrop extends CropsBlock {
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
             Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D),
             Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D),
-            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
+            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
+            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D),
+            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D),
+            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D),
+            Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D),
             Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D) };
 
     public OatCrop(Properties builder) {
@@ -28,11 +28,11 @@ public class OatCrop extends CropsBlock {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return ItemInit.OAT_SEED_ITEM.get();
+        return ItemInit.OAT_SEEDS.get();
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return SHAPE_BY_AGE[state.get(this.getAgeProperty())];
     }
-} */
+}

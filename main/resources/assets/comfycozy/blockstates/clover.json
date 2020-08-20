@@ -1,0 +1,14 @@
+{
+    "variants": {
+        "": [
+            { "model": "comfycozy:block/clover" },
+            { "model": "comfycozy:block/clover", "y": 90 },
+            { "model": "comfycozy:block/clover_different_heights" },
+            { "model": "comfycozy:block/clover_different_heights", "y": 90 },
+            { "model": "comfycozy:block/clover4" },
+            { "model": "comfycozy:block/clover_different_heights", "y": 270 },
+            { "model": "comfycozy:block/clover4", "y": 90 },
+            { "model": "comfycozy:block/clover_different_heights", "y": 180 }
+        ]
+    }
+}
