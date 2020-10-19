@@ -1,3 +1,231 @@
+Build: 1.15.2-31.2.45 - Mon Oct 05 14:34:56 GMT 2020
+	adam:
+		Bump mixin version to 0.8.2
+
+=========
+Build: 1.15.2-31.2.44 - Sat Oct 03 21:34:48 GMT 2020
+	curle:
+		Add mixin 0.8.1 (#7393)
+
+=========
+Build: 1.15.2-31.2.43 - Fri Sep 25 23:41:26 GMT 2020
+	ichttt:
+		Fix grass disappearing when alwaysSetupTerrainOffThread is true (#7291)
+
+	tterrag:
+		Add missing license headers
+
+=========
+Build: 1.15.2-31.2.41 - Tue Sep 15 20:43:06 GMT 2020
+	diesieben07:
+		Fix wrong BlockState param passed into canSustainPlant from FarmlandBlock, causing crops to uproot wrongly (#7215)
+
+=========
+Build: 1.15.2-31.2.40 - Tue Sep 15 20:19:00 GMT 2020
+	diesieben07:
+		Fix config iteration order (#7231)
+
+	41961280+L3MON4D3:
+		[1.15.x] Post EntityJoinWorldEvent when Lightning is added in ServerWorld. (#7223)
+		
+		* Post EntityJoinWorldEvent when Lightning is added in ServerWorld.
+		
+		* Ignite Blocks around impact Position in tick() instead of constructor.
+
+=========
+Build: 1.15.2-31.2.38 - Tue Sep 15 20:07:55 GMT 2020
+	shartte:
+		Sets the empty/fill sounds for vanilla fluids (#6787)
+
+=========
+Build: 1.15.2-31.2.37 - Tue Sep 08 19:08:03 GMT 2020
+	brandon4261:
+		Added custom elytra support (#6791)
+
+=========
+Build: 1.15.2-31.2.36 - Tue Aug 04 00:12:34 GMT 2020
+	sciwhiz12:
+		Fix misaligned patch for ServerWorld#updateEntity Fixes #6516 (#7210)
+
+=========
+Build: 1.15.2-31.2.35 - Mon Aug 03 23:35:09 GMT 2020
+	csh2001331:
+		Fire AnimalTameEvent for cats. (#6760)
+
+	mrtschipp:
+		Re-added PlayerEvent.NameFormat (#7173)
+
+=========
+Build: 1.15.2-31.2.33 - Mon Jul 27 23:27:15 GMT 2020
+	curle:
+		Add extra debugging information to the MDK (#6882)
+
+	ray.neiheiser:
+		Fix rail 180 rotations (#7174)
+
+=========
+Build: 1.15.2-31.2.31 - Mon Jul 06 20:59:19 GMT 2020
+	shartte:
+		Fix using Fluid's emptySound when filling buckets, rather than the fillSound. (#6786)
+
+=========
+Build: 1.15.2-31.2.30 - Thu Jul 02 05:43:41 GMT 2020
+	tterrag:
+		Fix improper handling of baked lighting in forge light pipeline
+		
+		Closes #6803
+
+=========
+Build: 1.15.2-31.2.29 - Tue Jun 30 19:45:50 GMT 2020
+	diesieben07:
+		Fix IItemHandler wrappers for chests not updating both chests (#6874)
+
+=========
+Build: 1.15.2-31.2.28 - Mon Jun 29 19:47:39 GMT 2020
+	mattmess1221:
+		Fix Language.javaLocale parsing (#6861)
+
+=========
+Build: 1.15.2-31.2.27 - Thu Jun 25 17:11:42 GMT 2020
+	Laughlan Coventry:
+		Allow RayTraceContext to be constructed with a null entity. (#6708)
+
+=========
+Build: 1.15.2-31.2.26 - Thu Jun 25 16:35:52 GMT 2020
+	lalis.jan:
+		Replace explicit shears reference in vanilla loot tables with tag for modded shears. (#6765)
+
+=========
+Build: 1.15.2-31.2.25 - Thu Jun 25 16:29:30 GMT 2020
+	hanetzer:
+		Fix cache file sorting issue on linux (#6793)
+
+=========
+Build: 1.15.2-31.2.23 - Wed Jun 24 02:14:02 GMT 2020
+	cpw:
+		Modify how modfiles load slightly, for better decoupling.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.15.2-31.2.22 - Mon Jun 22 07:52:41 GMT 2020
+	diesieben07:
+		Throw an exception from DeferredRegister when trying to register entries after registry event has fired (#6789)
+
+=========
+Build: 1.15.2-31.2.21 - Thu Jun 18 21:24:34 GMT 2020
+	Colby Prince:
+		Potential userProperties Fix (#6740)
+
+=========
+Build: 1.15.2-31.2.20 - Mon Jun 15 16:37:17 GMT 2020
+	diesieben07:
+		Add system for dimensions to be marked for deletion (#6515)
+
+=========
+Build: 1.15.2-31.2.19 - Sat Jun 13 00:28:16 GMT 2020
+	lex:
+		Fix dedicated server issue in some implementations of Block.getPickBlock. Closes #6566
+
+=========
+Build: 1.15.2-31.2.18 - Fri Jun 12 23:53:12 GMT 2020
+	lex:
+		Fire SpecialSpawn event for mobs spawners. Closes #6700
+
+=========
+Build: 1.15.2-31.2.17 - Fri Jun 12 23:37:10 GMT 2020
+	lex:
+		Remove the yellow coloring on hover in ExtendedButton to match vanilla behavior. Closes #6714 Closes #6713
+
+=========
+Build: 1.15.2-31.2.16 - Fri Jun 12 23:24:45 GMT 2020
+	lex:
+		Fix entity pathing not matching vanilla. Closes #6755
+
+=========
+Build: 1.15.2-31.2.15 - Fri Jun 12 22:48:51 GMT 2020
+	brandon4261:
+		Fixed ItemStack comparison ignoring capabilities when stack nbt is null. (#6764)
+
+	Colby Prince:
+		Fixed --server argument crashing the client (#6754)
+		
+		Closes #6753
+		Moving the fadeOutStart setter above the callback invocation prevents re-entry into the block (which would result in an infinite loop and a StackOverflowException) if the callback causes a render tick (which creating a new ConnectionScreen does).
+
+=========
+Build: 1.15.2-31.2.13 - Fri Jun 12 22:42:58 GMT 2020
+	williewillus:
+		Supply matrixstack to IRenderHandler where possible. Closes #6439 (#6537)
+
+=========
+Build: 1.15.2-31.2.12 - Fri Jun 12 22:37:06 GMT 2020
+	Colby Prince:
+		Added ProjectileImpactEvent.FireworkRocket (#6758)
+
+	diesieben07:
+		Fix StartupQuery not working more than once on the client (#6699)
+
+=========
+Build: 1.15.2-31.2.9 - Sun Jun 07 15:55:20 GMT 2020
+	diesieben07:
+		Fix "overlayMessage" rendering in ForgeIngameGui being different than vanilla (#6748)
+
+=========
+Build: 1.15.2-31.2.8 - Thu Jun 04 14:16:58 GMT 2020
+	David Quintana:
+		Implement loader for ItemLayerModel.
+		Add support for specifying which layers are fullbright.
+		Fix improper generation of model edge. - Thanks to iChun and KnightMiner for the fix suggestions.
+
+=========
+Build: 1.15.2-31.2.7 - Thu Jun 04 03:08:27 GMT 2020
+	lex:
+		Add --flat argument to data generators to not create data in mod specific directores.
+		Useful For Forge's test mods mainly.
+		Standardized data gen cache file's folder separators.
+		Added ItemModelProvider to BlockStateProvider for cleaner datagen code.
+		Added .gitattributes to fix datagen json's line endings correct on windows.
+
+	lex:
+		Remove dead test classes.
+
+=========
+Build: 1.15.2-31.2.5 - Sun May 24 21:41:17 GMT 2020
+	cpw:
+		Improve the DistExecutor API and introduce some "almost completely" safe mechanisms to handle sided lambdas.
+		
+		In general, use sided lambdas safely by embedding them in a separately loaded class. There's a whole twitch stream
+		dedicated to investigating this problem. See link in DistExecutor if you're interested.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.15.2-31.2.4 - Sun May 24 01:25:42 GMT 2020
+	tterrag:
+		Fix typo in new registry fields' names
+		
+		Note: this is technically a breaking change. If you for some reason added code referencing these two fields in the last few hours, sorry.
+
+=========
+Build: 1.15.2-31.2.3 - Sat May 23 20:23:05 GMT 2020
+	tterrag:
+		Fix server startup query info not including new text
+
+=========
+Build: 1.15.2-31.2.2 - Sat May 23 20:08:11 GMT 2020
+	tterrag:
+		Improve look of notification GUI, improve StartupQuery API
+
+=========
+Build: 1.15.2-31.2.1 - Sat May 23 17:45:49 GMT 2020
+	tterrag:
+		Add forge registries for applicable new registry types
+		
+		Expose constructors for all forge registry entries
+		Also, remove deprecation on ItemCameraTransforms/TransformType
+
+=========
 Build: 1.15.2-31.2.0 - Fri May 15 19:34:16 GMT 2020
 	lex:
 		Bump version for new RB.
@@ -9,6 +237,9 @@ Build: 1.15.2-31.1.99 - Fri May 15 19:25:51 GMT 2020
 
 =========
 Build: 1.15.2-31.1.98 - Fri May 15 18:34:16 GMT 2020
+	ichttt:
+		fix test mod and add warning comment to framebuffer (#6698)
+
 	ichttt:
 		fix test mod and add warning comment to framebuffer (#6698)
 
@@ -55,7 +286,7 @@ Build: 1.15.2-31.1.91 - Fri May 15 16:38:42 GMT 2020
 
 =========
 Build: 1.15.2-31.1.89 - Fri May 15 14:45:46 GMT 2020
-	laughlan.cov:
+	Laughlan Coventry:
 		Remove duplicate post of ChunkEvent.Load. (#6697)
 
 =========
@@ -101,7 +332,7 @@ Build: 1.15.2-31.1.80 - Tue May 12 21:08:20 GMT 2020
 
 =========
 Build: 1.15.2-31.1.79 - Mon May 11 22:28:50 GMT 2020
-	laughlan.cov:
+	Laughlan Coventry:
 		Fix IForgeBlock.removedByPlayer not firing on the client. (#6638)
 
 =========

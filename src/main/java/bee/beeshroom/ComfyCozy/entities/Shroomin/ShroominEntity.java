@@ -294,7 +294,7 @@ public class ShroominEntity extends TameableEntity
 
         public ShroominData(int type) {
             this.typeData = type;
-            this.setBabySpawnProbability(1.0F);
+            this.func_226258_a_(1.0F);
         }
     }
 

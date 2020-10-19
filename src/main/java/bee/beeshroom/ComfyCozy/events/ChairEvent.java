@@ -1,7 +1,8 @@
-/* package bee.beeshroom.comfycozy.events;
+package bee.beeshroom.comfycozy.events;
 
 import bee.beeshroom.comfycozy.blocks.Cushion;
 import bee.beeshroom.comfycozy.comfycozy;
+import bee.beeshroom.comfycozy.entities.Cushion.CushionEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
@@ -29,47 +30,56 @@ import java.lang.ref.Reference;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = comfycozy.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ChairEvent
-{
-	@SubscribeEvent
-	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
-	{
-		if(!event.getWorld().isRemote)
-		{
-			World world = event.getWorld();
-			BlockPos pos = event.getPos();
-			BlockState state = world.getBlockState(pos);
-			Block block = world.getBlockState(pos).getBlock();
-			PlayerEntity player = event.getPlayer();
+public class ChairEvent {
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (!event.getWorld().isRemote) {
+            World world = event.getWorld();
+            BlockPos pos = event.getPos();
+            BlockState state = world.getBlockState(pos);
+            Block block = world.getBlockState(pos).getBlock();
+            PlayerEntity player = event.getPlayer();
 
-			if((block instanceof Cushion) && player.getHeldItemMainhand().isEmpty() && world.getBlockState(pos.up()).isAir(world, pos.up()))
-			{
-				CushionEntity sit = new CushionEntity(world, pos);
+            if ((block instanceof Cushion) && player.getHeldItemMainhand().isEmpty() && !CushionEntity.isInUse(world, pos) && world.getBlockState(pos.up()).isAir(world, pos.up())) {
+                CushionEntity entity = new CushionEntity(world, pos);
 
-					world.addEntity(sit);
-					player.startRiding(sit);
+                if(CushionEntity.trackUse(world, pos, entity))
+                {
+                    world.addEntity(entity);
+                    player.startRiding(entity);
+                }
+            }
+        }
+    }
 
-			}
-		}
-	}
+    @SubscribeEvent
+    public static void onEntityMount(EntityMountEvent event) {
+        if (!event.getWorldObj().isRemote && event.isDismounting()) {
+            Entity player = event.getEntityBeingMounted();
 
-	@SubscribeEvent
-	public static void onEntityMount(EntityMountEvent event)
-	{
-		if(!event.getWorldObj().isRemote && event.isDismounting())
-		{
-			Entity player = event.getEntityBeingMounted();
+            if (player instanceof CushionEntity && CushionEntity.stopTrackingUse(event.getWorldObj(), player.getPosition()))
+            {
+                player.remove();
+            }
+        }
+    }
 
-			if(player instanceof CushionEntity)
-				player.remove();
-		}
-	}
-
-private static boolean isValidBlock(World world, BlockPos pos, BlockState state, Block block)
+    @SubscribeEvent
+    public static void onBreak(BlockEvent.BreakEvent event)
+    {
+        if(!event.getWorld().isRemote())
         {
+            CushionEntity entity = CushionEntity.getTrackedCushion(event.getWorld(), event.getPos());
+
+            if(entity != null && CushionEntity.stopTrackingUse(event.getWorld(), event.getPos()))
+            {
+                entity.remove();
+            }
+        }
+    }
+
+    private static boolean isValidBlock(World world, BlockPos pos, BlockState state, Block block) {
         boolean isValid = block instanceof Cushion;
         return isValid;
-        }
-
-
-        } */
+    }
+}
