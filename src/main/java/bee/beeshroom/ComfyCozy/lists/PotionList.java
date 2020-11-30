@@ -27,15 +27,12 @@ public class PotionList {
 
  //  public static final RegistryObject<Potion> FORTUNE_POTION = POTIONS.register("fortune", () -> new Potion(new EffectInstance(FORTUNE_EFFECT.get(), 3600)));
 
-
-
-
     private static Method brewing_mixes;
 
 
-    private static void addMix(Potion start, Item ingredient, Potion result) {
+    public static void addMix(Potion start, Item ingredient, Potion result) {
         if(brewing_mixes == null) {
-            brewing_mixes = ObfuscationReflectionHelper.findMethod(PotionBrewing.class, "addMix", Potion.class, Item.class, Potion.class);
+            brewing_mixes = ObfuscationReflectionHelper.findMethod(PotionBrewing.class, "func_193357_a", Potion.class, Item.class, Potion.class);
             brewing_mixes.setAccessible(true);
         }
 

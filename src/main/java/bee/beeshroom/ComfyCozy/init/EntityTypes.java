@@ -1,6 +1,7 @@
 package bee.beeshroom.comfycozy.init;
 
 import bee.beeshroom.comfycozy.comfycozy;
+import bee.beeshroom.comfycozy.entities.Cushion.CushionEntity;
 import bee.beeshroom.comfycozy.entities.Shroomin.ShroominEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -24,21 +25,11 @@ public class EntityTypes {
                             .size(0.6f, 0.7f)
                             .build(new ResourceLocation(comfycozy.MOD_ID, "shroomin_entity").toString()));
 
-/*
     public static final RegistryObject<EntityType<CushionEntity>> CUSHION = ENTITY_TYPES
             .register("cushion_entity",
                     () -> EntityType.Builder.<CushionEntity>create(CushionEntity::new, EntityClassification.MISC)
-            // );
                             .size(0.0f, 0.0f)
-       .build(new ResourceLocation(comfycozy.MOD_ID, "cushion_entity").toString()));
-
-                       //     .build(new ResourceLocation(null).toString()));
-
-    //  public static final RegistryObject<EntityType<CushionEntity>> CUSHION = ENTITY_TYPES
-  //            .register("cushion", CushionEntity::new, EntityClassification.MISC, 0, Integer.MAX_VALUE, false, CushionEntity::build);
-
-    @OnlyIn(value = Dist.CLIENT)
-    public static void registerRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(CUSHION.get(), CushionEntity.Render::new);
-    } */
+                            .setUpdateInterval(20)
+                            .setTrackingRange(256)
+                            .build(new ResourceLocation(comfycozy.MOD_ID, "cushion_entity").toString()));
 }
