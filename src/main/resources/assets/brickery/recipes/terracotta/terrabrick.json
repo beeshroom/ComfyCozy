@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "RR",
+        "RR"
+    ],
+    
+    "key":
+    {
+        "R":
+        {
+            "item": "minecraft:hardened_clay"
+        }
+    },
+    
+    "result":
+    {
+        "item": "brickery:terracotta_brick",
+        "count": 4
+    }
+}

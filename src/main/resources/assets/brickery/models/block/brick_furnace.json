@@ -1,0 +1,10 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+  
+    "top": "brickery:blocks/brick_furnace_top",
+    "front": "brickery:blocks/brick_furnace",
+    "side": "brickery:blocks/brick_furnace_side"
+  }
+}
+

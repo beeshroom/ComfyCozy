@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        " R ",
+        "R R",
+        " R "
+    ],
+    
+    "key":
+    {
+        "R":
+        {
+            "item": "minecraft:planks",
+            "data": 1
+        }
+    },
+    
+    "result":
+    {
+        "item": "brickery:fancy_spruce_planks",
+        "count": 4
+    }
+}

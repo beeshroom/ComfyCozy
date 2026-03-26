@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        " R ",
+        "R R",
+        " R "
+    ],
+    
+    "key":
+    {
+        "R":
+        {
+            "item": "minecraft:planks",
+            "data": 4
+        }
+    },
+    
+    "result":
+    {
+        "item": "brickery:fancy_acacia_planks",
+        "count": 4
+    }
+}

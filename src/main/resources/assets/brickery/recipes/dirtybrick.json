@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "RRR",
+        "RDR",
+        "RRR"
+    ],
+    
+    "key":
+    {
+        "R":
+        {
+            "item": "minecraft:brick_block"
+        },
+         "D":
+        {
+            "item": "minecraft:dirt",
+            "data": 0
+        }
+    },
+    
+    "result":
+    {
+        "item": "brickery:dirty_bricks",
+        "count": 8
+    }
+}

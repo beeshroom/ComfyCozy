@@ -1,0 +1,8 @@
+{
+   "variants": {
+        "axis=y":  { "model": "omm:stickbundle" },
+        "axis=z":   { "model": "omm:stickbundle", "x": 90 },
+        "axis=x":   { "model": "omm:stickbundle", "x": 90, "y": 90 },
+        "axis=none": { "model": "omm:stickbundle" }
+    }
+}

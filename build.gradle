@@ -1,0 +1,92 @@
+buildscript {
+	repositories {
+		gradlePluginPortal()
+		mavenCentral()
+		maven { url = "https://maven.minecraftforge.net/" }
+	}
+	
+	dependencies {
+		classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "5.1.+"
+		classpath group: "gradle.plugin.com.matthewprenger", name: "CurseGradle", version: "1.4.0"
+        classpath group: "com.modrinth.minotaur", name: "com.modrinth.minotaur.gradle.plugin", version: "2.+"
+	}
+}
+
+apply plugin: "java"
+apply plugin: "net.minecraftforge.gradle"
+apply plugin: 'com.matthewprenger.cursegradle'
+apply plugin: 'com.modrinth.minotaur'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+compileJava {
+	sourceCompatibility = "8"
+	targetCompatibility = "8"
+}
+
+repositories {
+	maven {
+		url = "https://maven.minecraftforge.net/"
+	}
+	maven {
+        name = "CurseMaven"
+        url = "https://www.cursemaven.com"
+    }
+}
+
+dependencies {
+	minecraft "net.minecraftforge:forge:1.12.2-14.23.5.2860"
+}
+
+minecraft {
+	mappings channel: "stable", version: "39-1.12"
+	
+	runs {
+		"client" {
+			workingDirectory file("./run")
+			mods { "${project.name}" { source sourceSets.main } }
+		}
+		
+		"server" {
+			workingDirectory file("./run/server")
+			mods { "${project.name}" { source sourceSets.main } }
+		}
+	}
+}
+
+processResources {
+	inputs.property "version", project.version
+	
+	filesMatching("mcmod.info") {
+		expand "version": project.version
+	}
+}
+
+curseforge {
+    apiKey = System.getenv("CURSEFORGE_TOKEN") ?: project.findProperty("CURSEFORGE_TOKEN") as String ?: "DUMMY"
+    project {
+        id = curseforgeID
+        //changelogType = "markdown"
+        changelog = ""
+        releaseType = "release"
+        mainArtifact(tasks.getByName("jar"), {
+            relations {
+                
+            }
+        })
+        addGameVersion("Forge")
+        addGameVersion("1.12.2")
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: project.findProperty("MODRINTH_TOKEN") as String ?: "DUMMY"
+    projectId = modrinthID
+    versionNumber = project.version
+    uploadFile = tasks.getByName("jar")
+    gameVersions = ["1.12.2"] 
+	loaders = ["forge"]
+}
+
+//When Forge 1.12 loads mods from a directory that's been put on the classpath, it expects to find resources in the same directory.
+//Default Gradle behavior puts resources in ./build/resources/main instead of ./build/classes/main/java. Let's change that.
+sourceSets.all { it.output.resourcesDir = it.output.classesDirs.getFiles().iterator().next() }

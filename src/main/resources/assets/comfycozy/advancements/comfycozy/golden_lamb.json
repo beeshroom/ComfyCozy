@@ -1,0 +1,24 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:golden_apple"
+        },
+        "title": {
+            "translate": "advancements.comfycozy.golden_lamb.title"
+        },
+        "description": {
+            "translate": "advancements.comfycozy.golden_lamb.description"
+        },
+		"frame": "challenge",
+		"hidden": true
+    },
+    "parent": "comfycozy:comfycozy/oatmeal_of_champions",
+	"rewards": {
+        "experience": 20
+    },
+    "criteria": {
+        "lamb": {
+            "trigger": "comfycozy:gold_apple_lamb"
+        }
+    }
+}

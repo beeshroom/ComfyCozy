@@ -1,0 +1,29 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "minecraft:cobblestone"
+    },
+      {
+      "item": "minecraft:stone",
+      "data": 1
+    },
+    {
+      "item": "minecraft:stone",
+      "data": 5
+    },
+     {
+      "item": "minecraft:stone",
+      "data": 3
+    }
+    ],
+
+    "result": 
+    {
+        "item": "brickery:mixed_cobble",
+        "count": 4
+    }
+}
